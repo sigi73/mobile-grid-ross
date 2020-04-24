@@ -27,7 +27,7 @@ void synchronizer_pre_init(synchronizer_state *s, tw_lp *lp)
         msg->task_flops = synchronizer_settings.mean_flop_per_task;
 
         tw_event_send(e);
-        printf("Synchronizer sent message to channel %d, gid %d\n", i, 2*i+1);
+        tw_output(lp, "Synchronizer sent message to channel %d, gid %d\n", i, 2*i+1);
 
         s->tasks_remaining--;
     }

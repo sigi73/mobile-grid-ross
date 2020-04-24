@@ -14,6 +14,8 @@
  *  Command line arguments
  */
 extern unsigned int g_num_clients;
+extern unsigned int g_num_total_lps;
+
 struct s_synchronizer_settings
 {
 	unsigned int mean_data_size;

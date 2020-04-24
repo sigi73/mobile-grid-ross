@@ -11,6 +11,7 @@
 //Given an LP's GID (global ID)
 //return the PE (aka node, MPI Rank)
 tw_peid mobile_grid_map(tw_lpid gid){
+  printf("gid: %u, g_tw_nlp: %u, node: %u\n", gid, g_tw_nlp, (tw_peid) gid / g_tw_nlp);
   return (tw_peid) gid / g_tw_nlp;
 }
 
@@ -18,12 +19,20 @@ tw_peid mobile_grid_map(tw_lpid gid){
 //    Given an LP's GID
 //    Return the index in the model_lps array (defined in mobile_grid_main.c)
 tw_lpid mobile_grid_typemap (tw_lpid gid) {
-  if (gid == 0)
-    return 0; // gid 0 is synchronizer
-  else if (gid % 2 == 1)
-    return 1; // Odd gids are channels
+  if (gid < g_num_total_lps)
+  {
+    if (gid == 0)
+      return 0; // gid 0 is synchronizer
+    else if (gid % 2 == 1)
+      return 1; // Odd gids are channels
+    else
+      return 2; // Remaning even gids are clients
+  }
   else
-    return 2; // Remaning even gids are clients
+  {
+    return 3; // Extra lps are unused
+  }
+  
 }
 
 /*

@@ -11,7 +11,7 @@ void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
     if (m->type == CHANNEL_TO_CLIENT)
     {
-        printf("Client with gid %u received message from a synchronizer\n", lp->gid);
+        tw_output(lp, "Client with gid %u received message from a synchronizer\n", lp->gid);
         tw_stime data_download_delay = m->task_data_size;
         tw_stime computation_delay = m->task_flops / s->flops;
         tw_stime delay = data_download_delay + computation_delay;

@@ -13,7 +13,7 @@ void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
     if (m->type == SYNCH_TO_CHANNEL)
     {
-        printf("Channel with gid %u received message from synchronizer\n", lp->gid);
+        tw_output(lp, "Channel with gid %u received message from synchronizer\n", lp->gid);
         tw_stime delay = 1;
         // Send to client with delay based on bandwidth, size, and length
         tw_event *e = tw_event_new(lp->gid+1, delay, lp);
@@ -27,7 +27,7 @@ void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
     }
     if (m->type == CLIENT_TO_CHANNEL)
     {
-        printf("Channel with gid %u received message from a client\n", lp->gid);
+        tw_output(lp, "Channel with gid %u received message from a client\n", lp->gid);
         tw_stime delay = 1;
         // Send to syncrhonizer with delay based on bandwidth, size, and length
         tw_event *e = tw_event_new(0, delay, lp);

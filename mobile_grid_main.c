@@ -8,6 +8,7 @@
 #include "ross.h"
 #include "mobile_grid.h"
 
+
 // Define LP types
 //   these are the functions called by ROSS for each LP
 //   multiple sets can be defined (for multiple LP types)
@@ -42,48 +43,49 @@ tw_lptype model_lps[] = {
     (map_f) mobile_grid_map,
     sizeof(client_state)
   },
+  { // Dummy LP for extra lps when running on multiple nodes
+    (init_f) NULL,
+    (pre_run_f) NULL,
+    (event_f) NULL,
+    (revent_f) NULL,
+    (commit_f) NULL,
+    (final_f) NULL,
+    (map_f) mobile_grid_map,
+	0
+  }, 
   { 0 },
 };
 
 
+/*
+ *  Globals
+ */
+unsigned int g_num_total_lps;
 
-//add your command line opts
-const tw_optdef model_opts[] = {
-	TWOPT_GROUP("Mobile Grid Model"),
-	TWOPT_UINT("num_clients", g_num_clients, "Number of clients to simulate"),
-	TWOPT_END(),
-};
-
-const tw_optdef synchronizer_opts[] = {
-	TWOPT_GROUP("Synchronizer Settings"),
-	TWOPT_UINT("mean_data_size", synchronizer_settings.mean_data_size, "Average size of data in workunit"),
-	TWOPT_UINT("stddev_data_size", synchronizer_settings.stdev_data_size, "Standard deviation of size of data in workunit"),
-	TWOPT_UINT("mean_flop_per_task", synchronizer_settings.mean_flop_per_task, "Average amount of work in workunit"),
-	TWOPT_UINT("stddev_flop_per_task", synchronizer_settings.stdev_flop_per_task, "Standard deviation of work in workunit"),
-	TWOPT_UINT("synchronizer_bandwidth", synchronizer_settings.bandwidth, "Bandwidth available to the syncrhonizer"),
-	TWOPT_END(),
-};
-
-const tw_optdef channel_opts[] = {
-	TWOPT_GROUP("Channel Settings"),
-	TWOPT_UINT("mean_channel_length", channel_settings.mean_length, "Average length of channel between synchronizer and client"),
-	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_length, "Standard deviation of length of channel between synchronizer and client"),
-	TWOPT_UINT("mean_channel_bandwidth", channel_settings.mean_bandwidth, "Average bandwidth of channel between synchronizer and client"),
-	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_bandwidth, "Standard deviation of bandwidth of channel between synchronizer and client"),
-	TWOPT_END(),
-};
-
-const tw_optdef client_opts[] = {
-	TWOPT_GROUP("Client Settings"),
-	TWOPT_UINT("mean_flops", client_settings.mean_flops, "Average number of floating point operations per second the client is capable of"),
-	TWOPT_UINT("stdev_flops", client_settings.stddev_flops, "Standard deviation of floating point operations per second the client is capable of"),
-	TWOPT_END(),
-};
-	
 
 /* 
  *	Command line arguments
  */
+const tw_optdef model_opts[] = {
+	TWOPT_GROUP("Mobile Grid Model"),
+	TWOPT_UINT("num_clients", g_num_clients, "Number of clients to simulate"),
+
+	TWOPT_UINT("mean_data_size", synchronizer_settings.mean_data_size, "Average size of data in workunit"),
+	TWOPT_UINT("stddev_data_size", synchronizer_settings.stdev_data_size, "Standard deviation of size of data in workunit"),
+	TWOPT_UINT("mean_flop_per_task", synchronizer_settings.mean_flop_per_task, "Average amount of work in workunit"),
+	TWOPT_UINT("stddev_flop_per_task", synchronizer_settings.stdev_flop_per_task, "Standard deviation of work in workunit"),
+	TWOPT_UINT("server_bandwidth", synchronizer_settings.bandwidth, "Bandwidth available to the syncrhonizer"),
+
+	TWOPT_UINT("mean_channel_length", channel_settings.mean_length, "Average length of channel between synchronizer and client"),
+	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_length, "Standard deviation of length of channel between synchronizer and client"),
+	TWOPT_UINT("mean_channel_bandwidth", channel_settings.mean_bandwidth, "Average bandwidth of channel between synchronizer and client"),
+	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_bandwidth, "Standard deviation of bandwidth of channel between synchronizer and client"),
+
+	TWOPT_UINT("mean_flops", client_settings.mean_flops, "Average number of floating point operations per second the client is capable of"),
+	TWOPT_UINT("stdev_flops", client_settings.stddev_flops, "Standard deviation of floating point operations per second the client is capable of"),
+
+	TWOPT_END(),
+};
 
 unsigned int g_num_clients = 4;
 void defaultSettings()
@@ -109,13 +111,8 @@ void defaultSettings()
 
 int mobile_grid_main(int argc, char* argv[]) {
 	defaultSettings();
-	int i;
-	int num_lps_per_pe;
 
 	tw_opt_add(model_opts);
-	tw_opt_add(synchronizer_opts);
-	tw_opt_add(channel_opts);
-	tw_opt_add(client_opts);
 	tw_init(&argc, &argv);
 
 	//Do some error checking?
@@ -139,8 +136,9 @@ int mobile_grid_main(int argc, char* argv[]) {
 	// g_tw_nkp
 	// g_tw_synchronization_protocol
 
-	int num_total_lps = g_num_clients*2+1;
-	num_lps_per_pe = num_total_lps/tw_nnodes();
+	g_num_total_lps = g_num_clients*2+1;
+	int num_lps_per_pe = (int)ceil((float)g_num_total_lps/(float)tw_nnodes());
+	printf("g_num_total_lps: %d, num_lps_per_pe: %d\n", g_num_total_lps, num_lps_per_pe);
 
 	//set up LPs within ROSS
 	tw_define_lps(num_lps_per_pe, sizeof(message));
