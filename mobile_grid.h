@@ -11,9 +11,37 @@
 #include "ross.h"
 
 /*
+ *  Command line arguments
+ */
+extern unsigned int g_num_clients;
+struct s_synchronizer_settings
+{
+	unsigned int mean_data_size;
+	unsigned int stdev_data_size;
+	unsigned int mean_flop_per_task;
+	unsigned int stdev_flop_per_task;
+	unsigned int bandwidth;
+} synchronizer_settings;
+
+struct s_channel_settings
+{
+	unsigned int mean_length;
+	unsigned int stdev_length;
+	unsigned int mean_bandwidth;
+	unsigned int stdev_bandwidth;
+} channel_settings;
+
+struct s_client_settings
+{
+	unsigned int mean_flops;
+	unsigned int stddev_flops;
+} client_settings;
+
+/*
  *  Map
  */
 tw_peid mobile_grid_map(tw_lpid gid);
+tw_lpid mobile_grid_typemap (tw_lpid gid);
 
 /*
  *  Message
@@ -27,8 +55,9 @@ typedef enum {
 typedef struct message message;
 struct message
 {
-    unsigned long int task_data_size;
-    unsigned long int task_flops;
+	message_type type;
+    unsigned int task_data_size;
+    unsigned int task_flops;
 };
 
 /*
@@ -37,17 +66,13 @@ struct message
 typedef struct client_state client_state;
 struct client_state
 {
-	unsigned long int flops_per_task;
-	//long int dropout_chance;
-	unsigned int has_work : 1;
+	unsigned int flops;
 };
 
 void client_init(client_state *s, tw_lp *lp);
 void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void client_event_handler_rc(client_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void client_finish(client_state *s, tw_lp *lp);
-//void client_pre_run(client_state *s, tw_lp *lp);
-//void client_commit(client_state *s, tw_bf *bf, client_message *m, tw_lp *lp);
 
 /*
  *  Channel
@@ -56,8 +81,8 @@ typedef struct channel_state channel_state;
 
 struct channel_state
 {
-	unsigned long int channel_length;
-	unsigned int client_gid;
+	unsigned int length;
+	unsigned int bandwidth;
 };
 
 void channel_init(channel_state *s, tw_lp *lp);
@@ -71,15 +96,12 @@ void channel_finish(channel_state *s, tw_lp *lp);
 typedef struct synchronizer_state synchronizer_state;
 struct synchronizer_state
 {
-	unsigned long int tasks_remaining; // Number of tasks to be dispatched
-
-	unsigned long int mean_data_size; // Size of data to be transferred. Changes time to send to client
-	unsigned long int stddev_dat_size;
-	unsigned long int mean_flops_per_task; // How long the computation takes
-	unsigned long int stddev_flops_per_task;
+	unsigned int tasks_remaining; // Number of tasks to be dispatched
+	unsigned int tasks_completed; // Number of tasks that have been completed
 };
 
 void synchronizer_init(synchronizer_state *s, tw_lp *lp);
+void synchronizer_pre_init(synchronizer_state *s, tw_lp *lp);
 void synchronizer_event_handler(synchronizer_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void synchronizer_event_handler_rc(synchronizer_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void synchronizer_finish(synchronizer_state *s, tw_lp *lp);

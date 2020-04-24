@@ -14,7 +14,7 @@
 tw_lptype model_lps[] = {
   {
     (init_f) synchronizer_init,
-    (pre_run_f) NULL,
+    (pre_run_f) synchronizer_pre_init,
     (event_f) synchronizer_event_handler,
     (revent_f) synchronizer_event_handler_rc,
     (commit_f) NULL,
@@ -45,25 +45,77 @@ tw_lptype model_lps[] = {
   { 0 },
 };
 
-//Define command line arguments default values
-unsigned int setting_1 = 0;
+
 
 //add your command line opts
 const tw_optdef model_opts[] = {
-	TWOPT_GROUP("ROSS Model"),
-	TWOPT_UINT("setting_1", setting_1, "first setting for this model"),
+	TWOPT_GROUP("Mobile Grid Model"),
+	TWOPT_UINT("num_clients", g_num_clients, "Number of clients to simulate"),
 	TWOPT_END(),
 };
 
+const tw_optdef synchronizer_opts[] = {
+	TWOPT_GROUP("Synchronizer Settings"),
+	TWOPT_UINT("mean_data_size", synchronizer_settings.mean_data_size, "Average size of data in workunit"),
+	TWOPT_UINT("stddev_data_size", synchronizer_settings.stdev_data_size, "Standard deviation of size of data in workunit"),
+	TWOPT_UINT("mean_flop_per_task", synchronizer_settings.mean_flop_per_task, "Average amount of work in workunit"),
+	TWOPT_UINT("stddev_flop_per_task", synchronizer_settings.stdev_flop_per_task, "Standard deviation of work in workunit"),
+	TWOPT_UINT("synchronizer_bandwidth", synchronizer_settings.bandwidth, "Bandwidth available to the syncrhonizer"),
+	TWOPT_END(),
+};
+
+const tw_optdef channel_opts[] = {
+	TWOPT_GROUP("Channel Settings"),
+	TWOPT_UINT("mean_channel_length", channel_settings.mean_length, "Average length of channel between synchronizer and client"),
+	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_length, "Standard deviation of length of channel between synchronizer and client"),
+	TWOPT_UINT("mean_channel_bandwidth", channel_settings.mean_bandwidth, "Average bandwidth of channel between synchronizer and client"),
+	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_bandwidth, "Standard deviation of bandwidth of channel between synchronizer and client"),
+	TWOPT_END(),
+};
+
+const tw_optdef client_opts[] = {
+	TWOPT_GROUP("Client Settings"),
+	TWOPT_UINT("mean_flops", client_settings.mean_flops, "Average number of floating point operations per second the client is capable of"),
+	TWOPT_UINT("stdev_flops", client_settings.stddev_flops, "Standard deviation of floating point operations per second the client is capable of"),
+	TWOPT_END(),
+};
+	
+
+/* 
+ *	Command line arguments
+ */
+
+unsigned int g_num_clients = 4;
+void defaultSettings()
+{
+	synchronizer_settings.mean_data_size = 100;
+	synchronizer_settings.stdev_data_size = 0;
+	synchronizer_settings.mean_flop_per_task = 100;
+	synchronizer_settings.stdev_flop_per_task = 0;
+	synchronizer_settings.bandwidth = 100;
+
+	channel_settings.mean_length = 100;
+	channel_settings.stdev_length = 0;
+	channel_settings.mean_bandwidth = 10;
+	channel_settings.stdev_bandwidth = 0;
+
+	client_settings.mean_flops = 1;
+	client_settings.stddev_flops = 0;
+}
+
 
 //for doxygen
-#define model_main main
+#define mobile_grid_main main
 
-int model_main (int argc, char* argv[]) {
+int mobile_grid_main(int argc, char* argv[]) {
+	defaultSettings();
 	int i;
 	int num_lps_per_pe;
 
 	tw_opt_add(model_opts);
+	tw_opt_add(synchronizer_opts);
+	tw_opt_add(channel_opts);
+	tw_opt_add(client_opts);
 	tw_init(&argc, &argv);
 
 	//Do some error checking?
@@ -87,8 +139,8 @@ int model_main (int argc, char* argv[]) {
 	// g_tw_nkp
 	// g_tw_synchronization_protocol
 
-	//assume 1 lp per node
-	num_lps_per_pe = 1;
+	int num_total_lps = g_num_clients*2+1;
+	num_lps_per_pe = num_total_lps/tw_nnodes();
 
 	//set up LPs within ROSS
 	tw_define_lps(num_lps_per_pe, sizeof(message));
@@ -96,7 +148,7 @@ int model_main (int argc, char* argv[]) {
 
 	// IF there are multiple LP types
 	//    you should define the mapping of GID -> lptype index
-	//g_tw_lp_typemap = &model_typemap;
+	g_tw_lp_typemap = &mobile_grid_typemap;
 
 	// set the global variable and initialize each LP's type
 	g_tw_lp_types = model_lps;

@@ -14,6 +14,18 @@ tw_peid mobile_grid_map(tw_lpid gid){
   return (tw_peid) gid / g_tw_nlp;
 }
 
+// Multiple LP Types mapping function
+//    Given an LP's GID
+//    Return the index in the model_lps array (defined in mobile_grid_main.c)
+tw_lpid mobile_grid_typemap (tw_lpid gid) {
+  if (gid == 0)
+    return 0; // gid 0 is synchronizer
+  else if (gid % 2 == 1)
+    return 1; // Odd gids are channels
+  else
+    return 2; // Remaning even gids are clients
+}
+
 /*
 // Multiple LP Types mapping function
 //    Given an LP's GID
