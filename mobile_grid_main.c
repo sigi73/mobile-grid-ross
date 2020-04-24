@@ -6,21 +6,41 @@
 
 //includes
 #include "ross.h"
-#include "model.h"
+#include "mobile_grid.h"
 
 // Define LP types
 //   these are the functions called by ROSS for each LP
 //   multiple sets can be defined (for multiple LP types)
 tw_lptype model_lps[] = {
   {
-    (init_f) model_init,
+    (init_f) synchronizer_init,
     (pre_run_f) NULL,
-    (event_f) model_event,
-    (revent_f) model_event_reverse,
+    (event_f) synchronizer_event_handler,
+    (revent_f) synchronizer_event_handler_rc,
     (commit_f) NULL,
-    (final_f) model_final,
-    (map_f) model_map,
-    sizeof(state)
+    (final_f) synchronizer_finish,
+    (map_f) mobile_grid_map,
+    sizeof(synchronizer_state)
+  },
+  {
+    (init_f) channel_init,
+    (pre_run_f) NULL,
+    (event_f) channel_event_handler,
+    (revent_f) channel_event_handler_rc,
+    (commit_f) NULL,
+    (final_f) channel_finish,
+    (map_f) mobile_grid_map,
+    sizeof(channel_state)
+  },
+  {
+    (init_f) client_init,
+    (pre_run_f) NULL,
+    (event_f) client_event_handler,
+    (revent_f) client_event_handler_rc,
+    (commit_f) NULL,
+    (final_f) client_finish,
+    (map_f) mobile_grid_map,
+    sizeof(client_state)
   },
   { 0 },
 };

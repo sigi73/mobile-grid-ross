@@ -11,23 +11,24 @@ GET_GIT_HEAD_REVISION(GIT_RESPEC_MODEL GIT_SHA1_MODEL)
 
 ## Build Configuration Header File
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/model_config.h.in ${CMAKE_CURRENT_BINARY_DIR}/model_config.h @ONLY)
-SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_SOURCE_DIR}/model_config.h.in PROPERTIES GENERATED FALSE)
-SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_BINARY_DIR}/model_config.h PROPERTIES GENERATED TRUE)
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/mobile_grid_config.h.in ${CMAKE_CURRENT_BINARY_DIR}/mobile_grid_config.h @ONLY)
+SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_SOURCE_DIR}/mobile_grid_config.h.in PROPERTIES GENERATED FALSE)
+SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_BINARY_DIR}/mobile_grid_config.h PROPERTIES GENERATED TRUE)
 
 # All source files for the model
-SET(model_srcs
-	model_main.c
-	model_driver.c
-	model_map.c
-	model.h
-	model_config.h
+SET(mobile_grid_srcs
+	mobile_grid_main.c
+	#model_driver.c
+	mobile_grid_map.c
+	client.c
+	channel.c
+	synchronizer.c
 )
 
 # Set the executable name here: model
-# You will be executing the ./model binary
-ADD_EXECUTABLE(model ${model_srcs})
+# You will be executing the ./mobile_grid binary
+ADD_EXECUTABLE(mobile_grid ${mobile_grid_srcs})
 
-TARGET_LINK_LIBRARIES(model ROSS m)
+TARGET_LINK_LIBRARIES(mobile_grid ROSS m)
 ## Alternatively, use this command with RIO
 #TARGET_LINK_LIBRARIES(model ROSS RIO m)

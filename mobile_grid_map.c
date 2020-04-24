@@ -6,11 +6,11 @@
 //   - setup function to place LPs and KPs on PEs
 //   - local map function to find LP in local PE's array
 
-#include "model.h"
+#include "mobile_grid.h"
 
 //Given an LP's GID (global ID)
 //return the PE (aka node, MPI Rank)
-tw_peid model_map(tw_lpid gid){
+tw_peid mobile_grid_map(tw_lpid gid){
   return (tw_peid) gid / g_tw_nlp;
 }
 
