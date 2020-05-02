@@ -14,24 +14,44 @@
 //   multiple sets can be defined (for multiple LP types)
 tw_lptype model_lps[] = {
   {
-    (init_f) synchronizer_init,
-    (pre_run_f) synchronizer_pre_init,
-    (event_f) synchronizer_event_handler,
-    (revent_f) synchronizer_event_handler_rc,
+    (init_f) coordinator_init,
+    (pre_run_f) coordinator_pre_init,
+    (event_f) coordinator_event_handler,
+    (revent_f) coordinator_event_handler_rc,
     (commit_f) NULL,
-    (final_f) synchronizer_finish,
+    (final_f) coordinator_finish,
     (map_f) mobile_grid_map,
-    sizeof(synchronizer_state)
+    sizeof(coordinator_state)
   },
   {
-    (init_f) channel_init,
-    (pre_run_f) NULL,
-    (event_f) channel_event_handler,
-    (revent_f) channel_event_handler_rc,
+    (init_f) aggregator_init,
+    (pre_run_f) aggregator_pre_init,
+    (event_f) aggregator_event_handler,
+    (revent_f) aggregator_event_handler_rc,
     (commit_f) NULL,
-    (final_f) channel_finish,
+    (final_f) aggregator_finish,
     (map_f) mobile_grid_map,
-    sizeof(channel_state)
+    sizeof(aggregator_state)
+  },
+  {
+    (init_f) data_server_init,
+    (pre_run_f) data_server_pre_init,
+    (event_f) data_server_event_handler,
+    (revent_f) data_server_event_handler_rc,
+    (commit_f) NULL,
+    (final_f) data_server_finish,
+    (map_f) mobile_grid_map,
+    sizeof(data_server_state)
+  },
+  {
+    (init_f) selector_init,
+    (pre_run_f) selector_pre_init,
+    (event_f) selector_event_handler,
+    (revent_f) selector_event_handler_rc,
+    (commit_f) NULL,
+    (final_f) selector_finish,
+    (map_f) mobile_grid_map,
+    sizeof(selector_state)
   },
   {
     (init_f) client_init,
@@ -42,6 +62,16 @@ tw_lptype model_lps[] = {
     (final_f) client_finish,
     (map_f) mobile_grid_map,
     sizeof(client_state)
+  },
+  {
+    (init_f) channel_init,
+    (pre_run_f) NULL,
+    (event_f) channel_event_handler,
+    (revent_f) channel_event_handler_rc,
+    (commit_f) NULL,
+    (final_f) channel_finish,
+    (map_f) mobile_grid_map,
+    sizeof(channel_state)
   },
   { // Dummy LP for extra lps when running on multiple nodes
     (init_f) NULL,
@@ -60,21 +90,27 @@ tw_lptype model_lps[] = {
 /*
  *  Globals
  */
-unsigned int g_num_total_lps;
+unsigned int g_num_used_lps;
+tw_lpid g_coordinator_id = 0;
 
 
 /* 
  *	Command line arguments
  */
+double g_data_center_delay;
+
 const tw_optdef model_opts[] = {
 	TWOPT_GROUP("Mobile Grid Model"),
-	TWOPT_UINT("num_clients", g_num_clients, "Number of clients to simulate"),
 
-	TWOPT_UINT("mean_data_size", synchronizer_settings.mean_data_size, "Average size of data in workunit"),
-	TWOPT_UINT("stddev_data_size", synchronizer_settings.stdev_data_size, "Standard deviation of size of data in workunit"),
-	TWOPT_UINT("mean_flop_per_task", synchronizer_settings.mean_flop_per_task, "Average amount of work in workunit"),
-	TWOPT_UINT("stddev_flop_per_task", synchronizer_settings.stdev_flop_per_task, "Standard deviation of work in workunit"),
-	TWOPT_UINT("server_bandwidth", synchronizer_settings.bandwidth, "Bandwidth available to the syncrhonizer"),
+	TWOPT_UINT("num_aggregators", num_actors.num_aggregators, "Number of aggregators"),
+	TWOPT_UINT("num_selectors", num_actors.num_selectors, "Number of selectors"),
+	TWOPT_UINT("num_clients_per_selector", num_actors.num_clients_per_selector, "Number of clients per selector"),
+
+	TWOPT_UINT("mean_data_size", coordinator_settings.mean_data_size, "Average size of data in workunit"),
+	TWOPT_UINT("stddev_data_size", coordinator_settings.stdev_data_size, "Standard deviation of size of data in workunit"),
+	TWOPT_UINT("mean_flop_per_task", coordinator_settings.mean_flop_per_task, "Average amount of work in workunit"),
+	TWOPT_UINT("stddev_flop_per_task", coordinator_settings.stdev_flop_per_task, "Standard deviation of work in workunit"),
+	TWOPT_DOUBLE("data_center_delay", g_data_center_delay, "Delay in the datacenter (in timstep units)"),
 
 	TWOPT_UINT("mean_channel_length", channel_settings.mean_length, "Average length of channel between synchronizer and client"),
 	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_length, "Standard deviation of length of channel between synchronizer and client"),
@@ -87,14 +123,14 @@ const tw_optdef model_opts[] = {
 	TWOPT_END(),
 };
 
-unsigned int g_num_clients = 4;
 void defaultSettings()
 {
-	synchronizer_settings.mean_data_size = 100;
-	synchronizer_settings.stdev_data_size = 0;
-	synchronizer_settings.mean_flop_per_task = 100;
-	synchronizer_settings.stdev_flop_per_task = 0;
-	synchronizer_settings.bandwidth = 100;
+	g_data_center_delay = 1;
+
+	coordinator_settings.mean_data_size = 100;
+	coordinator_settings.stdev_data_size = 0;
+	coordinator_settings.mean_flop_per_task = 100;
+	coordinator_settings.stdev_flop_per_task = 0;
 
 	channel_settings.mean_length = 100;
 	channel_settings.stdev_length = 0;
@@ -103,6 +139,10 @@ void defaultSettings()
 
 	client_settings.mean_flops = 1;
 	client_settings.stddev_flops = 0;
+
+	num_actors.num_aggregators = 4;
+	num_actors.num_selectors = 4;
+	num_actors.num_clients_per_selector = 4;
 }
 
 
@@ -136,9 +176,9 @@ int mobile_grid_main(int argc, char* argv[]) {
 	// g_tw_nkp
 	// g_tw_synchronization_protocol
 
-	g_num_total_lps = g_num_clients*2+1;
-	int num_lps_per_pe = (int)ceil((float)g_num_total_lps/(float)tw_nnodes());
-	printf("g_num_total_lps: %d, num_lps_per_pe: %d\n", g_num_total_lps, num_lps_per_pe);
+	g_num_used_lps = 1 + 1 + 1 + num_actors.num_aggregators + num_actors.num_selectors + 2 * num_actors.num_selectors * num_actors.num_clients_per_selector;
+	int num_lps_per_pe = (int)ceil((float)g_num_used_lps/(float)tw_nnodes());
+	printf("g_num_total_lps: %d, num_lps_per_pe: %d\n", g_num_used_lps, num_lps_per_pe);
 
 	//set up LPs within ROSS
 	tw_define_lps(num_lps_per_pe, sizeof(message));

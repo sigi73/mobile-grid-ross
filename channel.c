@@ -11,6 +11,7 @@ void channel_init(channel_state *s, tw_lp *lp)
 
 void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
+    /*
     if (m->type == SYNCH_TO_CHANNEL)
     {
         tw_output(lp, "Channel with gid %u received message from synchronizer\n", lp->gid);
@@ -39,6 +40,7 @@ void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
 
         tw_event_send(e);
     }
+    */
 }
 
 void channel_event_handler_rc(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)

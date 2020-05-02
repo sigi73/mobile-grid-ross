@@ -18,11 +18,13 @@ SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_BINARY_DIR}/mobile_grid_config.h PRO
 # All source files for the model
 SET(mobile_grid_srcs
 	mobile_grid_main.c
-	#model_driver.c
 	mobile_grid_map.c
 	client.c
 	channel.c
-	synchronizer.c
+	coordinator.c
+	aggregator.c
+	data_server.c
+	selector.c
 )
 
 # Set the executable name here: model

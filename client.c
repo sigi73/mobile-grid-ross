@@ -9,6 +9,7 @@ void client_init(client_state *s, tw_lp *lp)
 
 void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
+    /*
     if (m->type == CHANNEL_TO_CLIENT)
     {
         tw_output(lp, "Client with gid %u received message from a synchronizer\n", lp->gid);
@@ -29,6 +30,7 @@ void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)
     {
         // error
     }
+    */
     
 }
 

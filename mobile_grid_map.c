@@ -11,7 +11,7 @@
 //Given an LP's GID (global ID)
 //return the PE (aka node, MPI Rank)
 tw_peid mobile_grid_map(tw_lpid gid){
-  printf("gid: %u, g_tw_nlp: %u, node: %u\n", gid, g_tw_nlp, (tw_peid) gid / g_tw_nlp);
+  //printf("gid: %u, g_tw_nlp: %u, node: %u\n", gid, g_tw_nlp, (tw_peid) gid / g_tw_nlp);
   return (tw_peid) gid / g_tw_nlp;
 }
 
@@ -19,6 +19,29 @@ tw_peid mobile_grid_map(tw_lpid gid){
 //    Given an LP's GID
 //    Return the index in the model_lps array (defined in mobile_grid_main.c)
 tw_lpid mobile_grid_typemap (tw_lpid gid) {
+  if (gid < g_num_used_lps)
+  {
+    if (gid == 0)
+      return 0; // Coordinator
+    else if (gid == 1)
+      return 1; // Master Aggregator
+    else if (gid == 2)
+      return 2; // Data server
+    else if (gid <= 2 + num_actors.num_aggregators)
+      return 1; // Aggregator
+    else if (gid <= 2 + num_actors.num_aggregators + num_actors.num_selectors)
+      return 3; // Selector
+    else if (gid <= 2 + num_actors.num_aggregators + num_actors.num_selectors + num_actors.num_selectors * num_actors.num_clients_per_selector)
+      return 4; // Client
+    else
+      return 5; // Channel
+  }
+  else
+  {
+    return 6;
+  }
+  
+  /*
   if (gid < g_num_total_lps)
   {
     if (gid == 0)
@@ -32,6 +55,7 @@ tw_lpid mobile_grid_typemap (tw_lpid gid) {
   {
     return 3; // Extra lps are unused
   }
+  */
   
 }
 
