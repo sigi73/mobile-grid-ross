@@ -14,7 +14,8 @@ cd ROSS/models
 ln -s ../../mobile-grid-ross ./
 cd ../
 mkdir build
-cmake ../ -DROSS_BUILD_MODELS=ON
+cd build
+cmake .. -DROSS_BUILD_MODELS=ON
 make
 ./models/mobile-grid-ross/mobile_grid
 ```
