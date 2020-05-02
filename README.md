@@ -24,3 +24,7 @@ Pass `-DCMAKE_BUILD_TYPE=Debug` for compilation with debugging
 Pass `-DROSS_BUILD_DOXYGEN` to generate Doxygen files
 
 If client side searching is desired for Doxygen, set SEARCHENGINE=YES in ROSS/docs/Doxyfile.user.in
+
+# Debugging
+
+Compile/Test TLM code with `nvcc -D TEST_TLM cuda/*.cu`

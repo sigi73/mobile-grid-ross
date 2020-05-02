@@ -1,1 +1,6 @@
 .vscode/
+
+# nvcc output on windows
+a.exe
+a.exp
+a.lib
