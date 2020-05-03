@@ -77,11 +77,15 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
    {
       tw_output(lp, "Task Arriving\n");
 
-      double task_interval = (unsigned int) tw_rand_normal_sd(lp->rng, 9000, 2000, (unsigned int*) &lp->rng->count);
-      tw_event *e = tw_event_new(COORDINATOR_ID, task_interval, lp);
-      message *msg = tw_event_data(e);
-      msg->type = TASK_ARRIVED;
-      tw_event_send(e);
+      if (s->tasks_received + 1< coordinator_settings.num_tasks) {
+         tw_output(lp, "Scheduling new task");
+
+         double task_interval = (unsigned int) tw_rand_normal_sd(lp->rng, 9000, 2000, (unsigned int*) &lp->rng->count);
+         tw_event *e = tw_event_new(COORDINATOR_ID, task_interval, lp);
+         message *msg = tw_event_data(e);
+         msg->type = TASK_ARRIVED;
+         tw_event_send(e);
+      }
 
       // Generate new task
       // TODO remove hard-coded sub-task number
@@ -128,7 +132,7 @@ void schedule(coordinator_state *s, tw_lp *lp) {
    tw_output(lp, "scheduling\n");
 
    // Notify aggregators for all tasks that need to be started 
-   for (int i = s->tasks_started; i < s->tasks_received; i++) {
+   /*for (int i = s->tasks_started; i < s->tasks_received; i++) {
       printf("Notifying aggregators\n");
 
       // Send to all aggregators
@@ -151,7 +155,7 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       msg->task.task_id = i;
       msg->num_clients_for_task = num_actors.num_aggregators; 
       tw_event_send(e);
-   }
+   }*/
    
 
    // All staged tasks must be scheduled
@@ -175,7 +179,7 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       }
       printf("Assignment task: %d, worker: %d\n", task->flops, assignment->client_id);
 
-      // Initiate task execution by notifying selectors and aggregators
+      // Initiate task execution by notifying selectors aggregators
       tw_event *e = tw_event_new(client_to_selector(assignment->client_id), g_data_center_delay, lp);
       message *msg = tw_event_data(e);
       msg->type = ASSIGN_JOB;
@@ -200,6 +204,9 @@ worker* schedule_naive(client_task* task, coordinator_state *s, tw_lp *lp) {
    }
    return NULL;
 }
+
+
+// Risk-controlled task assignment
 
 // Map reduce task has a tree like structure
 client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp) {
