@@ -16,8 +16,8 @@ SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_SOURCE_DIR}/mobile_grid_config.h.in 
 SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_BINARY_DIR}/mobile_grid_config.h PROPERTIES GENERATED TRUE)
 
 # All source files for the model
-SET(mobile_grid_srcs
-	mobile_grid_main.c
+SET(mobile_grid_lib_srcs
+	#mobile_grid_main.c
 	mobile_grid_map.c
 	client.c
 	channel.c
@@ -26,10 +26,19 @@ SET(mobile_grid_srcs
 	selector.c
 )
 
+ADD_LIBRARY(lmobile_grid SHARED ${mobile_grid_lib_srcs})
+
+#message(WARNING "ADDING CUDA SUBDIRECTORY")
+#ADD_SUBDIRECTORY(cuda/)
+
+ADD_EXECUTABLE(mobile_grid mobile_grid_main.c)
+TARGET_LINK_LIBRARIES(mobile_grid ROSS m lmobile_grid lchannel_capacity)
+
+
 # Set the executable name here: model
 # You will be executing the ./mobile_grid binary
-ADD_EXECUTABLE(mobile_grid ${mobile_grid_srcs})
+# ADD_EXECUTABLE(mobile_grid ${mobile_grid_srcs})
 
-TARGET_LINK_LIBRARIES(mobile_grid ROSS m)
+# TARGET_LINK_LIBRARIES(mobile_grid ROSS m)
 ## Alternatively, use this command with RIO
 #TARGET_LINK_LIBRARIES(model ROSS RIO m)
