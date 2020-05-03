@@ -1,3 +1,5 @@
+#include <cuda.h>
+#include <cuda_runtime.h>
 #include "tlm.h"
 
 #ifdef TEST_TLM

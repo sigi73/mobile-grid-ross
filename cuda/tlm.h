@@ -4,8 +4,6 @@
 
 #define _USE_MATH_DEFINES
 
-#include <cuda.h>
-#include <cuda_runtime.h>
 #include <math.h>
 
 #ifdef __cplusplus
