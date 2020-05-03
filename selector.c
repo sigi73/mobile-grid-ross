@@ -23,7 +23,7 @@ void selector_pre_init(selector_state *s, tw_lp *lp)
     // At the start we tell the coordinator how many devices we have
     for (unsigned int i = 0; i < s->num_clients; i++)
     {
-        tw_event *e = tw_event_new(COORDINATOR_ID, g_data_center_delay, lp);
+        tw_event *e = tw_event_new(COORDINATOR_ID, get_client_start_time(s->client_gids[i]), lp);
         message *msg = tw_event_data(e);
 
         msg->type = DEVICE_REGISTER;

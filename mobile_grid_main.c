@@ -160,15 +160,10 @@ const tw_optdef model_opts[] = {
 	TWOPT_UINT("mean_flop_per_task", coordinator_settings.mean_flop_per_task, "Average amount of work in workunit"),
 	TWOPT_UINT("stddev_flop_per_task", coordinator_settings.stdev_flop_per_task, "Standard deviation of work in workunit"),
 	TWOPT_DOUBLE("data_center_delay", g_data_center_delay, "Delay in the datacenter (in timstep units)"),
-  TWOPT_DOUBLE("scheduling_interval", coordinator_settings.scheduling_interval, "How often the coordinator reschedules (in timestep units)"),
-  TWOPT_DOUBLE("num_tasks", coordinator_settings.num_tasks, "How many tasks should be requested"),
-  TWOPT_DOUBLE("task_size", coordinator_settings.task_size, "How many sub-tasks are there?"),
+  	TWOPT_DOUBLE("scheduling_interval", coordinator_settings.scheduling_interval, "How often the coordinator reschedules (in timestep units)"),
+  	TWOPT_DOUBLE("num_tasks", coordinator_settings.num_tasks, "How many tasks should be requested"),
+	TWOPT_DOUBLE("task_size", coordinator_settings.task_size, "How many sub-tasks are there?"),
 	TWOPT_UINT("scheduling_algorithm", coordinator_settings.scheduling_algorithm, "Scheduling algorithm to be used"),
-
-	TWOPT_UINT("mean_channel_length", channel_settings.mean_length, "Average length of channel between synchronizer and client"),
-	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_length, "Standard deviation of length of channel between synchronizer and client"),
-	TWOPT_UINT("mean_channel_bandwidth", channel_settings.mean_bandwidth, "Average bandwidth of channel between synchronizer and client"),
-	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_bandwidth, "Standard deviation of bandwidth of channel between synchronizer and client"),
 
 	TWOPT_UINT("mean_flops", client_settings.mean_flops, "Average number of floating point operations per second the client is capable of"),
 	TWOPT_UINT("stdev_flops", client_settings.stddev_flops, "Standard deviation of floating point operations per second the client is capable of"),
@@ -178,24 +173,20 @@ const tw_optdef model_opts[] = {
 
 void defaultSettings()
 {
-	g_data_center_delay = 1;
+	g_data_center_delay = 3;
 
-	coordinator_settings.mean_data_size = 100;
-	coordinator_settings.stdev_data_size = 0;
-	coordinator_settings.mean_flop_per_task = 100;
-	coordinator_settings.stdev_flop_per_task = 0;
+	coordinator_settings.mean_data_size = 2000000;
+	coordinator_settings.stdev_data_size = 500000;
+	coordinator_settings.mean_flop_per_task = 30000000;
+	coordinator_settings.stdev_flop_per_task = 10000000;
   	coordinator_settings.scheduling_interval = 10000;
   	coordinator_settings.num_tasks = 10;
   	coordinator_settings.task_size= 50;
   	coordinator_settings.scheduling_algorithm = 0;          // 0 For naive, 1 for Risk-Controlled Task Assignment
 
-	channel_settings.mean_length = 100;
-	channel_settings.stdev_length = 0;
-	channel_settings.mean_bandwidth = 10;
-	channel_settings.stdev_bandwidth = 0;
-
-	client_settings.mean_flops = 1;
-	client_settings.stddev_flops = 0;
+	client_settings.mean_flops = 20000000;
+	client_settings.stddev_flops = 5000000;
+	client_settings.mean_duration = 3000;
 
 	num_actors.num_aggregators = 4;
 	num_actors.num_selectors = 4;
@@ -214,7 +205,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 	tw_opt_add(model_opts);
 	tw_init(&argc, &argv);
 	g_num_clients = num_actors.num_selectors* num_actors.num_clients_per_selector;
-	setup_client_capabilities();
+	allocate_client_parameters();
 
 	//Do some error checking?
 	//Print out some settings?
@@ -276,6 +267,8 @@ int mobile_grid_main(int argc, char* argv[]) {
 			printf("Test print only once\n");
 		}
 	}
+	
+	free_client_parameters();
 
 	return 0;
 }

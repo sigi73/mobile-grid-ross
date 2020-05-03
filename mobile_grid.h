@@ -16,6 +16,8 @@
 #define NUM_FIXED_ACTORS		2
 #define AGGREGATOR_BASE_INDEX   NUM_FIXED_ACTORS
 
+#define MAX_GRID_SIZE			50
+
 #define SEED 1024
 
 #define EPSILON 0.0001
@@ -42,18 +44,11 @@ struct s_num_actors
 } num_actors;
 
 
-struct s_channel_settings
-{
-	unsigned int mean_length;
-	unsigned int stdev_length;
-	unsigned int mean_bandwidth;
-	unsigned int stdev_bandwidth;
-} channel_settings;
-
 struct s_client_settings
 {
 	unsigned int mean_flops;
 	unsigned int stddev_flops;
+	float mean_duration;
 } client_settings;
 
 struct s_coordinator_settings
@@ -139,25 +134,47 @@ struct message
  *  Client
  */
 extern unsigned int g_num_clients;
-extern unsigned int *g_client_flops;
-extern float *g_client_dropout;
+struct s_client_parameters
+{
+	unsigned int *client_flops;
+	float *client_start_time;
+	float *client_duration;
+	float *client_x;
+	float *client_y;
+} client_parameters;
 
-void setup_client_capabilities();
+void allocate_client_parameters();
+void free_client_parameters();
 
 static inline unsigned int get_client_flops(tw_lpid gid)
 {
-    return g_client_flops[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
+    return client_parameters.client_flops[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
+}
+static inline unsigned int get_client_start_time(tw_lpid gid)
+{
+    return client_parameters.client_start_time[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
+}
+static inline unsigned int get_client_duration(tw_lpid gid)
+{
+    return client_parameters.client_duration[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
+}
+static inline unsigned int get_client_x(tw_lpid gid)
+{
+    return client_parameters.client_x[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
+}
+static inline unsigned int get_client_y(tw_lpid gid)
+{
+    return client_parameters.client_y[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
 }
 
-static inline unsigned int get_client_dropout(tw_lpid gid)
-{
-    return g_client_dropout[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
-}
 
 typedef struct client_state client_state;
 struct client_state
 {
 	unsigned int flops;
+	float x_pos;
+	float y_pos;
+	float duration;
 };
 
 void client_init(client_state *s, tw_lp *lp);
@@ -201,7 +218,7 @@ struct worker
 {
 	tw_lpid client_id;
 	unsigned int flops;
-	unsigned int dropout;
+	//unsigned int dropout;
 	int assigned;   // 0 -> unassigned, 1 -> assigned
 };
 
