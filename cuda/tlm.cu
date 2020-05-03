@@ -51,33 +51,19 @@ void print_grid(int width, int height, float * v_in) {
       int x = j/3;
       int y = height - (i/3) - 1;
 
-      if (i%3 == 1 && j%3 == 1) {
-        printf("[%d, %d]", x, y);
-        continue;
-      }
-
-      float v;
-      int is_space = 1;
       if(i%3 == 0 && j%3 == 1) {
-        v =  v_in[T2I(x, y, 2)];
-        is_space = 0;
+        printf("%5.2f ", v_in[T2I(x, y, 2)]);
       } else if (i%3 == 1 && j%3 == 0) {
-        v =  v_in[T2I(x, y, 1)];
-        is_space = 0;
+        printf("%5.2f ", v_in[T2I(x, y, 1)]);
       } else if (i%3 == 1 && j%3 == 2) {
-        v =  v_in[T2I(x, y, 3)];
-        is_space = 0;
+        printf("%5.2f ", v_in[T2I(x, y, 3)]);
       } else if (i%3 == 2 && j%3 == 1) {
-        v =  v_in[T2I(x, y, 0)];
-        is_space = 0;
-      } 
-
-      if(is_space) {
+        printf("%5.2f ", v_in[T2I(x, y, 0)]);
+      } else if (i%3 == 1 && j%3 == 1) {
+        printf("[%d, %d]", x, y);
+      } else {
         printf("      ");
-        continue;
       }
-
-      printf("%s%.2f ", v < 0 ? "" : " ", v);
     }
     printf("\n\n");
   } 
