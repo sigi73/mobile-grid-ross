@@ -17,8 +17,12 @@ void coordinator_init(coordinator_state *s, tw_lp *lp)
    s->task_stage->task = NULL;
    s->task_stage->next = NULL;
 
-   // Initialize worker array.
-   s->workers = malloc(num_actors.num_selectors * num_actors.num_clients_per_selector * sizeof(worker*));
+   // Initialize worker linked list.
+   //s->workers = malloc(num_actors.num_selectors * num_actors.num_clients_per_selector * sizeof(worker*));
+   //s->num_workers = 0;
+   s->workers = malloc(sizeof(worker_node));
+   s->workers->worker = NULL;
+   s->workers->next = NULL;
    s->num_workers = 0;
 
    // Initialize scheduling interval
@@ -57,19 +61,32 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
       w->dropout = get_client_dropout(m->client_id);
       w->assigned = 0;
 
-      s->workers[s->num_workers] = w; 
+      // Add worker to linked list
+      //s->workers[s->num_workers] = w; 
+      //s->num_workers++;
+//      tw_output(lp, "Num workers %d\n", s->num_workers);
+      add_worker(s->workers, w);
       s->num_workers++;
-      tw_output(lp, "Num workers %d\n", s->num_workers);
    }
 
    if (m->type == DEVICE_AVAILABLE) 
    {
       // Inefficient loop to set right one to available
-      for (int i = 0; i < s->num_workers; i++) {
+      /*for (int i = 0; i < s->num_workers; i++) {
          if (s->workers[i]->client_id == m->client_id) {
             tw_output(lp, "Device available received \n");
             s->workers[i]->assigned = 0;
          }
+      }*/
+
+      worker_node* cur = s->workers->next;
+      while (cur != NULL) {
+         if (cur->worker->client_id == m->client_id) {
+            tw_output(lp, "Device available received \n");
+            cur->worker->assigned = 0;
+            break;
+         }
+         cur = cur->next;
       }
 
    }
@@ -134,10 +151,12 @@ void coordinator_finish(coordinator_state *s, tw_lp *lp)
    free_task_stage(s->task_stage);
    free(s->task_stage);
 
-   printf("num %d\n", s->num_workers);
-   for (int i = 0; i < s->num_workers; i++) {
-      free(s->workers[i]);
-   }
+   //printf("num %d\n", s->num_workers);
+   //for (int i = 0; i < s->num_workers; i++) {
+    //  free(s->workers[i]);
+   //}
+   //free(s->workers);
+   free_workers(s->workers);
    free(s->workers);
 }
 
@@ -171,7 +190,13 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       tw_event_send(e);
    }
    
-
+   worker** workers_array = NULL;
+   if (coordinator_settings.scheduling_algorithm == 1) {
+      workers_array = convert_workers_to_array(s->workers, s->num_workers);
+      for (int i = 0; i < s->num_workers; i++) {
+         printf("%d->", workers_array[i]->flops);
+      }
+   }
    // All staged tasks must be scheduled
    task_node* cur = s->task_stage; 
    while (cur->next != NULL) {
@@ -192,7 +217,7 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       if (assignment == NULL) {
          break;
       }
-      printf("Assignment task: %d, worker: %d, %d\n", task->flops, assignment->client_id, task->aggregator_id);
+      printf("Assignment task: %d, worker: %d, %d\n", task->flops, (int) assignment->client_id, (int) task->aggregator_id);
 
       // Initiate task execution by notifying selectors aggregators
       tw_event *e = tw_event_new(client_to_selector(assignment->client_id), g_data_center_delay, lp);
@@ -205,23 +230,57 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       msg->task.aggregator_id = task->aggregator_id;
 
       tw_event_send(e);
-
+      cur = cur->next;
    }
 }
 
 // Just assign first potential worker
 worker* schedule_naive(client_task* task, coordinator_state *s, tw_lp *lp) {
-   for (int i = 0; i < s->num_workers; i++) {
+   worker_node* cur = s->workers->next;
+   while (cur != NULL) {
+      if (cur->worker->assigned == 0) {
+         cur->worker->assigned = 1;
+         return cur->worker;
+      }
+      cur = cur->next;
+   }
+   return NULL;
+   /*for (int i = 0; i < s->num_workers; i++) {
       if (s->workers[i]->assigned == 0) {
          s->workers[i]->assigned = 1;
          return s->workers[i];
       }
    }
-   return NULL;
+   return NULL;*/
 }
 
 
 // Risk-controlled task assignment
+/*worker* schedule_rcta(client_task* task, coordinator_state *s, tw_lp *lp) {
+   // Part 1: Assign comptime, churnprobability, to all workers
+   int lowestRisk = -1;
+   coordinator_worker* selectedH = NULL;
+   for (int i = 0; i < s->workers; i++) {
+      if (s->workers[i]->assigned == 0) {
+         coordinator_worker* cw = malloc(sizeof(coordinator_worker));
+         cw->worker = s->workers[i];
+         // Compute comp time
+         cw->comp_time = task->flops / s->workers[i]->flops;
+         // Compute churn probability (set to 0 for now)
+         cw->churn_prob = 0;
+
+         if (lowestRisk > _ || lowestRisk == -1) {
+            seletedH = cw;
+            lowestRisk = 
+         }
+      }
+   }
+
+   // Part 2: Sort workers by risk
+
+   // Part 3: Risk based assignment
+}*/
+
 
 // Map reduce task has a tree like structure
 client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp) {
@@ -290,4 +349,64 @@ void free_task_stage(task_node* head)
       cur = cur->next;
       free(prev);
    }
+}
+
+// Add worker to head of list
+void add_worker(worker_node* head, worker* worker) {
+   worker_node* wn = malloc(sizeof(worker_node));
+   wn->worker = worker;
+   wn->next = head->next;
+   head->next = wn;
+}
+
+// Delete worker with matching client_id from linked list
+void delete_worker(worker_node* head, tw_lpid client_id) {
+   worker_node* cur = head->next;
+   worker_node* prev = head;
+   while (cur != NULL) {
+      if (cur->worker->client_id == client_id) {
+         prev->next = cur->next;
+         free(cur);
+         return;
+      }
+      prev = cur;
+      cur = cur->next;
+   }
+}
+
+worker* pop_worker(worker_node* head) {
+   worker_node* res_node = head->next;
+   if (res_node != NULL) {
+      head->next = res_node->next;
+   }
+   worker* worker = res_node->worker;
+   free(res_node);
+   return worker;
+}
+
+// Free all workers
+void free_workers(worker_node* head) {
+   worker_node* cur = head->next;
+   worker_node* prev = NULL;
+   while (cur != NULL) {
+      prev = cur;
+      cur = cur->next;
+      free(prev);
+   }
+}
+
+// Convert worker linked list to array so it can be easilly sorted
+worker** convert_workers_to_array(worker_node* head, int count) {
+   // Allocate array
+   worker** res = malloc(sizeof(worker*) * count);
+
+   // Populate array
+   worker_node* cur = head->next;
+   int i = 0;
+   while (cur != NULL) {
+      res[i] = cur->worker;
+      cur = cur->next;
+      i++;
+   }
+   return res;
 }
