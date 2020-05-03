@@ -3,35 +3,67 @@
 
 unsigned int g_num_clients;
 unsigned int *g_client_flops;
-float *g_client_dropout;
+float *g_client_duration;
 
 /* generate a random value weighted within the normal (gaussian) distribution */
 /* https://github.com/rflynn/c/blob/master/rand-normal-distribution.c */
 // TODO: Remember to add acknolwedgement in report
-static double gauss(void)
+static double gauss(int mean, int stddev)
 {
   double x = (double)random() / RAND_MAX,
          y = (double)random() / RAND_MAX,
          z = sqrt(-2 * log(x)) * cos(2 * M_PI * y);
+         z *= (double)stddev;
+         z+= (double)mean;
   return z;
 }
 
-void setup_client_capabilities()
+/* Generate a random value with a exponential distribution */
+/* https://stackoverflow.com/questions/34558230/generating-random-numbers-of-exponential-distribution */
+double rand_expo(double lambda)
+{
+    double u;
+    u = rand() / (RAND_MAX + 1.0);
+    return -log(1- u) / lambda;
+}
+
+double rand_uniform(double low, double high) 
+{
+    double u = (double)rand() / RAND_MAX; //0 to 1
+    u *= (high - low);
+    u += low;
+    return u;
+}
+
+void allocate_client_parameters()
 {
     srand(SEED);
 
-    g_client_flops = malloc(g_num_clients * sizeof(unsigned int));
-    g_client_dropout = malloc(g_num_clients * sizeof(float));
+    client_parameters.client_flops = malloc(g_num_clients * sizeof(unsigned int));
+    client_parameters.client_start_time = malloc(g_num_clients * sizeof(float));
+    client_parameters.client_duration = malloc(g_num_clients * sizeof(float));
+    client_parameters.client_x = malloc(g_num_clients * sizeof(float));
+    client_parameters.client_y = malloc(g_num_clients * sizeof(float));
     for (unsigned int i = 0; i < g_num_clients; i++)
     {
-        double flops = gauss(); // Doesn't need to be reversible, before any events
-        flops *= client_settings.stddev_flops;
-        flops += client_settings.mean_flops;
-        flops = fmax(0, flops); // 0 probably shouldn't be permitted?
-        g_client_flops[i] = (unsigned int)flops;
+        double flops = gauss(client_settings.mean_flops, client_settings.stddev_flops); // Doesn't need to be reversible, before any events
+        flops = fmax(1, flops); // 0 probably shouldn't be permitted?
+        client_parameters.client_flops[i] = (unsigned int)flops;
 
-        g_client_dropout[i] = 0.0f;
+        client_parameters.client_start_time[i] = rand_uniform(g_min_delay, g_tw_ts_end - client_settings.mean_duration);
+        client_parameters.client_duration[i] = rand_expo(client_settings.mean_duration);
+        client_parameters.client_x[i] = rand_uniform(-MAX_GRID_SIZE, MAX_GRID_SIZE);
+        client_parameters.client_y[i] = rand_uniform(-MAX_GRID_SIZE, MAX_GRID_SIZE);
     }
+}
+
+void free_client_parameters()
+{
+    free(client_parameters.client_flops);
+    free(client_parameters.client_start_time);
+    free(client_parameters.client_duration);
+    free(client_parameters.client_x);
+    free(client_parameters.client_y);
 }
 
 
@@ -39,6 +71,7 @@ void client_init(client_state *s, tw_lp *lp)
 {
    printf("Initializing client, gid: %u (Channel %u)\n", lp->gid, client_to_channel(lp->gid));
    s->flops = get_client_flops(lp->gid);
+   s->duration = get_client_duration(lp->gid);
 }
 
 void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)

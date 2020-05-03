@@ -52,7 +52,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
 {
    if (m->type == DEVICE_AVAILABLE)
    {
-      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_dropout(m->client_id));
+      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_duration(m->client_id));
       for (int i = 0; i < s->num_workers; i++)
       {
          if (m->client_id == s->workers[i]->client_id)
@@ -63,13 +63,13 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
    }
    if (m->type == DEVICE_REGISTER)
    {
-      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_dropout(m->client_id));
+      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_duration(m->client_id));
 
       // Add to list of active workers
       worker* w = malloc(sizeof(worker));
       w->client_id = m->client_id;
       w->flops = get_client_flops(m->client_id);
-      w->dropout = get_client_dropout(m->client_id);
+      //w->dropout = get_client_dropout(m->client_id);
       w->assigned = 0;
 
       s->workers[s->num_workers] = w; 
