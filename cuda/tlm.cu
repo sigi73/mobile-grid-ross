@@ -62,6 +62,32 @@ __global__ void path_loss_2d_kernel(float P, float dx, int width, int height, fl
   }
 }
 
+// https://en.wikipedia.org/wiki/Shannon%E2%80%93Hartley_theorem
+__global__ void channel_capacity_2d_kernel(
+  float channel_bandwidth, 
+  float noise_power, 
+  int width, 
+  int height, 
+  float * v_in, 
+  float * channel_capacity
+) {
+  int i = blockIdx.x*blockDim.x + threadIdx.x;
+  while(i < width * height) {  
+    int x = i / height;
+    int y = i % height;
+
+    float v_max = 0; // approximate signal power at this location
+    for(int k = 0; k < 4; k++) {
+      v_max = fmax(v_max, fabs(v_in[T2I(x, y, k)]));
+    }
+
+    // TODO: Check my math
+    channel_capacity[x * height + y] = channel_bandwidth * log2(1 + pow(v_max, 2) / noise_power); // (?) signal power estimated as v_max^2
+
+    i += blockDim.x*gridDim.x;
+  }
+}
+
 #ifdef TEST_TLM
 void print_tlm_grid(int width, int height, float * v_in) {
   for(int i = 0; i < height * 3; i++) {
@@ -90,7 +116,7 @@ void print_tlm_grid(int width, int height, float * v_in) {
 void print_grid(int width, int height, float * v) {
   for(int y = height - 1; y >= 0; y--) {
     for(int x = 0; x < width; x++) {
-      printf("%5.2f ", v[x * height + y]);
+      printf("%8.2E ", v[x * height + y]);
     }
     printf("\n\n");
   }
@@ -140,14 +166,14 @@ int main() {
   printf("Step %d, t = %E:\n\n", i, t);
   print_tlm_grid(width, height, v_in_curr);
 
-  float * path_loss;
-  cudaMallocManaged(&path_loss, width * height * sizeof(float));
+  float * channel_capacity;
+  cudaMallocManaged(&channel_capacity, width * height * sizeof(float));
 
-  path_loss_2d_kernel<<< 1, 64 >>>(P, dx, width, height, v_in_curr, path_loss);
+  channel_capacity_2d_kernel<<< 1, 64 >>>(23e6, 0.1, width, height, v_in_curr, channel_capacity);
   cudaDeviceSynchronize();
 
-  printf("Path Loss:\n\n");
-  print_grid(width, height, path_loss);
+  printf("Channel Capacity:\n\n");
+  print_grid(width, height, channel_capacity);
 
   printf("Complete!\n");
 }
