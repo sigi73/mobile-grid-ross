@@ -7,6 +7,7 @@
 #define T2I(x, y, k) (x) * height * 4 + (y) * 4 + k // index for 2d tlm voltage arrays
 
 __global__ void tlm_2d_step_kernel(int width, int height, float * v_in_curr, float * v_in_next) {
+  // TODO: implement boundary conditions
   int i = blockIdx.x*blockDim.x + threadIdx.x;
 
   while(i < width * height) {  
