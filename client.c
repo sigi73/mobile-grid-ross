@@ -87,3 +87,15 @@ void client_finish(client_state *s, tw_lp *lp)
     (void) s;
     (void) lp;
 }
+
+
+void client_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
+{
+    if (m->type == RETURN_DATA)
+    {
+        memcpy(buffer, &(m->task.flops), sizeof(unsigned int));
+    } else
+    {
+        collect_flag = 0;
+    }
+}

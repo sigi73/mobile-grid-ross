@@ -76,6 +76,64 @@ tw_lptype model_lps[] = {
   { 0 },
 };
 
+st_model_types model_logging[] = {
+	{ // Coordinator
+		(ev_trace_f) NULL,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Aggregator
+		(ev_trace_f) NULL,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Selector
+		(ev_trace_f) NULL,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Client
+		(ev_trace_f) client_event_trace,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Channel
+		(ev_trace_f) NULL,
+		(size_t) sizeof(unsigned int),
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Dummy
+		(ev_trace_f) NULL,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ 0 },
+};
+
 
 /*
  *  Globals
@@ -181,6 +239,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 
 	// set the global variable and initialize each LP's type
 	g_tw_lp_types = model_lps;
+	g_st_model_types = model_logging;
 	tw_lp_setup_types();
 
 	// Do some file I/O here? on a per-node (not per-LP) basis
