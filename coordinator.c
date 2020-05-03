@@ -121,3 +121,14 @@ client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp) {
 
    return tasks;
 }
+
+
+void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
+{
+   (*collect_flag) = 0;
+   if (m->type == DEVICE_AVAILABLE)
+   {
+      (*collect_flag) = 1;
+      memcpy(buffer, &(m->client_id), sizeof(m->client_id));
+   }
+}

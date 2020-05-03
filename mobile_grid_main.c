@@ -78,8 +78,8 @@ tw_lptype model_lps[] = {
 
 st_model_types model_logging[] = {
 	{ // Coordinator
-		(ev_trace_f) NULL,
-		(size_t) 0,
+		(ev_trace_f) coordinator_event_trace,
+		(size_t) sizeof(tw_lpid),
 		(model_stat_f) NULL,
 		(size_t) 0,
 		(sample_event_f) NULL,
@@ -105,7 +105,8 @@ st_model_types model_logging[] = {
 		(size_t) 0,
 	},
 	{ // Client
-		(ev_trace_f) client_event_trace,
+		//(ev_trace_f) client_event_trace,
+		(ev_trace_f) NULL,
 		(size_t) 0,
 		(model_stat_f) NULL,
 		(size_t) 0,

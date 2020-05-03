@@ -196,6 +196,8 @@ void coordinator_finish(coordinator_state *s, tw_lp *lp);
 void schedule(tw_lp *lp); 
 client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp);
 
+void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag);
+
 /*
  *  Selector
  */
