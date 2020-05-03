@@ -111,6 +111,8 @@ const tw_optdef model_opts[] = {
 	TWOPT_UINT("mean_flop_per_task", coordinator_settings.mean_flop_per_task, "Average amount of work in workunit"),
 	TWOPT_UINT("stddev_flop_per_task", coordinator_settings.stdev_flop_per_task, "Standard deviation of work in workunit"),
 	TWOPT_DOUBLE("data_center_delay", g_data_center_delay, "Delay in the datacenter (in timstep units)"),
+  TWOPT_DOUBLE("scheduling_interval", coordinator_settings.scheduling_interval, "How often the coordinator reschedules (in timestep units)"),
+  TWOPT_DOUBLE("num_tasks", coordinator_settings.num_tasks, "How many tasks should be requested"),
 
 	TWOPT_UINT("mean_channel_length", channel_settings.mean_length, "Average length of channel between synchronizer and client"),
 	TWOPT_UINT("stdev_channel_length", channel_settings.stdev_length, "Standard deviation of length of channel between synchronizer and client"),
@@ -131,6 +133,8 @@ void defaultSettings()
 	coordinator_settings.stdev_data_size = 0;
 	coordinator_settings.mean_flop_per_task = 100;
 	coordinator_settings.stdev_flop_per_task = 0;
+  coordinator_settings.scheduling_interval = 10000;
+  coordinator_settings.num_tasks = 10;
 
 	channel_settings.mean_length = 100;
 	channel_settings.stdev_length = 0;
