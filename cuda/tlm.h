@@ -1,8 +1,10 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
+
 #include <cuda.h>
 #include <cuda_runtime.h>
-
+#include <math.h>
 
 // v_in/v_out voltages into of each node [width x height x 6], row major order
 // dt = dx / c

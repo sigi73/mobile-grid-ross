@@ -43,8 +43,25 @@ void tlm_2d_init_zero(int width, int height, float** v_in_curr, float ** v_in_ne
   }
 }
 
+__global__ void path_loss_2d_kernel(float P, float c, float f, int width, int height, float * v_in, float * path_loss) {
+  int i = blockIdx.x*blockDim.x + threadIdx.x;
+  while(i < width * height) {  
+    int x = i / height;
+    int y = i % height;
+
+    float v_max = 0;
+    for(int k = 0; k < 4; k++) {
+      v_max = fmax(v_max, fabs(v_in[T2I(x, y, k)]));
+    }
+
+    path_loss[x * height + y] = -10 * log10( P/pow(v_max, 2) * pow(c/(4*M_PI*f), 2) );
+
+    i += blockDim.x*gridDim.x;
+  }
+}
+
 #ifdef TEST_TLM
-void print_grid(int width, int height, float * v_in) {
+void print_tlm_grid(int width, int height, float * v_in) {
   for(int i = 0; i < height * 3; i++) {
     for(int j = 0; j < width * 3; j++) {
       int x = j/3;
@@ -65,10 +82,28 @@ void print_grid(int width, int height, float * v_in) {
       }
     }
     printf("\n\n");
-  } 
+  }
+}
+
+void print_grid(int width, int height, float * v) {
+  for(int y = height - 1; y >= 0; y--) {
+    for(int x = 0; x < width; x++) {
+      printf("%5.2f ", v[x * height + y]);
+    }
+    printf("\n\n");
+  }
 }
 
 int main() {
+
+  float P = 0.1; // transmitter power: W
+  float dx = 0.1; // grid size: m
+  float c = 3e8; // speed of light: m/s
+  float f = 2.4e9; // frequency: hz
+
+  float dt = dx / c; // time step: s
+  float v0 = sqrt(P)/dx; // transmitter voltage: V (assuming transmitter at constant amperage)
+
   int width = 8;
   int height = 8;
   float * v_in_curr;
@@ -79,24 +114,38 @@ int main() {
   printf("Starting...\n");
 
   int i;
-  for(i = 0; i < 64; i++) {
-    v_in_curr[T2I(width / 2, height / 2, 0)] = 1; // transmitter
-
-    if(i == 0) {
-      printf("Step %d:\n\n", i);
-      print_grid(width, height, v_in_curr);
+  float t = 0;
+  for(i = 0; i < 16384; i++) {
+    if (i < 4) {
+      v_in_curr[T2I(width / 2, height / 2, 0)] = v0; // transmitter
     }
 
-    tlm_2d_step_kernel<<< 1, 1024 >>>(width, height, v_in_curr, v_in_next);
+    if(i == 0) {
+      printf("Step %d, t = %E:\n\n", i, t);
+      print_tlm_grid(width, height, v_in_curr);
+    }
+
+    tlm_2d_step_kernel<<< 1, 64 >>>(width, height, v_in_curr, v_in_next);
     cudaDeviceSynchronize();
 
     float * tmp = v_in_curr;
     v_in_curr = v_in_next;
     v_in_next = tmp;
+
+    t += dt;
   }
 
-  printf("Step %d:\n\n", i);
-  print_grid(width, height, v_in_curr);
+  printf("Step %d, t = %E:\n\n", i, t);
+  print_tlm_grid(width, height, v_in_curr);
+
+  float * path_loss;
+  cudaMallocManaged(&path_loss, width * height * sizeof(float));
+
+  path_loss_2d_kernel<<< 1, 64 >>>(P, c, f, width, height, v_in_curr, path_loss);
+  cudaDeviceSynchronize();
+
+  printf("Path Loss:\n\n");
+  print_grid(width, height, path_loss);
 
   printf("Complete!\n");
 }
