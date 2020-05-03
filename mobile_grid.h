@@ -18,6 +18,8 @@
 
 #define SEED 1024
 
+#define EPSILON 0.0001
+
 /*
  * Global state settings
  */
@@ -30,6 +32,7 @@ extern unsigned int g_num_clients;
 extern unsigned int g_num_used_lps;
 
 extern double g_data_center_delay;
+extern double g_min_delay;
 
 struct s_num_actors
 {
@@ -108,6 +111,7 @@ struct client_task
  *  Message
  */
 typedef enum {
+	DEVICE_REGISTER,
 	DEVICE_AVAILABLE,
 	ASSIGN_JOB,
 	SCHEDULING_INTERVAL,
@@ -201,12 +205,14 @@ struct worker
 	int assigned;   // 0 -> unassigned, 1 -> assigned
 };
 
+/*
 typedef struct assignment;
 struct assignment
 {
 	client_task* task;
 	worker* worker;
 };
+*/
 
 struct coordinator_state
 {

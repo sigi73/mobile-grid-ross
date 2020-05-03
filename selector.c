@@ -26,7 +26,7 @@ void selector_pre_init(selector_state *s, tw_lp *lp)
         tw_event *e = tw_event_new(COORDINATOR_ID, g_data_center_delay, lp);
         message *msg = tw_event_data(e);
 
-        msg->type = DEVICE_AVAILABLE;
+        msg->type = DEVICE_REGISTER;
         msg->client_id = s->client_gids[i];
 
         tw_event_send(e);

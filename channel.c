@@ -26,6 +26,8 @@ void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
         // Delay to simulate the download of data to the client
         tw_output(lp, "Channel %u: Got data request for lp %u\n", lp->gid, m->client_id);
         double temp_channel_delay = m->task.data_size/1000;
+        if (temp_channel_delay < g_min_delay)
+            temp_channel_delay = g_min_delay;
 
         tw_event *e = tw_event_new(m->client_id, temp_channel_delay, lp);
         message *msg = tw_event_data(e);
@@ -40,6 +42,8 @@ void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
         // Delay to simulate the upload of results from the client
         tw_output(lp, "Channel %u: Sending results for lp %u\n", lp->gid, m->client_id);
         double temp_channel_delay = m->task.results_size/1000;
+        if (temp_channel_delay < g_min_delay)
+            temp_channel_delay = g_min_delay;
 
         tw_event *e = tw_event_new(m->task.aggregator_id, temp_channel_delay, lp);
         message *msg = tw_event_data(e);

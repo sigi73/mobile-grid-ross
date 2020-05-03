@@ -18,7 +18,11 @@ void coordinator_init(coordinator_state *s, tw_lp *lp)
    s->task_stage->next = NULL;
 
    // Initialize worker array.
-   s->workers = malloc(num_actors.num_selectors * num_actors.num_clients_per_selector * sizeof(worker*));
+   s->workers = malloc(g_num_clients * sizeof(worker*));
+   for (unsigned int i = 0; i < g_num_clients; i++)
+   {
+      s->workers[i] = malloc(sizeof(worker));
+   }
    s->num_workers = 0;
 
    // Initialize scheduling interval
@@ -47,6 +51,17 @@ void coordinator_pre_init(coordinator_state *s, tw_lp *lp)
 void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
    if (m->type == DEVICE_AVAILABLE)
+   {
+      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_dropout(m->client_id));
+      for (int i = 0; i < s->num_workers; i++)
+      {
+         if (m->client_id == s->workers[i]->client_id)
+         {
+            s->workers[i]->assigned = 0;
+         }
+      }
+   }
+   if (m->type == DEVICE_REGISTER)
    {
       tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_dropout(m->client_id));
 
@@ -114,6 +129,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
 
 void coordinator_event_handler_rc(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
+   printf("scheduler rollback!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 }
 
 void coordinator_finish(coordinator_state *s, tw_lp *lp)
@@ -274,6 +290,8 @@ void free_task_stage(task_node* head)
       prev = cur;
       cur = cur->next;
       free(prev);
+   }
+}
 
 void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
 {

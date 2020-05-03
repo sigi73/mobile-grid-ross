@@ -140,6 +140,7 @@ st_model_types model_logging[] = {
  *  Globals
  */
 unsigned int g_num_used_lps;
+double g_min_delay;
 
 
 /* 
@@ -199,6 +200,8 @@ void defaultSettings()
 	num_actors.num_aggregators = 4;
 	num_actors.num_selectors = 4;
 	num_actors.num_clients_per_selector = 4;
+
+	g_min_delay = g_tw_lookahead + EPSILON;
 }
 
 

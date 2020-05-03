@@ -47,7 +47,8 @@ void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)
     {
         // Received a job, now download data from data server
         tw_output(lp, "Client:Got job for lp %u\n", m->client_id);
-        tw_event *e = tw_event_new(client_to_channel(lp->gid), 0, lp);
+        // Min delay
+        tw_event *e = tw_event_new(client_to_channel(lp->gid), g_min_delay, lp);
         message *msg = tw_event_data(e);
 
         msg->type = REQUEST_DATA;
@@ -61,7 +62,7 @@ void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)
         // Received data, run calculation and send results to aggregator
         tw_output(lp, "Client: Got data for lp %u\n", m->client_id);
         //double delay = m->task.flops / s->flops * 1000;
-        double delay = 0;
+        double delay = g_min_delay;
         tw_event *e = tw_event_new(client_to_channel(lp->gid), delay, lp);
         message *msg = tw_event_data(e);
 
