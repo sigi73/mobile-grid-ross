@@ -15,7 +15,7 @@ ln -s ../../mobile-grid-ross ./
 cd ../
 mkdir build
 cd build
-cmake .. -DROSS_BUILD_MODELS=ON
+cmake .. -DROSS_BUILD_MODELS=ON -DMOBILE_GRID_USE_CUDA=ON -DCMAKE_BUILD_TYPE=Debug
 make
 ./models/mobile-grid-ross/mobile_grid
 ```
@@ -23,6 +23,9 @@ make
 Pass `-DCMAKE_BUILD_TYPE=Debug` for compilation with debugging
 
 Pass `-DROSS_BUILD_DOXYGEN` to generate Doxygen files
+
+Remove the -DMOBILE_GRID_USE_CUDA=ON option to not use the cuda implementation of the wireless channel
+
 
 If client side searching is desired for Doxygen, set SEARCHENGINE=YES in ROSS/docs/Doxyfile.user.in
 

@@ -26,13 +26,24 @@ SET(mobile_grid_lib_srcs
 	selector.c
 )
 
+OPTION(MOBILE_GRID_USE_CUDA "Use the cuda channel?" OFF)
+IF(MOBILE_GRID_USE_CUDA)
+ADD_DEFINITIONS(-DUSE_CUDA_CHANNEL)
+ENDIF(MOBILE_GRID_USE_CUDA)
+
 ADD_LIBRARY(lmobile_grid SHARED ${mobile_grid_lib_srcs})
 
 #message(WARNING "ADDING CUDA SUBDIRECTORY")
 #ADD_SUBDIRECTORY(cuda/)
 
+
 ADD_EXECUTABLE(mobile_grid mobile_grid_main.c)
+    
+IF(MOBILE_GRID_USE_CUDA)
 TARGET_LINK_LIBRARIES(mobile_grid ROSS m lmobile_grid lchannel_capacity)
+ELSE(MOBILE_GRID_USE_CUDA)
+TARGET_LINK_LIBRARIES(mobile_grid ROSS m lmobile_grid)
+ENDIF(MOBILE_GRID_USE_CUDA)
 
 
 # Set the executable name here: model

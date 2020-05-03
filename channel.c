@@ -5,6 +5,14 @@ void channel_init(channel_state *s, tw_lp *lp)
    printf("Initializing channel, gid: %u (Client %u)\n", lp->gid, channel_to_client(lp->gid));
 }
 
+#ifdef USE_CUDA_CHANNEL
+#pragma message "Using Cuda Channel"
+void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
+{
+
+}
+#else 
+#pragma message "Using Fixed Delay Channel"
 void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
     if (m->type == ASSIGN_JOB)
@@ -66,6 +74,7 @@ void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
     }
 
 }
+#endif
 
 void channel_event_handler_rc(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
