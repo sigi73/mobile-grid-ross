@@ -8,14 +8,6 @@ void coordinator_init(coordinator_state *s, tw_lp *lp)
    // Initialize coordinator state
 
    printf("Initializing coordinator, gid: %u\n", lp->gid);
-}
-
-
-void coordinator_pre_init(coordinator_state *s, tw_lp *lp)
-{
-   printf("Coordinator preeeinit\n");
-
-
    // Initialize state variable
    s->tasks_received = 0;
 
@@ -37,6 +29,15 @@ void coordinator_pre_init(coordinator_state *s, tw_lp *lp)
    message *msg2 = tw_event_data(e2);
    msg2->type = TASK_ARRIVED;
    tw_event_send(e2);
+
+}
+
+
+void coordinator_pre_init(coordinator_state *s, tw_lp *lp)
+{
+   printf("Coordinator preeeinit\n");
+
+
 }
 
 void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp)
@@ -53,7 +54,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
 
       tw_event_send(e);*/
 
-      tw_output(lp, "Device available received\n");
+      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_dropout(m->client_id));
    }
 
    if (m->type == SCHEDULING_INTERVAL)
