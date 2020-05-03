@@ -11,6 +11,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+  void tlm_init(int mpi_rank);
+
   // initialize tlm grid with zeros
   void tlm_2d_init_zero(int width, int height, float** v_in_curr, float ** v_in_next, float ** v_max);
 
