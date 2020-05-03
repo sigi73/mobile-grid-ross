@@ -7,7 +7,7 @@ float *g_client_dropout;
 
 /* generate a random value weighted within the normal (gaussian) distribution */
 /* https://github.com/rflynn/c/blob/master/rand-normal-distribution.c */
-// TODO: Remember to add acknolwedgements
+// TODO: Remember to add acknolwedgement in report
 static double gauss(void)
 {
   double x = (double)random() / RAND_MAX,
@@ -89,6 +89,7 @@ void client_finish(client_state *s, tw_lp *lp)
 }
 
 
+/*
 void client_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
 {
     if (m->type == RETURN_DATA)
@@ -99,3 +100,4 @@ void client_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
         collect_flag = 0;
     }
 }
+*/

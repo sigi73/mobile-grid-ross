@@ -231,6 +231,8 @@ void stage_task(task_node* head, client_task* task);
 client_task* pop_task(task_node* head);
 void free_task_stage(task_node* head);
 
+void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag);
+
 /*
  *  Selector
  */

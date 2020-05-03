@@ -274,5 +274,13 @@ void free_task_stage(task_node* head)
       prev = cur;
       cur = cur->next;
       free(prev);
+
+void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
+{
+   (*collect_flag) = 0;
+   if (m->type == DEVICE_AVAILABLE)
+   {
+      (*collect_flag) = 1;
+      memcpy(buffer, &(m->client_id), sizeof(m->client_id));
    }
 }
