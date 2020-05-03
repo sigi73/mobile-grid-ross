@@ -189,12 +189,22 @@ struct task_node
 	task_node* next;
 };
 
+typedef struct worker worker;
+struct worker
+{
+	tw_lpid client_id;
+	unsigned int flops;
+	unsigned int dropout;
+};
+
 struct coordinator_state
 {
 	unsigned int tasks_remaining; // Number of tasks to be dispatched
 	unsigned int tasks_completed; // Number of tasks that have been completed
 	unsigned int tasks_received;  // Number of tasks that have received so far
 	task_node* task_stage;      // Head of linked list of tasks ready to be distributed in the next round
+	worker** workers;	
+	int num_workers;
 };
 
 void coordinator_init(coordinator_state *s, tw_lp *lp);

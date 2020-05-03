@@ -11,11 +11,14 @@ void coordinator_init(coordinator_state *s, tw_lp *lp)
    // Initialize state variable
    s->tasks_received = 0;
 
-
    // Initialize task stage linked list with dummy head node
    s->task_stage = malloc(sizeof(task_node));
    s->task_stage->task = NULL;
    s->task_stage->next = NULL;
+
+   // Initialize worker array.
+   s->workers = malloc(num_actors.num_selectors * num_actors.num_clients_per_selector * sizeof(worker*));
+   s->num_workers = 0;
 
    // Initialize scheduling interval
    tw_event *e = tw_event_new(COORDINATOR_ID, coordinator_settings.scheduling_interval, lp);
@@ -44,17 +47,16 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
 {
    if (m->type == DEVICE_AVAILABLE)
    {
-      // Send the job to the channel for channel simulation
-      /*tw_event *e = tw_event_new(client_to_channel(m->client_id), g_data_center_delay, lp);
-      message *msg = tw_event_data(e);
-
-      msg->type = ASSIGN_JOB;
-      msg->task = m->task;
-      msg->client_id = m->client_id;
-
-      tw_event_send(e);*/
-
       tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_dropout(m->client_id));
+
+      // Add to list of active workers
+      worker* w = malloc(sizeof(worker));
+      w->client_id = m->client_id;
+      w->flops = get_client_flops(m->client_id);
+      w->dropout = get_client_dropout(m->client_id);
+
+      s->workers[s->num_workers] = w; 
+      s->num_workers++;
    }
 
    if (m->type == SCHEDULING_INTERVAL)
@@ -114,6 +116,11 @@ void coordinator_finish(coordinator_state *s, tw_lp *lp)
 {
    free_task_stage(s->task_stage);
    free(s->task_stage);
+
+   for (int i = 0; i < s->num_workers; i++) {
+      free(s->workers[i]);
+   }
+   free(s->workers);
 }
 
 
