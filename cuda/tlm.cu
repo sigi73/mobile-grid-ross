@@ -33,7 +33,7 @@ __global__ void tlm_2d_step_kernel(int width, int height, float * v_in_curr, flo
   }
 }
 
-void tlm_2d_init_pulse(int width, int height, float** v_in_curr, float ** v_in_next, float pulse) {
+void tlm_2d_init_zero(int width, int height, float** v_in_curr, float ** v_in_next) {
   cudaMallocManaged(v_in_curr,  width * height * 4 * sizeof(float));
   cudaMallocManaged(v_in_next, width * height * 4 * sizeof(float));
 
@@ -41,8 +41,6 @@ void tlm_2d_init_pulse(int width, int height, float** v_in_curr, float ** v_in_n
     (*v_in_curr)[i] = 0.0;
     (*v_in_next)[i] = 0.0;
   }
-
-  (*v_in_curr)[T2I(width / 2, height / 2, 0)] = pulse;
 }
 
 #ifdef TEST_TLM
@@ -76,14 +74,20 @@ int main() {
   float * v_in_curr;
   float * v_in_next;
 
-  tlm_2d_init_pulse(width, height, &v_in_curr, &v_in_next, 1);
+  tlm_2d_init_zero(width, height, &v_in_curr, &v_in_next);
+
+  printf("Starting...\n");
 
   int i;
-  for(i = 0; i < 3; i++) {
-    printf("Step %d:\n\n", i);
-    print_grid(width, height, v_in_curr);
+  for(i = 0; i < 64; i++) {
+    v_in_curr[T2I(width / 2, height / 2, 0)] = 1; // transmitter
 
-    tlm_2d_step_kernel<<< 1, 32 >>>(width, height, v_in_curr, v_in_next);
+    if(i == 0) {
+      printf("Step %d:\n\n", i);
+      print_grid(width, height, v_in_curr);
+    }
+
+    tlm_2d_step_kernel<<< 1, 1024 >>>(width, height, v_in_curr, v_in_next);
     cudaDeviceSynchronize();
 
     float * tmp = v_in_curr;
@@ -93,5 +97,7 @@ int main() {
 
   printf("Step %d:\n\n", i);
   print_grid(width, height, v_in_curr);
+
+  printf("Complete!\n");
 }
 #endif

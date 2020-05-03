@@ -8,5 +8,5 @@
 // dt = dx / c
 __global__ void tlm_2d_step_kernel(int width, int height, float * v_in_curr, float * v_in_next);
 
-// initialize tlm grid with a pulse at the center
-void tlm_2d_init_pulse(int width, int height, float** v_in_curr, float ** v_in_next, float pulse);
+// initialize tlm grid with zeros
+void tlm_2d_init_zero(int width, int height, float** v_in_curr, float ** v_in_next);
