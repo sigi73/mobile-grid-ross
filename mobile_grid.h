@@ -59,7 +59,8 @@ struct s_coordinator_settings
 	unsigned int stdev_data_size;
 	unsigned int mean_flop_per_task;
 	unsigned int stdev_flop_per_task;
-
+	double scheduling_interval;
+	int num_tasks;
 } coordinator_settings;
 
 
@@ -106,6 +107,8 @@ struct client_task
 typedef enum {
 	DEVICE_AVAILABLE,
 	ASSIGN_JOB,
+	SCHEDULING_INTERVAL,
+	TASK_ARRIVED,
 	REQUEST_DATA,
 	RETURN_DATA,
 	SEND_RESULTS,
@@ -118,6 +121,8 @@ struct message
 	client_task task;
 
 	tw_lpid client_id;
+	
+	long rng_count;        // Required by ROSS rng
 
 	unsigned int num_clients_for_task; // Used when sending a new task to aggregator
 };
@@ -178,10 +183,9 @@ void channel_finish(channel_state *s, tw_lp *lp);
 typedef struct coordinator_state coordinator_state;
 struct coordinator_state
 {
-	unsigned int current_task_id;
-	unsigned int num_assigned_currently;
-
-	unsigned int num_completed;
+	unsigned int tasks_remaining; // Number of tasks to be dispatched
+	unsigned int tasks_completed; // Number of tasks that have been completed
+	unsigned int tasks_received;  // Number of tasks that have received so far
 };
 
 void coordinator_init(coordinator_state *s, tw_lp *lp);
@@ -189,6 +193,8 @@ void coordinator_pre_init(coordinator_state *s, tw_lp *lp);
 void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void coordinator_event_handler_rc(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void coordinator_finish(coordinator_state *s, tw_lp *lp);
+void schedule(tw_lp *lp); 
+client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp);
 
 /*
  *  Selector
