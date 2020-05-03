@@ -172,8 +172,6 @@ typedef struct client_state client_state;
 struct client_state
 {
 	unsigned int flops;
-	float x_pos;
-	float y_pos;
 	float duration;
 };
 
@@ -191,7 +189,10 @@ typedef struct channel_state channel_state;
 
 struct channel_state
 {
-	unsigned int dummy; // I don't think an empty struct is valid
+	float *x_pos;		// X and y positions of associated client
+	float *y_pos;
+	float *capacity;	// Channel capacity calculated
+	// Make these arrays of length 1 since the gpu code is generalized to calculate for multiple clients. Possible extension: multiple clients sharing a channel
 };
 
 void channel_init(channel_state *s, tw_lp *lp);

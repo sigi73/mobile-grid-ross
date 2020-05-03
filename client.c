@@ -72,8 +72,6 @@ void client_init(client_state *s, tw_lp *lp)
    printf("Initializing client, gid: %u (Channel %u)\n", lp->gid, client_to_channel(lp->gid));
    s->flops = get_client_flops(lp->gid);
    s->duration = get_client_duration(lp->gid);
-   s->x_pos = get_client_x(lp->gid);
-   s->y_pos = get_client_y(lp->gid);
 }
 
 void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)

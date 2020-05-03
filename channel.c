@@ -1,15 +1,27 @@
 #include "mobile_grid.h"
+#ifdef USE_CUDA_CHANNEL
+#include "cuda/tlm.h"
+#endif
 
 void channel_init(channel_state *s, tw_lp *lp)
 {
    printf("Initializing channel, gid: %u (Client %u)\n", lp->gid, channel_to_client(lp->gid));
+   s->x_pos = malloc(1*sizeof(float));
+   s->y_pos = malloc(1*sizeof(float));
+   s->capacity = malloc(1*sizeof(float));
+   s->x_pos[0] = get_client_x(channel_to_client(lp->gid));
+   s->y_pos[0] = get_client_y(channel_to_client(lp->gid));
+
+   #ifdef USE_CUDA_CHANNEL
+   alloc_channel_capacity_args(1, &s->x_pos, &s->y_pos, &s->capacity); // Use && since this supports passing an array but our length is 1
+   #endif
 }
 
 #ifdef USE_CUDA_CHANNEL
 #pragma message "Using Cuda Channel"
 void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
-
+    compute_channel_capacity(1, s->x_pos, s->y_pos, s->capacity);
 }
 #else 
 #pragma message "Using Fixed Delay Channel"
@@ -87,6 +99,10 @@ void channel_event_handler_rc(channel_state *s, tw_bf *bf, message *m, tw_lp *lp
 
 void channel_finish(channel_state *s, tw_lp *lp)
 {
-    (void)s;
     (void)lp;
+    #ifdef USE_CUDA_CHANNEL
+    free_channel_capacity_args(&s->x_pos, &s->y_pos, &s->capacity);
+    #else
+    (void)s;
+    #endif
 }

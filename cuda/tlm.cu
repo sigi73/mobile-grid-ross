@@ -138,6 +138,12 @@ void alloc_channel_capacity_args(int n, float** client_x, float ** client_y, flo
   cudaMallocManaged(channel_capacity, n * sizeof(float));  
 }
 
+void free_channel_capacity_args(float** client_x, float ** client_y, float ** channel_capacity) {
+  cudaFree(client_x);  
+  cudaFree(client_y);
+  cudaFree(channel_capacity);
+}
+
 void compute_channel_capacity(
   int n, 
   float * client_x, 
