@@ -260,5 +260,19 @@ int mobile_grid_main(int argc, char* argv[]) {
 
 	tw_end();
 
+	// If ROSS is outputting a file, output some info
+	// Only output by master node
+	if (!g_st_disable_out && g_tw_mynode == g_tw_masternode)
+	{
+		char filename[INST_MAX_LENGTH];
+		sprintf(filename, "%s/run_statistics.csv", stats_directory);
+		FILE *f = fopen(filename, "w");
+		fprintf(f, "NumAggregators:%d\n", num_actors.num_aggregators);
+		fprintf(f, "NumSelectors:%d\n", num_actors.num_selectors);
+		fprintf(f, "NumClientsPerSelector:%d\n", num_actors.num_clients_per_selector);
+		fclose(f);
+		printf("Test print only once\n");
+	}
+
 	return 0;
 }
