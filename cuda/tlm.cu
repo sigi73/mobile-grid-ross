@@ -24,8 +24,8 @@ __global__ void tlm_2d_step_kernel(int width, int height, float * v_in_curr, flo
       v_out_next[k] = v - v_in_curr[T2I(x, y, k)];
     }
 
-    if(y - 1 > 0     ) v_in_next[T2I(    x, y - 1, 2)] = v_out_next[0];
-    if(x - 1 > 0     ) v_in_next[T2I(x - 1,     y, 3)] = v_out_next[1];
+    if(y - 1 >= 0    ) v_in_next[T2I(    x, y - 1, 2)] = v_out_next[0];
+    if(x - 1 >= 0    ) v_in_next[T2I(x - 1,     y, 3)] = v_out_next[1];
     if(y + 1 < height) v_in_next[T2I(    x, y + 1, 0)] = v_out_next[2];
     if(x + 1 < width ) v_in_next[T2I(x + 1,     y, 1)] = v_out_next[3];
 
