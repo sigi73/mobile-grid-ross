@@ -13,6 +13,10 @@ void coordinator_pre_init(coordinator_state *s, tw_lp *lp)
 {
    printf("Coordinator preeeinit\n");
 
+
+   // Initialize state variable
+   s->tasks_received = 0;
+
    // Initialize scheduling interval
    tw_event *e = tw_event_new(g_coordinator_id, coordinator_settings.scheduling_interval, lp);
    message *msg = tw_event_data(e);
@@ -58,6 +62,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
       schedule(lp);
    }
 
+   // TODO might make more sense to put this in a uniform distribution at the init stage :)
    if (m->type == TASK_ARRIVED)
    {
       tw_output(lp, "Task Arriving\n");
@@ -69,7 +74,10 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
       tw_event_send(e);
 
       // Generate new task
-      generate_map_reduce_task(50, lp);
+      client_task* tasks = generate_map_reduce_task(s->tasks_received, 50, lp);
+      s->tasks_received++;
+
+      printf("Task: %d\n", tasks[0].task_id);
    }
 }
 
@@ -87,17 +95,19 @@ void schedule(tw_lp *lp) {
 }
 
 // Map reduce task has a tree like structure
-void generate_map_reduce_task(int n, tw_lp *lp) {
+client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp) {
 
    long start_count = lp->rng->count;
 
    
    printf("Generating map reduce task\n");
 
-   client_task tasks[n];
+   client_task* tasks = malloc(n * sizeof(client_task));
+
+   //client_task tasks[n];
    for (int i = 0; i < n; i++) {
       client_task task;
-      task.task_id = i;
+      task.task_id = task_id;
       // TODO determine why rng count doesn't increment
       // Mu: 2 M, Sigma: 0.5 M
       task.data_size = (unsigned int) tw_rand_normal_sd(lp->rng, 2000000, 500000, (unsigned int*) &lp->rng->count);
@@ -106,4 +116,6 @@ void generate_map_reduce_task(int n, tw_lp *lp) {
 
       tasks[i] = task;
    }
+
+   return tasks;
 }

@@ -160,6 +160,7 @@ struct coordinator_state
 {
 	unsigned int tasks_remaining; // Number of tasks to be dispatched
 	unsigned int tasks_completed; // Number of tasks that have been completed
+	unsigned int tasks_received;  // Number of tasks that have received so far
 };
 
 void coordinator_init(coordinator_state *s, tw_lp *lp);
@@ -168,7 +169,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
 void coordinator_event_handler_rc(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void coordinator_finish(coordinator_state *s, tw_lp *lp);
 void schedule(tw_lp *lp); 
-void generate_map_reduce_task(int n, tw_lp *lp);
+client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp);
 
 /*
  *  Selector
