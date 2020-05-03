@@ -31,7 +31,7 @@ tw_lpid mobile_grid_typemap (tw_lpid gid) {
       return 1; // Aggregator
     else if (gid <= 2 + num_actors.num_aggregators + num_actors.num_selectors)
       return 3; // Selector
-    else if (gid <= 2 + num_actors.num_aggregators + num_actors.num_selectors + num_actors.num_selectors * num_actors.num_clients_per_selector)
+    else if (gid <= 2 + num_actors.num_aggregators + num_actors.num_selectors + g_num_clients)
       return 4; // Client
     else
       return 5; // Channel

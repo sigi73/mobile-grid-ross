@@ -1,36 +1,45 @@
+#include <math.h>
 #include "mobile_grid.h"
+
+unsigned int g_num_clients;
+unsigned int *g_client_flops;
+float *g_client_dropout;
+
+/* generate a random value weighted within the normal (gaussian) distribution */
+/* https://github.com/rflynn/c/blob/master/rand-normal-distribution.c */
+static double gauss(void)
+{
+  double x = (double)random() / RAND_MAX,
+         y = (double)random() / RAND_MAX,
+         z = sqrt(-2 * log(x)) * cos(2 * M_PI * y);
+  return z;
+}
+
+void setup_client_capabilities()
+{
+    srandom(time(NULL));
+
+    g_client_flops = malloc(g_num_clients * sizeof(unsigned int));
+    for (unsigned int i = 0; i < g_num_clients; i++)
+    {
+        double flops = gauss();
+        flops *= client_settings.stddev_flops;
+        flops += client_settings.mean_flops;
+        flops = fmax(0, flops); // 0 probably shouldn't be permitted?
+        g_client_flops[i] = (unsigned int)flops;
+
+        g_client_dropout[i] = 0.0f;
+    }
+}
+
 
 void client_init(client_state *s, tw_lp *lp)
 {
-   // TODO: Use stddev as well
-   s->flops = client_settings.mean_flops;
-   printf("Initializing client, gid: %u\n", lp->gid);
+   printf("Initializing client, gid: %u (Channel %u)\n", lp->gid, client_to_channel(lp->gid));
 }
 
 void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
-    /*
-    if (m->type == CHANNEL_TO_CLIENT)
-    {
-        tw_output(lp, "Client with gid %u received message from a synchronizer\n", lp->gid);
-        tw_stime data_download_delay = m->task_data_size;
-        tw_stime computation_delay = m->task_flops / s->flops;
-        tw_stime delay = data_download_delay + computation_delay;
-
-
-        tw_event *e = tw_event_new(lp->gid-1, delay, lp);
-        message *msg = tw_event_data(e);
-
-        msg->type = CLIENT_TO_CHANNEL;
-        msg->task_data_size = m->task_data_size;
-        msg->task_flops = m->task_flops;
-
-        tw_event_send(e);
-    } else
-    {
-        // error
-    }
-    */
     
 }
 

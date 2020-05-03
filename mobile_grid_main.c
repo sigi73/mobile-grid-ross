@@ -154,6 +154,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 
 	tw_opt_add(model_opts);
 	tw_init(&argc, &argv);
+	g_num_clients = num_actors.num_selectors* num_actors.num_clients_per_selector;
 
 	//Do some error checking?
 	//Print out some settings?
@@ -176,7 +177,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 	// g_tw_nkp
 	// g_tw_synchronization_protocol
 
-	g_num_used_lps = 1 + 1 + 1 + num_actors.num_aggregators + num_actors.num_selectors + 2 * num_actors.num_selectors * num_actors.num_clients_per_selector;
+	g_num_used_lps = 1 + 1 + 1 + num_actors.num_aggregators + num_actors.num_selectors + 2 * g_num_clients;
 	int num_lps_per_pe = (int)ceil((float)g_num_used_lps/(float)tw_nnodes());
 	printf("g_num_total_lps: %d, num_lps_per_pe: %d\n", g_num_used_lps, num_lps_per_pe);
 

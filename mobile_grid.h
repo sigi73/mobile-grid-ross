@@ -63,6 +63,18 @@ struct s_coordinator_settings
 tw_peid mobile_grid_map(tw_lpid gid);
 tw_lpid mobile_grid_typemap (tw_lpid gid);
 
+// Returns the gid of the channel connected to the passed client
+static inline tw_lpid client_to_channel(tw_lpid gid)
+{
+	return gid + g_num_clients;
+}
+
+// Returns the gid of the client connected to the passed channel
+static inline tw_lpid channel_to_client(tw_lpid gid)
+{
+	return gid - g_num_clients;
+}
+
 /*
  * Task
  */
@@ -94,10 +106,24 @@ struct message
 /*
  *  Client
  */
+extern unsigned int g_num_clients;
+extern unsigned int *g_client_flops;
+extern float *g_client_dropout;
+
+static inline unsigned int get_client_flops(tw_lpid gid)
+{
+    return g_client_flops[gid - 3 - num_actors.num_aggregators - num_actors.num_selectors];
+}
+
+static inline unsigned int get_client_dropout(tw_lpid gid)
+{
+    return g_client_dropout[gid - 3 - num_actors.num_aggregators - num_actors.num_selectors];
+}
+
 typedef struct client_state client_state;
 struct client_state
 {
-	unsigned int flops;
+	unsigned char dummy; // I don't think empty structs are allowed. No state
 };
 
 void client_init(client_state *s, tw_lp *lp);

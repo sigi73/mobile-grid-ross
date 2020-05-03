@@ -37,7 +37,15 @@ void selector_event_handler(selector_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
     if (m->type == ASSIGN_JOB)
     {
-        // Client completed task, notify coordinator
+        // Send the job to the channel for channel simulation
+        tw_event *e = tw_event_new(client_to_channel(m->client_id), g_data_center_delay, lp);
+        message *msg = tw_event_data(e);
+
+        msg->type = ASSIGN_JOB;
+        msg->task = m->task;
+        msg->client_id = m->client_id;
+
+        tw_event_send(e);
     }
 }
 
