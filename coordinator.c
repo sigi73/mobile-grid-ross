@@ -10,6 +10,7 @@ void coordinator_init(coordinator_state *s, tw_lp *lp)
    printf("Initializing coordinator, gid: %u\n", lp->gid);
    // Initialize state variable
    s->tasks_received = 0;
+   s->tasks_started = 0;
 
    // Initialize task stage linked list with dummy head node
    s->task_stage = malloc(sizeof(task_node));
@@ -54,6 +55,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
       w->client_id = m->client_id;
       w->flops = get_client_flops(m->client_id);
       w->dropout = get_client_dropout(m->client_id);
+      w->assigned = 0;
 
       s->workers[s->num_workers] = w; 
       s->num_workers++;
@@ -61,16 +63,13 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
 
    if (m->type == SCHEDULING_INTERVAL)
    {
-      tw_output(lp, "SCHEDULING INTERVAL\n");
-
       tw_event *e = tw_event_new(COORDINATOR_ID, coordinator_settings.scheduling_interval, lp);
       message *msg = tw_event_data(e);
       msg->type = SCHEDULING_INTERVAL;
 
       tw_event_send(e);
 
-
-      schedule(lp);
+      schedule(s, lp);
    }
 
    // TODO might make more sense to put this in a uniform distribution at the init stage :)
@@ -86,13 +85,14 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
 
       // Generate new task
       // TODO remove hard-coded sub-task number
-      client_task* tasks = generate_map_reduce_task(s->tasks_received, 50, lp);
+      client_task* tasks = generate_map_reduce_task(s->tasks_received, coordinator_settings.task_size, lp);
       s->tasks_received++;
 
       // Stage tasks
-      for (int i = 0; i < 50; i++) {
+      for (int i = 0; i < coordinator_settings.task_size; i++) {
          stage_task(s->task_stage, &tasks[i]);
       }
+      printf("Staged subtask: %d\n", s->task_stage->next->task->subtask_id);
 
       //task_node* cur = s->task_stage;
       /*while (cur->next != NULL) {
@@ -123,9 +123,82 @@ void coordinator_finish(coordinator_state *s, tw_lp *lp)
    free(s->workers);
 }
 
-
-void schedule(tw_lp *lp) {
+// Outer loop of scheduling algorithm that loops through each task
+void schedule(coordinator_state *s, tw_lp *lp) {
    tw_output(lp, "scheduling\n");
+
+   // Notify aggregators for all tasks that need to be started 
+   for (int i = s->tasks_started; i < s->tasks_received; i++) {
+      printf("Notifying aggregators\n");
+
+      // Send to all aggregators
+      for (int j = 0; j < num_actors.num_aggregators; j++) {
+
+         tw_event *e = tw_event_new(AGGREGATOR_BASE_INDEX + j, g_data_center_delay, lp);
+         message *msg = tw_event_data(e);
+         msg->type = NOTIFY_NEW_JOB;
+         msg->task.task_id = i;
+         msg->num_clients_for_task = (coordinator_settings.task_size / num_actors.num_aggregators) + ((j < coordinator_settings.task_size % num_actors.num_aggregators) ? 1 : 0);
+//         msg->task.aggregator_id = msg->task.subtask_id % num_actors.num_aggregators;
+         printf("Assigned to aggregator num tasks%d\n", msg->num_clients_for_task);
+         tw_event_send(e);
+      }
+
+      // Send to master aggregator
+      tw_event *e = tw_event_new(MASTER_AGGREGATOR_ID, g_data_center_delay, lp);
+      message *msg = tw_event_data(e);
+      msg->type = NOTIFY_NEW_JOB;
+      msg->task.task_id = i;
+      msg->num_clients_for_task = num_actors.num_aggregators; 
+      tw_event_send(e);
+   }
+   
+
+   // All staged tasks must be scheduled
+   task_node* cur = s->task_stage; 
+   while (cur->next != NULL) {
+      // Assign task based off of the chosen algorithm
+      client_task* task = pop_task(s->task_stage);
+      worker* assignment;
+      if (coordinator_settings.scheduling_algorithm == 0) {
+         // Naive scheduling
+         assignment = schedule_naive(task, s, lp);
+      } else {
+         // Risk-Controlled task assignment
+         assignment = NULL;
+      }
+
+      // We are out of available workers.
+      // TODO Support for multischeduling tasks to workers?
+      if (assignment == NULL) {
+         break;
+      }
+      printf("Assignment task: %d, worker: %d\n", task->flops, assignment->client_id);
+
+      // Initiate task execution by notifying selectors and aggregators
+      tw_event *e = tw_event_new(client_to_selector(assignment->client_id), g_data_center_delay, lp);
+      message *msg = tw_event_data(e);
+      msg->type = ASSIGN_JOB;
+      msg->client_id = assignment->client_id;
+      msg->task.task_id = task->task_id;
+      msg->task.data_size = task->data_size;
+      msg->task.flops = task->flops;
+      msg->task.aggregator_id = 0;
+
+      tw_event_send(e);
+
+   }
+}
+
+// Just assign first potential worker
+worker* schedule_naive(client_task* task, coordinator_state *s, tw_lp *lp) {
+   for (int i = 0; i < s->num_workers; i++) {
+      if (s->workers[i]->assigned == 0) {
+         s->workers[i]->assigned = 1;
+         return s->workers[i];
+      }
+   }
+   return NULL;
 }
 
 // Map reduce task has a tree like structure
@@ -142,6 +215,8 @@ client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp) {
    for (int i = 0; i < n; i++) {
       client_task task;
       task.task_id = task_id;
+      task.subtask_id = i;
+      task.aggregator_id = AGGREGATOR_BASE_INDEX + (i % num_actors.num_aggregators);
       // TODO determine why rng count doesn't increment
       // Mu: 2 M, Sigma: 0.5 M
       task.data_size = (unsigned int) tw_rand_normal_sd(lp->rng, 2000000, 500000, (unsigned int*) &lp->rng->count);

@@ -61,6 +61,8 @@ struct s_coordinator_settings
 	unsigned int stdev_flop_per_task;
 	double scheduling_interval;
 	int num_tasks;
+	int task_size;
+	int scheduling_algorithm;
 } coordinator_settings;
 
 
@@ -94,6 +96,7 @@ typedef struct client_task client_task;
 struct client_task
 {
 	unsigned int task_id;
+	unsigned int subtask_id;
 	unsigned int data_size;	
 	unsigned int flops;
 	unsigned int results_size;
@@ -195,6 +198,14 @@ struct worker
 	tw_lpid client_id;
 	unsigned int flops;
 	unsigned int dropout;
+	int assigned;   // 0 -> unassigned, 1 -> assigned
+};
+
+typedef struct assignment;
+struct assignment
+{
+	client_task* task;
+	worker* worker;
 };
 
 struct coordinator_state
@@ -202,6 +213,7 @@ struct coordinator_state
 	unsigned int tasks_remaining; // Number of tasks to be dispatched
 	unsigned int tasks_completed; // Number of tasks that have been completed
 	unsigned int tasks_received;  // Number of tasks that have received so far
+	unsigned int tasks_started;  // Number of tasks that the coordinator has started scheduling 
 	task_node* task_stage;      // Head of linked list of tasks ready to be distributed in the next round
 	worker** workers;	
 	int num_workers;
@@ -212,7 +224,8 @@ void coordinator_pre_init(coordinator_state *s, tw_lp *lp);
 void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void coordinator_event_handler_rc(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void coordinator_finish(coordinator_state *s, tw_lp *lp);
-void schedule(tw_lp *lp); 
+void schedule(coordinator_state *s, tw_lp *lp); 
+worker* schedule_naive(client_task* task, coordinator_state *s, tw_lp *lp);
 client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp);
 void stage_task(task_node* head, client_task* task);
 client_task* pop_task(task_node* head);

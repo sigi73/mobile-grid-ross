@@ -6,12 +6,14 @@
  */
 aggregator_task *add_aggregator_task(aggregator_task *head)
 {
+   printf("hello\n");
    aggregator_task *tail = head;
    while (tail->next != NULL)
    {
       tail = tail->next;
    }
    tail->next = malloc(sizeof(aggregator_task));
+   printf("goodbye\n");
    return tail->next;
 }
 
@@ -88,6 +90,7 @@ void aggregator_event_handler(aggregator_state *s, tw_bf *bf, message *m, tw_lp 
 {
    if (m->type == NOTIFY_NEW_JOB)
    {
+      tw_output(lp, "Aggregator notified of new job\n");
       aggregator_task *job = add_aggregator_task(s->tasks);
       job->task_id = m->task.task_id;
       job->num_remaining = m->num_clients_for_task;
