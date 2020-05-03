@@ -6,14 +6,12 @@
  */
 aggregator_task *add_aggregator_task(aggregator_task *head)
 {
-   printf("hello\n");
    aggregator_task *tail = head;
    while (tail->next != NULL)
    {
       tail = tail->next;
    }
    tail->next = malloc(sizeof(aggregator_task));
-   printf("goodbye\n");
    return tail->next;
 }
 

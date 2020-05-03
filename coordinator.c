@@ -137,7 +137,7 @@ void coordinator_finish(coordinator_state *s, tw_lp *lp)
    free_task_stage(s->task_stage);
    free(s->task_stage);
 
-   for (int i = 0; i < s->num_workers; i++) {
+   for (int i = 0; i < g_num_clients; i++) {
       free(s->workers[i]);
    }
    free(s->workers);
@@ -148,7 +148,7 @@ void schedule(coordinator_state *s, tw_lp *lp) {
    tw_output(lp, "scheduling\n");
 
    // Notify aggregators for all tasks that need to be started 
-   /*for (int i = s->tasks_started; i < s->tasks_received; i++) {
+   for (int i = s->tasks_started; i < s->tasks_received; i++) {
       printf("Notifying aggregators\n");
 
       // Send to all aggregators
@@ -171,7 +171,7 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       msg->task.task_id = i;
       msg->num_clients_for_task = num_actors.num_aggregators; 
       tw_event_send(e);
-   }*/
+   }
    
 
    // All staged tasks must be scheduled
@@ -193,7 +193,7 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       if (assignment == NULL) {
          break;
       }
-      printf("Assignment task: %d, worker: %d\n", task->flops, assignment->client_id);
+      printf("Assignment task: %d, worker: %d, %d\n", task->flops, assignment->client_id, task->aggregator_id);
 
       // Initiate task execution by notifying selectors aggregators
       tw_event *e = tw_event_new(client_to_selector(assignment->client_id), g_data_center_delay, lp);
@@ -203,7 +203,7 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       msg->task.task_id = task->task_id;
       msg->task.data_size = task->data_size;
       msg->task.flops = task->flops;
-      msg->task.aggregator_id = 0;
+      msg->task.aggregator_id = task->aggregator_id;
 
       tw_event_send(e);
 
