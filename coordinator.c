@@ -1,3 +1,4 @@
+#include <math.h>
 #include "mobile_grid.h"
 
 
@@ -9,6 +10,7 @@ void coordinator_init(coordinator_state *s, tw_lp *lp)
    printf("Initializing coordinator, gid: %u\n", lp->gid);
 }
 
+
 void coordinator_pre_init(coordinator_state *s, tw_lp *lp)
 {
    printf("Coordinator preeeinit\n");
@@ -18,14 +20,14 @@ void coordinator_pre_init(coordinator_state *s, tw_lp *lp)
    s->tasks_received = 0;
 
    // Initialize scheduling interval
-   tw_event *e = tw_event_new(g_coordinator_id, coordinator_settings.scheduling_interval, lp);
+   tw_event *e = tw_event_new(COORDINATOR_ID, coordinator_settings.scheduling_interval, lp);
    message *msg = tw_event_data(e);
    msg->type = SCHEDULING_INTERVAL;
    tw_event_send(e);
 
    // Initialize task requests at random intervals
    double task_interval = (unsigned int) tw_rand_normal_sd(lp->rng, 9000, 2000, (unsigned int*) &lp->rng->count);
-   tw_event *e2 = tw_event_new(g_coordinator_id, task_interval, lp);
+   tw_event *e2 = tw_event_new(COORDINATOR_ID, task_interval, lp);
    message *msg2 = tw_event_data(e2);
    msg2->type = TASK_ARRIVED;
    tw_event_send(e2);
@@ -52,7 +54,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
    {
       tw_output(lp, "SCHEDULING INTERVAL\n");
 
-      tw_event *e = tw_event_new(g_coordinator_id, coordinator_settings.scheduling_interval, lp);
+      tw_event *e = tw_event_new(COORDINATOR_ID, coordinator_settings.scheduling_interval, lp);
       message *msg = tw_event_data(e);
       msg->type = SCHEDULING_INTERVAL;
 
@@ -68,7 +70,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
       tw_output(lp, "Task Arriving\n");
 
       double task_interval = (unsigned int) tw_rand_normal_sd(lp->rng, 9000, 2000, (unsigned int*) &lp->rng->count);
-      tw_event *e = tw_event_new(g_coordinator_id, task_interval, lp);
+      tw_event *e = tw_event_new(COORDINATOR_ID, task_interval, lp);
       message *msg = tw_event_data(e);
       msg->type = TASK_ARRIVED;
       tw_event_send(e);

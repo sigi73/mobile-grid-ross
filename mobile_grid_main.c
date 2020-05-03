@@ -34,16 +34,6 @@ tw_lptype model_lps[] = {
     sizeof(aggregator_state)
   },
   {
-    (init_f) data_server_init,
-    (pre_run_f) data_server_pre_init,
-    (event_f) data_server_event_handler,
-    (revent_f) data_server_event_handler_rc,
-    (commit_f) NULL,
-    (final_f) data_server_finish,
-    (map_f) mobile_grid_map,
-    sizeof(data_server_state)
-  },
-  {
     (init_f) selector_init,
     (pre_run_f) selector_pre_init,
     (event_f) selector_event_handler,
@@ -86,12 +76,69 @@ tw_lptype model_lps[] = {
   { 0 },
 };
 
+st_model_types model_logging[] = {
+	{ // Coordinator
+		(ev_trace_f) NULL,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Aggregator
+		(ev_trace_f) NULL,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Selector
+		(ev_trace_f) NULL,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Client
+		(ev_trace_f) client_event_trace,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Channel
+		(ev_trace_f) NULL,
+		(size_t) sizeof(unsigned int),
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ // Dummy
+		(ev_trace_f) NULL,
+		(size_t) 0,
+		(model_stat_f) NULL,
+		(size_t) 0,
+		(sample_event_f) NULL,
+		(sample_revent_f) NULL,
+		(size_t) 0,
+	},
+	{ 0 },
+};
+
 
 /*
  *  Globals
  */
 unsigned int g_num_used_lps;
-tw_lpid g_coordinator_id = 0;
 
 
 /* 
@@ -159,6 +206,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 	tw_opt_add(model_opts);
 	tw_init(&argc, &argv);
 	g_num_clients = num_actors.num_selectors* num_actors.num_clients_per_selector;
+	setup_client_capabilities();
 
 	//Do some error checking?
 	//Print out some settings?
@@ -181,7 +229,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 	// g_tw_nkp
 	// g_tw_synchronization_protocol
 
-	g_num_used_lps = 1 + 1 + 1 + num_actors.num_aggregators + num_actors.num_selectors + 2 * g_num_clients;
+	g_num_used_lps = NUM_FIXED_ACTORS + num_actors.num_aggregators + num_actors.num_selectors + 2 * g_num_clients;
 	int num_lps_per_pe = (int)ceil((float)g_num_used_lps/(float)tw_nnodes());
 	printf("g_num_total_lps: %d, num_lps_per_pe: %d\n", g_num_used_lps, num_lps_per_pe);
 
@@ -195,6 +243,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 
 	// set the global variable and initialize each LP's type
 	g_tw_lp_types = model_lps;
+	g_st_model_types = model_logging;
 	tw_lp_setup_types();
 
 	// Do some file I/O here? on a per-node (not per-LP) basis
