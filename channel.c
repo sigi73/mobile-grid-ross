@@ -11,10 +11,11 @@ void channel_init(channel_state *s, tw_lp *lp)
 
 void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
-    if (m-> type == ASSIGN_JOB)
+    if (m->type == ASSIGN_JOB)
     {
-        // For now just a delay
+        // Delay to simulate job being transmitted from selector to client
         // TODO: Replace with TLM propogation simulation
+        tw_output(lp, "Channel %u: Got job for lp %u\n", lp->gid, m->client_id);
         double temp_channel_delay = 5;
         tw_event *e = tw_event_new(m->client_id, temp_channel_delay, lp);
         message *msg = tw_event_data(e);
@@ -24,7 +25,36 @@ void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
         msg->client_id = m->client_id;
 
         tw_event_send(e);
+    } else if (m->type == REQUEST_DATA)
+    {
+        // Delay to simulate the download of data to the client
+        tw_output(lp, "Channel %u: Got data request for lp %u\n", lp->gid, m->client_id);
+        double temp_channel_delay = 5*m->task.data_size;
+
+        tw_event *e = tw_event_new(m->client_id, temp_channel_delay, lp);
+        message *msg = tw_event_data(e);
+
+        msg->type = RETURN_DATA;
+        msg->task = m->task;
+        msg->client_id = m->client_id;
+
+        tw_event_send(e);
+    } else if (m->type == SEND_RESULTS)
+    {
+        // Delay to simulate the upload of results from the client
+        tw_output(lp, "Channel %u: Sending results for lp %u\n", lp->gid, m->client_id);
+        double temp_channel_delay = 5*m->task.results_size;
+
+        tw_event *e = tw_event_new(m->task.aggregator_id, temp_channel_delay, lp);
+        message *msg = tw_event_data(e);
+
+        msg->type = SEND_RESULTS;
+        msg->task = m->task;
+        msg->client_id = m->client_id;
+
+        tw_event_send(e);
     }
+
 }
 
 void channel_event_handler_rc(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)

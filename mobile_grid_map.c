@@ -25,20 +25,18 @@ tw_lpid mobile_grid_typemap (tw_lpid gid) {
       return 0; // Coordinator
     else if (gid == 1)
       return 1; // Master Aggregator
-    else if (gid == 2)
-      return 2; // Data server
-    else if (gid <= 2 + num_actors.num_aggregators)
+    else if (gid <= (NUM_FIXED_ACTORS - 1) + num_actors.num_aggregators)
       return 1; // Aggregator
-    else if (gid <= 2 + num_actors.num_aggregators + num_actors.num_selectors)
-      return 3; // Selector
-    else if (gid <= 2 + num_actors.num_aggregators + num_actors.num_selectors + g_num_clients)
-      return 4; // Client
+    else if (gid <= (NUM_FIXED_ACTORS - 1) + num_actors.num_aggregators + num_actors.num_selectors)
+      return 2; // Selector
+    else if (gid <= (NUM_FIXED_ACTORS - 1) + num_actors.num_aggregators + num_actors.num_selectors + g_num_clients)
+      return 3; // Client
     else
-      return 5; // Channel
+      return 4; // Channel
   }
   else
   {
-    return 6;
+    return 5;
   }
   
   /*

@@ -23,7 +23,6 @@ SET(mobile_grid_srcs
 	channel.c
 	coordinator.c
 	aggregator.c
-	data_server.c
 	selector.c
 )
 
