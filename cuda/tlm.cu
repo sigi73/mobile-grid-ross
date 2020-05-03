@@ -132,11 +132,17 @@ __global__ void get_grid_values_kernel(
   }  
 }
 
+void alloc_channel_capacity_args(int n, float** client_x, float ** client_y, float ** channel_capacity) {
+  cudaMallocManaged(client_x, n * sizeof(float));  
+  cudaMallocManaged(client_y, n * sizeof(float));  
+  cudaMallocManaged(channel_capacity, n * sizeof(float));  
+}
+
 void compute_channel_capacity(
   int n, 
   float * client_x, 
   float * client_y, 
-  float ** channel_capacity
+  float * channel_capacity
 ) {
     //////////////////////
     ////  PARAMETERS  ////
@@ -188,16 +194,6 @@ void compute_channel_capacity(
     ////  EXTRACT VALUES  ////
     //////////////////////////
 
-    float* xs;
-    float* ys;
-    cudaMallocManaged(&xs, n * sizeof(float));
-    cudaMallocManaged(&ys, n * sizeof(float));
-
-    memcpy(xs, client_x, n * sizeof(float));
-    memcpy(ys, client_y, n * sizeof(float));
-
-    cudaMallocManaged(channel_capacity, n * sizeof(float));
-
     get_grid_values_kernel<<< blocks, threads >>>(
       -dx * size / 2, 
       -dx * size / 2, 
@@ -208,16 +204,14 @@ void compute_channel_capacity(
       size,
       channel_capacity_grid,
       n,
-      xs,
-      ys,
-      *channel_capacity
+      client_x,
+      client_y,
+      channel_capacity
     );
 
     cudaDeviceSynchronize();
 
     cudaFree(channel_capacity_grid);
-    cudaFree(xs);
-    cudaFree(ys);
 }
 
 #ifdef TEST_TLM
@@ -256,16 +250,18 @@ void print_grid(int width, int height, float * v) {
 
 int main() {
   const int n = 1024;
-  float client_x[n];
-  float client_y[n];
+  float* client_x;
+  float* client_y;
+  float* channel_capacity;
+  
+  alloc_channel_capacity_args(n, &client_x, &client_y, &channel_capacity);
+
   for(int i = 0; i < n; i++) {
     client_x[i] = ((float) rand() / RAND_MAX) * 50 - 25;
     client_y[i] = ((float) rand() / RAND_MAX) * 50 - 25;
   }
 
-  float * channel_capacity;
-
-  compute_channel_capacity(n, client_x, client_y, &channel_capacity);
+  compute_channel_capacity(n, client_x, client_y, channel_capacity);
 
   for(int i = 0; i < n; i++) {
     printf("x: %6.2f y: %6.2f cap: %E\n", client_x[i], client_y[i], channel_capacity[i]);
