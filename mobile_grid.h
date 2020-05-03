@@ -181,11 +181,20 @@ void channel_finish(channel_state *s, tw_lp *lp);
 #define NUM_CLIENTS_PER_TASK    5
 #define NUM_TOTAL_TASKS			128
 typedef struct coordinator_state coordinator_state;
+
+typedef struct task_node task_node;
+struct task_node
+{
+	client_task* task;
+	task_node* next;
+};
+
 struct coordinator_state
 {
 	unsigned int tasks_remaining; // Number of tasks to be dispatched
 	unsigned int tasks_completed; // Number of tasks that have been completed
 	unsigned int tasks_received;  // Number of tasks that have received so far
+	task_node* task_stage;      // Head of linked list of tasks ready to be distributed in the next round
 };
 
 void coordinator_init(coordinator_state *s, tw_lp *lp);
@@ -195,6 +204,9 @@ void coordinator_event_handler_rc(coordinator_state *s, tw_bf *bf, message *m, t
 void coordinator_finish(coordinator_state *s, tw_lp *lp);
 void schedule(tw_lp *lp); 
 client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp);
+void stage_task(task_node* head, client_task* task);
+client_task* pop_task(task_node* head);
+void free_task_stage(task_node* head);
 
 /*
  *  Selector

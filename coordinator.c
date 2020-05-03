@@ -19,6 +19,12 @@ void coordinator_pre_init(coordinator_state *s, tw_lp *lp)
    // Initialize state variable
    s->tasks_received = 0;
 
+
+   // Initialize task stage linked list with dummy head node
+   s->task_stage = malloc(sizeof(task_node));
+   s->task_stage->task = NULL;
+   s->task_stage->next = NULL;
+
    // Initialize scheduling interval
    tw_event *e = tw_event_new(COORDINATOR_ID, coordinator_settings.scheduling_interval, lp);
    message *msg = tw_event_data(e);
@@ -76,10 +82,26 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
       tw_event_send(e);
 
       // Generate new task
+      // TODO remove hard-coded sub-task number
       client_task* tasks = generate_map_reduce_task(s->tasks_received, 50, lp);
       s->tasks_received++;
 
-      printf("Task: %d\n", tasks[0].task_id);
+      // Stage tasks
+      for (int i = 0; i < 50; i++) {
+         stage_task(s->task_stage, &tasks[i]);
+      }
+
+      //task_node* cur = s->task_stage;
+      /*while (cur->next != NULL) {
+         cur = cur->next;
+         printf("%d->", cur->task->flops);
+      }
+      printf("\n");*/
+
+      //client_task* task = pop_task(s->task_stage);
+      //printf("Pooped task: %u, %d\n", task->flops, s->task_stage->next->task->flops);
+
+      //printf("Task: %d\n", tasks[0].flops);
    }
 }
 
@@ -89,6 +111,8 @@ void coordinator_event_handler_rc(coordinator_state *s, tw_bf *bf, message *m, t
 
 void coordinator_finish(coordinator_state *s, tw_lp *lp)
 {
+   free_task_stage(s->task_stage);
+   free(s->task_stage);
 }
 
 
@@ -120,4 +144,45 @@ client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp) {
    }
 
    return tasks;
+}
+
+// To properly stage a task, it must be inserted into the list in sorted order of highest compute requirements
+void stage_task(task_node* head, client_task* task)
+{
+   task_node* cur = head;
+   while (cur != NULL) {
+      if (cur->next == NULL || cur->next->task->flops < task->flops) {
+         // Insert node
+         task_node* new_node = malloc(sizeof(task_node));
+         new_node->task = task;
+         new_node->next = cur->next;
+         cur->next = new_node;
+         break;
+      }
+      cur = cur->next;
+   }
+}
+
+// Return the enclosed client_task for the first node, then free it
+client_task* pop_task(task_node* head)
+{
+   task_node* res_node = head->next;
+   if (res_node != NULL) {
+      head->next = res_node->next;
+   }
+   client_task* task = res_node->task;
+   free(res_node);
+   return task;
+}
+
+// Free linked list
+void free_task_stage(task_node* head) 
+{
+   task_node* cur = head->next;
+   task_node* prev = NULL;
+   while (cur != NULL) {
+      prev = cur;
+      cur = cur->next;
+      free(prev);
+   }
 }
