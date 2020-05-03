@@ -46,9 +46,9 @@ void coordinator_pre_init(coordinator_state *s, tw_lp *lp)
 
 void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
-   if (m->type == DEVICE_AVAILABLE)
+   if (m->type == DEVICE_REGISTER)
    {
-      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_dropout(m->client_id));
+      tw_output(lp, "Device register received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_dropout(m->client_id));
 
       // Add to list of active workers
       worker* w = malloc(sizeof(worker));
@@ -59,6 +59,19 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
 
       s->workers[s->num_workers] = w; 
       s->num_workers++;
+      tw_output(lp, "Num workers %d\n", s->num_workers);
+   }
+
+   if (m->type == DEVICE_AVAILABLE) 
+   {
+      // Inefficient loop to set right one to available
+      for (int i = 0; i < s->num_workers; i++) {
+         if (s->workers[i]->client_id == m->client_id) {
+            tw_output(lp, "Device available received \n");
+            s->workers[i]->assigned = 0;
+         }
+      }
+
    }
 
    if (m->type == SCHEDULING_INTERVAL)
@@ -121,6 +134,7 @@ void coordinator_finish(coordinator_state *s, tw_lp *lp)
    free_task_stage(s->task_stage);
    free(s->task_stage);
 
+   printf("num %d\n", s->num_workers);
    for (int i = 0; i < s->num_workers; i++) {
       free(s->workers[i]);
    }
@@ -167,6 +181,7 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       if (coordinator_settings.scheduling_algorithm == 0) {
          // Naive scheduling
          assignment = schedule_naive(task, s, lp);
+         //assignment = NULL;
       } else {
          // Risk-Controlled task assignment
          assignment = NULL;

@@ -108,6 +108,7 @@ struct client_task
  *  Message
  */
 typedef enum {
+	DEVICE_REGISTER,
 	DEVICE_AVAILABLE,
 	ASSIGN_JOB,
 	SCHEDULING_INTERVAL,
