@@ -34,6 +34,9 @@ extern "C" {
     float * channel_capacity
   );
 
+
+  void alloc_channel_capacity_args(int n, float** client_x, float ** client_y);
+
   // Computes the channel capacity of each client based on its relative distance
   // from the router.
   // 
