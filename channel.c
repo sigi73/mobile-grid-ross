@@ -2,10 +2,6 @@
 
 void channel_init(channel_state *s, tw_lp *lp)
 {
-   // TODO: Use stddev as well
-   s->length = channel_settings.mean_length;
-   s->bandwidth = channel_settings.mean_bandwidth;
-
    printf("Initializing channel, gid: %u (Client %u)\n", lp->gid, channel_to_client(lp->gid));
 }
 
@@ -47,6 +43,16 @@ void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp)
 
         tw_event *e = tw_event_new(m->task.aggregator_id, temp_channel_delay, lp);
         message *msg = tw_event_data(e);
+
+        msg->type = SEND_RESULTS;
+        msg->task = m->task;
+        msg->client_id = m->client_id;
+
+        tw_event_send(e);
+
+        // When upload is done, also notify the selector
+        e = tw_event_new(client_to_selector(m->client_id), temp_channel_delay, lp);
+        msg = tw_event_data(e);
 
         msg->type = SEND_RESULTS;
         msg->task = m->task;

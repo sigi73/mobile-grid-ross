@@ -48,15 +48,29 @@ void selector_event_handler(selector_state *s, tw_bf *bf, message *m, tw_lp *lp)
         msg->client_id = m->client_id;
 
         tw_event_send(e);
+    } else if (m->type == SEND_RESULTS)
+    {
+        tw_event *e = tw_event_new(COORDINATOR_ID, g_data_center_delay, lp);
+        message *msg = tw_event_data(e);
+
+        msg->type = DEVICE_AVAILABLE;
+        msg->client_id = m->client_id;
+
+        tw_event_send(e);
     }
 }
 
 void selector_event_handler_rc(selector_state *s, tw_bf *bf, message *m, tw_lp *lp)
 {
-
+    // No internal state to be updated
+    (void) s;
+    (void) bf;
+    (void) m;
+    (void) lp;
 }
 
 void selector_finish(selector_state *s, tw_lp *lp)
 {
+    (void) lp;
     free (s->client_gids);
 }

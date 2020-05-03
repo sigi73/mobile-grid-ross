@@ -14,6 +14,7 @@
 #define MASTER_AGGREGATOR_ID 	1
 
 #define NUM_FIXED_ACTORS		2
+#define AGGREGATOR_BASE_INDEX   NUM_FIXED_ACTORS
 
 #define SEED 1024
 
@@ -107,7 +108,8 @@ typedef enum {
 	ASSIGN_JOB,
 	REQUEST_DATA,
 	RETURN_DATA,
-	SEND_RESULTS
+	SEND_RESULTS,
+	NOTIFY_NEW_JOB
 } message_type;
 typedef struct message message;
 struct message
@@ -116,6 +118,8 @@ struct message
 	client_task task;
 
 	tw_lpid client_id;
+
+	unsigned int num_clients_for_task; // Used when sending a new task to aggregator
 };
 
 
@@ -156,8 +160,7 @@ typedef struct channel_state channel_state;
 
 struct channel_state
 {
-	unsigned int length;
-	unsigned int bandwidth;
+	unsigned int dummy; // I don't think an empty struct is valid
 };
 
 void channel_init(channel_state *s, tw_lp *lp);
@@ -168,11 +171,15 @@ void channel_finish(channel_state *s, tw_lp *lp);
 /*
  *  Coordinator
  */
+#define NUM_CLIENTS_PER_TASK    5
+#define NUM_TOTAL_TASKS			128
 typedef struct coordinator_state coordinator_state;
 struct coordinator_state
 {
-	unsigned int tasks_remaining; // Number of tasks to be dispatched
-	unsigned int tasks_completed; // Number of tasks that have been completed
+	unsigned int current_task_id;
+	unsigned int num_assigned_currently;
+
+	unsigned int num_completed;
 };
 
 void coordinator_init(coordinator_state *s, tw_lp *lp);
@@ -206,13 +213,13 @@ struct aggregator_task
 {
 	unsigned int task_id;
 	unsigned int num_remaining;
+	aggregator_task *next;
 };
 
 typedef struct aggregator_state aggregator_state;
 struct aggregator_state
 {
-	unsigned int num_tasks;
-	aggregator_task *tasks; //Pointer to array of tasks
+	aggregator_task *tasks; //Linked list of tasks
 };
 
 void aggregator_init(aggregator_state *s, tw_lp *lp);
