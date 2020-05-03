@@ -43,7 +43,8 @@ void tlm_2d_init_zero(int width, int height, float** v_in_curr, float ** v_in_ne
   }
 }
 
-__global__ void path_loss_2d_kernel(float P, float c, float f, int width, int height, float * v_in, float * path_loss) {
+// Approximates the linear path loss
+__global__ void path_loss_2d_kernel(float P, float dx, int width, int height, float * v_in, float * path_loss) {
   int i = blockIdx.x*blockDim.x + threadIdx.x;
   while(i < width * height) {  
     int x = i / height;
@@ -54,7 +55,8 @@ __global__ void path_loss_2d_kernel(float P, float c, float f, int width, int he
       v_max = fmax(v_max, fabs(v_in[T2I(x, y, k)]));
     }
 
-    path_loss[x * height + y] = -10 * log10( P/pow(v_max, 2) * pow(c/(4*M_PI*f), 2) );
+    // TODO: Check my math
+    path_loss[x * height + y] = (P / pow(dx, 2)) / pow(v_max, 2); // (?) path loss approximated as v0^2/v_max^2
 
     i += blockDim.x*gridDim.x;
   }
@@ -141,7 +143,7 @@ int main() {
   float * path_loss;
   cudaMallocManaged(&path_loss, width * height * sizeof(float));
 
-  path_loss_2d_kernel<<< 1, 64 >>>(P, c, f, width, height, v_in_curr, path_loss);
+  path_loss_2d_kernel<<< 1, 64 >>>(P, dx, width, height, v_in_curr, path_loss);
   cudaDeviceSynchronize();
 
   printf("Path Loss:\n\n");
