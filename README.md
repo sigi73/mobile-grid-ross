@@ -29,6 +29,22 @@ Remove the -DMOBILE_GRID_USE_CUDA=ON option to not use the cuda implementation o
 
 If client side searching is desired for Doxygen, set SEARCHENGINE=YES in ROSS/docs/Doxyfile.user.in
 
+## To collect and analyze data:
+``` shell
+./models/mobile-grid-ross/mobile_grid --event-trace=1
+```
+This will generate a stats-output directory which will contain two files: `ross-stats-evtrace.bin` and `run_statistics.csv`
+
+Then in the mobile-grid-ross/ResultsParsing folder do
+``` shell
+python parse_events.py ../../ROSS/build/stats-output/ross-stats-evtrace.bin ../../ROSS/build/stats-output/run_statistics.csv
+```
+## To run on multiple nodes (on your computer, not AiMOS)
+``` shell
+mpirun -n # ./models/mobile-grid-rss/mobile_grid --synch=2
+```
+Where # is the number of processes. --synch=2 uses the Conservative parallel mode
+
 # Debugging
 
 Compile/Test TLM code with `nvcc -D TEST_TLM cuda/*.cu`

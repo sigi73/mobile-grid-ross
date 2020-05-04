@@ -1,11 +1,26 @@
+#include <cuda.h>
+#include <cuda_runtime.h>
 #include "tlm.h"
 
-#ifdef TEST_TLM
 #include <stdio.h>
 #include <stdlib.h> 
-#endif
 
 #define T2I(x, y, k) (x) * height * 4 + (y) * 4 + k // index for 2d tlm voltage arrays
+
+void tlm_init(int mpi_rank) {
+  // Determine number of cuda devices and set device accordingly
+  int cE, cudaDeviceCount;
+  if( (cE = cudaGetDeviceCount( &cudaDeviceCount)) != cudaSuccess ) {
+    printf(" Unable to determine cuda device count, error is %d, count is %d\n",
+    cE, cudaDeviceCount );
+    exit(-1);
+  }
+  if( (cE = cudaSetDevice( mpi_rank % cudaDeviceCount )) != cudaSuccess ) {
+    printf(" Unable to have rank %d set to cuda device %d, error is %d \n",
+    mpi_rank, (mpi_rank % cudaDeviceCount), cE);
+    exit(-1);
+  }
+}
 
 // v_in/v_out voltages into of each node [width x height x 6], row major order
 // dt = dx / c

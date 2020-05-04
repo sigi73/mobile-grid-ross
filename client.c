@@ -2,8 +2,6 @@
 #include "mobile_grid.h"
 
 unsigned int g_num_clients;
-unsigned int *g_client_flops;
-float *g_client_duration;
 
 /* generate a random value weighted within the normal (gaussian) distribution */
 /* https://github.com/rflynn/c/blob/master/rand-normal-distribution.c */
@@ -18,13 +16,23 @@ static double gauss(int mean, int stddev)
   return z;
 }
 
-/* Generate a random value with a exponential distribution */
-/* https://stackoverflow.com/questions/34558230/generating-random-numbers-of-exponential-distribution */
-double rand_expo(double lambda)
+//https://www.csee.usf.edu/~kchriste/tools/genexp.c
+double rand_exp(double x)
 {
-    double u;
-    u = rand() / (RAND_MAX + 1.0);
-    return -log(1- u) / lambda;
+  double z;                     // Uniform random number (0 < z < 1)
+  double exp_value;             // Computed exponential value to be returned
+
+  // Pull a uniform random number (0 < z < 1)
+  do
+  {
+    z = (double)rand() / (double)RAND_MAX;
+  }
+  while ((z == 0) || (z == 1));
+
+  // Compute exponential random variable using inversion method
+  exp_value = -x * log(z);
+
+  return exp_value;
 }
 
 double rand_uniform(double low, double high) 
@@ -52,9 +60,15 @@ void allocate_client_parameters()
         client_parameters.client_flops[i] = (unsigned int)flops;
 
         client_parameters.client_start_time[i] = rand_uniform(g_min_delay, g_tw_ts_end - client_settings.mean_duration);
-        client_parameters.client_duration[i] = rand_expo(client_settings.mean_duration);
         client_parameters.client_churn_prob[i] = gauss(10, 2) / 100;                       // TODO set as actual parameters 
-        printf("yooo %f\n", client_parameters.client_churn_prob[i]);
+        client_parameters.client_duration[i] = (float)(rand_exp(client_settings.mean_duration));
+        if (g_num_clients * client_settings.proportion_start_immediately > i)
+        {
+            client_parameters.client_start_time[i] = (float)g_min_delay;
+        } else
+        {
+            client_parameters.client_start_time[i] = rand_uniform(g_min_delay, g_tw_ts_end - client_settings.mean_duration);
+        }
         client_parameters.client_x[i] = rand_uniform(-MAX_GRID_SIZE, MAX_GRID_SIZE);
         client_parameters.client_y[i] = rand_uniform(-MAX_GRID_SIZE, MAX_GRID_SIZE);
     }
@@ -75,7 +89,6 @@ void client_init(client_state *s, tw_lp *lp)
 {
    printf("Initializing client, gid: %u (Channel %u)\n", lp->gid, client_to_channel(lp->gid));
    s->flops = get_client_flops(lp->gid);
-   s->duration = get_client_duration(lp->gid);
 }
 
 void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)
@@ -98,8 +111,7 @@ void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)
     {
         // Received data, run calculation and send results to aggregator
         tw_output(lp, "Client: Got data for lp %u\n", m->client_id);
-        //double delay = m->task.flops / s->flops * 1000;
-        double delay = g_min_delay;
+        double delay = m->task.flops / s->flops * 1000;
         tw_event *e = tw_event_new(client_to_channel(lp->gid), delay, lp);
         message *msg = tw_event_data(e);
 
@@ -127,15 +139,9 @@ void client_finish(client_state *s, tw_lp *lp)
 }
 
 
-/*
 void client_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
 {
-    if (m->type == RETURN_DATA)
-    {
-        memcpy(buffer, &(m->task.flops), sizeof(unsigned int));
-    } else
-    {
-        collect_flag = 0;
-    }
+    memcpy(buffer, &m->type, sizeof(message_type));
+    buffer += sizeof(message_type);
+    memcpy(buffer, &m->task.task_id, sizeof(unsigned int));
 }
-*/

@@ -365,11 +365,17 @@ void free_task_stage(task_node* head)
 
 void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
 {
-   (*collect_flag) = 0;
+   // Always log type
+   memcpy(buffer, &m->type, sizeof(message_type));
+   buffer += sizeof(message_type);
    if (m->type == DEVICE_AVAILABLE)
    {
-      (*collect_flag) = 1;
-      memcpy(buffer, &(m->client_id), sizeof(m->client_id));
+      memcpy(buffer, &m->client_id, 8);
+   }
+   else if (m->type == DEVICE_REGISTER)
+   {
+      memcpy(buffer, &m->client_id, 8);
+      buffer += 8;
    }
 }
 

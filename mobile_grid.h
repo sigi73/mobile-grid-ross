@@ -18,6 +18,8 @@
 
 #define MAX_GRID_SIZE			50
 
+#define JOB_SIZE                100 // (Bytes)
+
 #define SEED 1024
 
 #define EPSILON 0.0001
@@ -49,6 +51,7 @@ struct s_client_settings
 	unsigned int mean_flops;
 	unsigned int stddev_flops;
 	float mean_duration;
+	float proportion_start_immediately;
 } client_settings;
 
 struct s_coordinator_settings
@@ -58,9 +61,9 @@ struct s_coordinator_settings
 	unsigned int mean_flop_per_task;
 	unsigned int stdev_flop_per_task;
 	double scheduling_interval;
-	int num_tasks;
-	int task_size;
-	int scheduling_algorithm;
+	unsigned int num_tasks;
+	unsigned int task_size;
+	unsigned int scheduling_algorithm;
 } coordinator_settings;
 
 
@@ -106,7 +109,7 @@ struct client_task
  *  Message
  */
 typedef enum {
-	DEVICE_REGISTER,
+	DEVICE_REGISTER = 1,
 	DEVICE_AVAILABLE,
 	ASSIGN_JOB,
 	SCHEDULING_INTERVAL,
@@ -147,7 +150,7 @@ struct s_client_parameters
 void allocate_client_parameters();
 void free_client_parameters();
 
-static inline unsigned int get_client_flops(tw_lpid gid)
+static inline float get_client_flops(tw_lpid gid)
 {
     return client_parameters.client_flops[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
 }
@@ -163,11 +166,11 @@ static inline float get_client_churn_prob(tw_lpid gid)
 {
     return client_parameters.client_churn_prob[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
 }
-static inline unsigned int get_client_x(tw_lpid gid)
+static inline float get_client_x(tw_lpid gid)
 {
     return client_parameters.client_x[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
 }
-static inline unsigned int get_client_y(tw_lpid gid)
+static inline float get_client_y(tw_lpid gid)
 {
     return client_parameters.client_y[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
 }
@@ -177,7 +180,6 @@ typedef struct client_state client_state;
 struct client_state
 {
 	unsigned int flops;
-	float duration;
 };
 
 void client_init(client_state *s, tw_lp *lp);
@@ -204,6 +206,8 @@ void channel_init(channel_state *s, tw_lp *lp);
 void channel_event_handler(channel_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void channel_event_handler_rc(channel_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void channel_finish(channel_state *s, tw_lp *lp);
+
+void channel_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag);
 
 /*
  *  Coordinator
@@ -308,6 +312,9 @@ void selector_event_handler(selector_state *s, tw_bf *bf, message *m, tw_lp *lp)
 void selector_event_handler_rc(selector_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void selector_finish(selector_state *s, tw_lp *lp);
 
+void selector_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag);
+
+
 /*
  *  Aggregator
  */
@@ -331,6 +338,8 @@ void aggregator_pre_init(aggregator_state *s, tw_lp *lp);
 void aggregator_event_handler(aggregator_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void aggregator_event_handler_rc(aggregator_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void aggregator_finish(aggregator_state *s, tw_lp *lp);
+
+void aggregator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag);
 
 
 #endif
