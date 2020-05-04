@@ -2,10 +2,8 @@
 #include <cuda_runtime.h>
 #include "tlm.h"
 
-#ifdef TEST_TLM
 #include <stdio.h>
 #include <stdlib.h> 
-#endif
 
 #define T2I(x, y, k) (x) * height * 4 + (y) * 4 + k // index for 2d tlm voltage arrays
 

@@ -50,13 +50,17 @@ void selector_event_handler(selector_state *s, tw_bf *bf, message *m, tw_lp *lp)
         tw_event_send(e);
     } else if (m->type == SEND_RESULTS)
     {
-        tw_event *e = tw_event_new(COORDINATOR_ID, g_data_center_delay, lp);
-        message *msg = tw_event_data(e);
+        // Only send device availabe if device hasn't dropped out
+        if (tw_now(lp) < get_client_start_time(m->client_id) + get_client_start_time(m->client_id)) 
+        {
+            tw_event *e = tw_event_new(COORDINATOR_ID, g_data_center_delay, lp);
+            message *msg = tw_event_data(e);
 
-        msg->type = DEVICE_AVAILABLE;
-        msg->client_id = m->client_id;
+            msg->type = DEVICE_AVAILABLE;
+            msg->client_id = m->client_id;
 
-        tw_event_send(e);
+            tw_event_send(e);
+        }
     }
 }
 
@@ -73,4 +77,9 @@ void selector_finish(selector_state *s, tw_lp *lp)
 {
     (void) lp;
     free (s->client_gids);
+}
+
+void selector_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
+{
+    (*collect_flag) = 0;
 }

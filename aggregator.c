@@ -88,7 +88,7 @@ void aggregator_event_handler(aggregator_state *s, tw_bf *bf, message *m, tw_lp 
 {
    if (m->type == NOTIFY_NEW_JOB)
    {
-      tw_output(lp, "Aggregator notified of new job\n");
+      tw_output(lp, "Aggregator notified of new job %u\n", m->task.task_id);
       aggregator_task *job = add_aggregator_task(s->tasks);
       job->task_id = m->task.task_id;
       job->num_remaining = m->num_clients_for_task;
@@ -108,6 +108,7 @@ void aggregator_event_handler(aggregator_state *s, tw_bf *bf, message *m, tw_lp 
       if (job == NULL)
       {
          printf("ERROR: GID %u received results but is not waiting for task_id %u", lp->gid, m->task.task_id);
+         exit(1);
       }
       job->num_remaining--;
 
@@ -165,4 +166,23 @@ void aggregator_finish(aggregator_state *s, tw_lp *lp)
 {
    free_aggregator_task(s->tasks);
    s->tasks = NULL;
+}
+
+
+void aggregator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
+{
+   memcpy(buffer, &m->type, sizeof(message_type));
+   buffer += sizeof(message_type);
+   if (m->type == NOTIFY_NEW_JOB)
+   {
+      memcpy(buffer, &m->task.task_id, sizeof(unsigned int));
+      buffer += sizeof(unsigned int);
+      memcpy(buffer, &m->num_clients_for_task, sizeof(unsigned int));
+   } else if (m->type == SEND_RESULTS)
+   {
+      memcpy(buffer, &m->task.task_id, sizeof(unsigned int));
+   } else
+   {
+      (*collect_flag) = 0;
+   }
 }

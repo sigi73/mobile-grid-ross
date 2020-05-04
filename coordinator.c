@@ -52,7 +52,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
 {
    if (m->type == DEVICE_AVAILABLE)
    {
-      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_duration(m->client_id));
+      tw_output(lp, "Device available received %d, %u\n", m->client_id, get_client_flops(m->client_id));
       for (int i = 0; i < s->num_workers; i++)
       {
          if (m->client_id == s->workers[i]->client_id)
@@ -63,7 +63,8 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
    }
    if (m->type == DEVICE_REGISTER)
    {
-      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_duration(m->client_id));
+      tw_output(lp, "Device available received %d, %u\n", m->client_id, get_client_flops(m->client_id));
+
 
       // Add to list of active workers
       worker* w = malloc(sizeof(worker));
@@ -295,10 +296,26 @@ void free_task_stage(task_node* head)
 
 void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
 {
-   (*collect_flag) = 0;
+   // Always log type
+   memcpy(buffer, &m->type, sizeof(message_type));
+   buffer += sizeof(message_type);
    if (m->type == DEVICE_AVAILABLE)
    {
       (*collect_flag) = 1;
-      memcpy(buffer, &(m->client_id), sizeof(m->client_id));
+      memcpy(buffer, &m->client_id, 8);
+   }
+   else if (m->type == DEVICE_REGISTER)
+   {
+      (*collect_flag) = 1;
+      memcpy(buffer, &m->client_id, 8);
+      buffer += 8;
+   }
+   else if (m->type == SCHEDULING_INTERVAL) {
+      (*collect_flag) = 1;
+      // Nothing else to log
+   } else
+   {
+      (*collect_flag) = 0;
+      // No logging
    }
 }

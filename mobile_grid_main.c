@@ -79,7 +79,7 @@ tw_lptype model_lps[] = {
 st_model_types model_logging[] = {
 	{ // Coordinator
 		(ev_trace_f) coordinator_event_trace,
-		(size_t) sizeof(tw_lpid),
+		(size_t) sizeof(message_type) + 8,
 		(model_stat_f) NULL,
 		(size_t) 0,
 		(sample_event_f) NULL,
@@ -87,8 +87,8 @@ st_model_types model_logging[] = {
 		(size_t) 0,
 	},
 	{ // Aggregator
-		(ev_trace_f) NULL,
-		(size_t) 0,
+		(ev_trace_f) aggregator_event_trace,
+		(size_t) sizeof(message_type) + 2 * sizeof(unsigned int),
 		(model_stat_f) NULL,
 		(size_t) 0,
 		(sample_event_f) NULL,
@@ -96,8 +96,8 @@ st_model_types model_logging[] = {
 		(size_t) 0,
 	},
 	{ // Selector
-		(ev_trace_f) NULL,
-		(size_t) 0,
+		(ev_trace_f) selector_event_trace,
+		(size_t) sizeof(message_type),
 		(model_stat_f) NULL,
 		(size_t) 0,
 		(sample_event_f) NULL,
@@ -105,9 +105,8 @@ st_model_types model_logging[] = {
 		(size_t) 0,
 	},
 	{ // Client
-		//(ev_trace_f) client_event_trace,
-		(ev_trace_f) NULL,
-		(size_t) 0,
+		(ev_trace_f) client_event_trace,
+		(size_t) sizeof(message_type) + sizeof(unsigned int),
 		(model_stat_f) NULL,
 		(size_t) 0,
 		(sample_event_f) NULL,
@@ -115,8 +114,8 @@ st_model_types model_logging[] = {
 		(size_t) 0,
 	},
 	{ // Channel
-		(ev_trace_f) NULL,
-		(size_t) sizeof(unsigned int),
+		(ev_trace_f) channel_event_trace,
+		(size_t) sizeof(message_type) + 2 * sizeof(unsigned int),
 		(model_stat_f) NULL,
 		(size_t) 0,
 		(sample_event_f) NULL,
@@ -161,12 +160,14 @@ const tw_optdef model_opts[] = {
 	TWOPT_UINT("stddev_flop_per_task", coordinator_settings.stdev_flop_per_task, "Standard deviation of work in workunit"),
 	TWOPT_DOUBLE("data_center_delay", g_data_center_delay, "Delay in the datacenter (in timstep units)"),
   	TWOPT_DOUBLE("scheduling_interval", coordinator_settings.scheduling_interval, "How often the coordinator reschedules (in timestep units)"),
-  	TWOPT_DOUBLE("num_tasks", coordinator_settings.num_tasks, "How many tasks should be requested"),
-	TWOPT_DOUBLE("task_size", coordinator_settings.task_size, "How many sub-tasks are there?"),
+  	TWOPT_UINT("num_tasks", coordinator_settings.num_tasks, "How many tasks should be requested"),
+	TWOPT_UINT("task_size", coordinator_settings.task_size, "How many sub-tasks are there?"),
 	TWOPT_UINT("scheduling_algorithm", coordinator_settings.scheduling_algorithm, "Scheduling algorithm to be used"),
 
 	TWOPT_UINT("mean_flops", client_settings.mean_flops, "Average number of floating point operations per second the client is capable of"),
 	TWOPT_UINT("stdev_flops", client_settings.stddev_flops, "Standard deviation of floating point operations per second the client is capable of"),
+	TWOPT_UINT("mean_dur", client_settings.mean_duration, "Mean duration client is connected"),
+	TWOPT_UINT("prop_start", client_settings.proportion_start_immediately, "Proportion of clients that are conencted at startup"),
 
 	TWOPT_END(),
 };
@@ -186,7 +187,8 @@ void defaultSettings()
 
 	client_settings.mean_flops = 20000000;
 	client_settings.stddev_flops = 5000000;
-	client_settings.mean_duration = 3000;
+	client_settings.mean_duration = 10000;
+	client_settings.proportion_start_immediately = 0.1;
 
 	num_actors.num_aggregators = 4;
 	num_actors.num_selectors = 4;
@@ -207,6 +209,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 	g_num_clients = num_actors.num_selectors* num_actors.num_clients_per_selector;
 	allocate_client_parameters();
 
+	printf("%u\n", coordinator_settings.task_size);
 	//Do some error checking?
 	//Print out some settings?
 
@@ -263,6 +266,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 			fprintf(f, "NumAggregators:%d\n", num_actors.num_aggregators);
 			fprintf(f, "NumSelectors:%d\n", num_actors.num_selectors);
 			fprintf(f, "NumClientsPerSelector:%d\n", num_actors.num_clients_per_selector);
+			fprintf(f, "Sizeof MessageType:%d\n", sizeof(message_type));
 			fclose(f);
 			printf("Test print only once\n");
 		}
