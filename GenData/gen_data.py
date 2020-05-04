@@ -3,8 +3,8 @@ f = open(fn, 'w')
 
 
 mkdir_format_string = 'mkdir -p ./{output_folder}\n'
-run_cuda_format_string = 'sbatch -o ./{output_folder} -p dcs -N {N} --ntasks-per-node={NR} --gres=gpu:{G} -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch={SY} --scheduling_algorithm={S} --num_aggregators={NA} --num_selectors={NS} --num_clients_per_selector={NC} --num_tasks={NT} --stats-path=./{output_folder} --end=600000 --mean_dur=120000 --prop_start=.05\n'
-run_cpu_format_string = 'sbatch -o ./{output_folder} -p dcs -N {N} --ntasks-per-node={NR} --gres=gpu:{G} -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch={SY} --scheduling_algorithm={S} --num_aggregators={NA} --num_selectors={NS} --num_clients_per_selector={NC} --num_tasks={NT} --task_size={TS} --stats-path=./{output_folder} --end=600000 --mean_dur=120000 --prop_start=.05\n'
+run_cuda_format_string = 'sbatch -o ./{output_folder}/output.%a.out -p dcs -N {N} --ntasks-per-node={NR} --gres=gpu:{G} -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch={SY} --scheduling_algorithm={S} --num_aggregators={NA} --num_selectors={NS} --num_clients_per_selector={NC} --num_tasks={NT} --stats-path=./{output_folder} --end=600000 --mean_dur=120000 --prop_start=.05\n'
+run_cpu_format_string = 'sbatch -o ./{output_folder}/output.%a.out -p dcs -N {N} --ntasks-per-node={NR} --gres=gpu:{G} -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch={SY} --scheduling_algorithm={S} --num_aggregators={NA} --num_selectors={NS} --num_clients_per_selector={NC} --num_tasks={NT} --task_size={TS} --stats-path=./{output_folder} --end=600000 --mean_dur=120000 --prop_start=.05\n'
 
 # SIM Strong Scaling
 num_nodes = [1, 1, 1, 2, 2, 2, 2]
