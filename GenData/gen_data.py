@@ -67,12 +67,12 @@ output_folder_template =  'PhoneStrong_ScalingRCTA/{num_clients}Clients/'
 G = 6
 SY = 2
 S = 2
-num_aggregators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
-num_selectors = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2]
-num_clients_per_selector = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 750, 1000]
+num_aggregators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 100, 1000]
+num_selectors = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 10, 100]
+num_clients_per_selector = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 750, 1000, 1000, 1000]
 NT = 100
 
-for i in range(len(num_nodes)):
+for i in range(len(num_aggregators)):
     NA = num_aggregators[i]
     NS = num_selectors[i]
     NC = num_clients_per_selector[i]
@@ -97,7 +97,7 @@ num_selectors = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2]
 num_clients_per_selector = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 750, 1000]
 num_tasks = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 100, 1500, 2000]
 
-for i in range(len(num_nodes)):
+for i in range(len(num_aggregators)):
     NA = num_aggregators[i]
     NS = num_selectors[i]
     NC = num_clients_per_selector[i]
@@ -118,12 +118,12 @@ output_folder_template =  'PhoneStrong_ScalingNaive/{num_clients}Clients/'
 G = 6
 SY = 2
 S = 1
-num_aggregators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
-num_selectors = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2]
-num_clients_per_selector = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 750, 1000]
+num_aggregators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 100, 1000]
+num_selectors = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 10, 100]
+num_clients_per_selector = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 750, 1000, 1000, 1000]
 NT = 100
 
-for i in range(len(num_nodes)):
+for i in range(len(num_aggregators)):
     NA = num_aggregators[i]
     NS = num_selectors[i]
     NC = num_clients_per_selector[i]
@@ -148,7 +148,7 @@ num_selectors = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2]
 num_clients_per_selector = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 750, 1000]
 num_tasks = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 100, 1500, 2000]
 
-for i in range(len(num_nodes)):
+for i in range(len(num_aggregators)):
     NA = num_aggregators[i]
     NS = num_selectors[i]
     NC = num_clients_per_selector[i]
