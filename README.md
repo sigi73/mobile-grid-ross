@@ -60,3 +60,10 @@ export CC=mpicc
 cmake .. -DROSS_BUILD_MODELS=ON -DMOBILE_GRID_USE_CUDA=ON
 make
 ```
+
+# USEFUL COMMANDS
+```shell
+module load spectrum-mpi gcc/7.4.0/1 cmake cuda
+cmake .. -DROSS_BUILD_MODELS=ON -DMOBILE_GRID_USE_CUDA=ON -DCMAKE_BUILD_TYPE=Debug
+rsync -P -a --exclude .git --exclude build --exclude build_cuda --exclude srw --exclude suspend-test ./{mobile-grid-ross,ROSS} USERNAME@lp01.ccni.rpi.edu:~/barn/Final
+```
