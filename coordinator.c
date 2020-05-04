@@ -18,11 +18,14 @@ void coordinator_init(coordinator_state *s, tw_lp *lp)
    s->task_stage->next = NULL;
 
    // Initialize worker array.
-   s->workers = malloc(g_num_clients * sizeof(worker*));
+   /*s->workers = malloc(g_num_clients * sizeof(worker*));
    for (unsigned int i = 0; i < g_num_clients; i++)
    {
       s->workers[i] = malloc(sizeof(worker));
-   }
+   }*/
+   s->workers = malloc(sizeof(worker_node));
+   s->workers->worker = NULL;
+   s->workers->next = NULL;
    s->num_workers = 0;
 
    // Initialize scheduling interval
@@ -53,12 +56,21 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
    if (m->type == DEVICE_AVAILABLE)
    {
       tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_duration(m->client_id));
-      for (int i = 0; i < s->num_workers; i++)
+      /*for (int i = 0; i < s->num_workers; i++)
       {
          if (m->client_id == s->workers[i]->client_id)
          {
             s->workers[i]->assigned = 0;
          }
+      }*/
+      worker_node* cur = s->workers->next;
+      while (cur != NULL) {
+         if (cur->worker->client_id == m->client_id) {
+            tw_output(lp, "Device available received \n");
+            cur->worker->assigned = 0;
+            break;
+         }
+         cur = cur->next;
       }
    }
    if (m->type == DEVICE_REGISTER)
@@ -72,7 +84,8 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
       //w->dropout = get_client_dropout(m->client_id);
       w->assigned = 0;
 
-      s->workers[s->num_workers] = w; 
+      //s->workers[s->num_workers] = w; 
+      add_worker(s->workers, w);
       s->num_workers++;
    }
 
@@ -137,9 +150,10 @@ void coordinator_finish(coordinator_state *s, tw_lp *lp)
    free_task_stage(s->task_stage);
    free(s->task_stage);
 
-   for (int i = 0; i < g_num_clients; i++) {
+/*   for (int i = 0; i < g_num_clients; i++) {
       free(s->workers[i]);
-   }
+   }*/
+   free_workers(s->workers);
    free(s->workers);
 }
 
@@ -173,6 +187,13 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       tw_event_send(e);
    }
    
+   worker** workers_array = NULL;
+   if (coordinator_settings.scheduling_algorithm == 1) {
+      workers_array = convert_workers_to_array(s->workers, s->num_workers);
+      for (int i = 0; i < s->num_workers; i++) {
+         printf("%d->", workers_array[i]->flops);
+      }
+   }
 
    // All staged tasks must be scheduled
    task_node* cur = s->task_stage; 
@@ -207,16 +228,25 @@ void schedule(coordinator_state *s, tw_lp *lp) {
 
       tw_event_send(e);
 
+      cur = cur->next;
    }
 }
 
 // Just assign first potential worker
 worker* schedule_naive(client_task* task, coordinator_state *s, tw_lp *lp) {
-   for (int i = 0; i < s->num_workers; i++) {
+   /*for (int i = 0; i < s->num_workers; i++) {
       if (s->workers[i]->assigned == 0) {
          s->workers[i]->assigned = 1;
          return s->workers[i];
       }
+   }*/
+   worker_node* cur = s->workers->next;
+   while (cur != NULL) {
+      if (cur->worker->assigned == 0) {
+         cur->worker->assigned = 1;
+         return cur->worker;
+      }
+      cur = cur->next;
    }
    return NULL;
 }
@@ -302,3 +332,63 @@ void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_f
       memcpy(buffer, &(m->client_id), sizeof(m->client_id));
    }
 }
+
+// Add worker to head of list
+void add_worker(worker_node* head, worker* worker) {
+   worker_node* wn = malloc(sizeof(worker_node));
+   wn->worker = worker;
+   wn->next = head->next;
+   head->next = wn;
+}
+
+// Delete worker with matching client_id from linked list
+void delete_worker(worker_node* head, tw_lpid client_id) {
+   worker_node* cur = head->next;
+   worker_node* prev = head;
+   while (cur != NULL) {
+      if (cur->worker->client_id == client_id) {
+         prev->next = cur->next;
+         free(cur);
+         return;
+      }
+      prev = cur;
+      cur = cur->next;
+   }
+}
+
+worker* pop_worker(worker_node* head) {
+   worker_node* res_node = head->next;
+   if (res_node != NULL) {
+      head->next = res_node->next;
+   }
+   worker* worker = res_node->worker;
+   free(res_node);
+   return worker;
+}
+
+// Free all workers
+void free_workers(worker_node* head) {
+   worker_node* cur = head->next;
+   worker_node* prev = NULL;
+   while (cur != NULL) {
+      prev = cur;
+      cur = cur->next;
+      free(prev);
+   }
+}
+
+// Convert worker linked list to array so it can be easilly sorted
+worker** convert_workers_to_array(worker_node* head, int count) {
+   // Allocate array
+   worker** res = malloc(sizeof(worker*) * count);
+
+   // Populate array
+   worker_node* cur = head->next;
+   int i = 0;
+   while (cur != NULL) {
+      res[i] = cur->worker;
+      cur = cur->next;
+      i++;
+   }
+   return res;
+} 
