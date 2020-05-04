@@ -48,3 +48,15 @@ Where # is the number of processes. --synch=2 uses the Conservative parallel mod
 # Debugging
 
 Compile/Test TLM code with `nvcc -D TEST_TLM cuda/*.cu`
+
+# Building on AiMOS
+The folder structure should be as described above. Copy ROSS onto the server, and have the mobile-grid-ross folder either in the ROSS/models folder or symlinked in. Run the following commands
+```shell
+cd ROSS/
+mkdir build
+cd build
+module load spectrum-mpi gcc/7.4.0/1 cuda cmake
+export CC=mpicc
+cmake .. -DROSS_BUILD_MODELS=ON -DMOBILE_GRID_USE_CUDA=ON
+make
+```
