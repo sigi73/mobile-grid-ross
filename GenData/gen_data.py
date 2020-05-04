@@ -4,6 +4,7 @@ f = open(fn, 'w')
 
 mkdir_format_string = 'mkir -p ./{output_folder}\n'
 run_cuda_format_string = 'sbatch -o ./{output_folder} -p dcs -N {N} --ntasks-per-node={NR} --gres=gpu:{G} -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch={SY} --scheduling_algorithm={S} --num_aggregators={NA} --num_selectors={NS} --num_clients_per_selector={NC} --num_tasks={NT} --stats-path=./{output_folder} --end=600000 --mean_dur = 120000 --prop_start=.05\n'
+run_cpu_format_string = 'sbatch -o ./{output_folder} -p dcs -N {N} --ntasks-per-node={NR} --gres=gpu:{G} -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch={SY} --scheduling_algorithm={S} --num_aggregators={NA} --num_selectors={NS} --num_clients_per_selector={NC} --num_tasks={NT} --stats-path=./{output_folder} --end=600000 --mean_dur = 120000 --prop_start=.05\n'
 
 # SIM Strong Scaling
 num_nodes = [1, 1, 1, 2, 2, 2, 2]
@@ -62,7 +63,7 @@ f.write('\n')
 N = 2
 NR = 32
 # 1, 2, 4, 8, 16, 32, 64
-output_folder_template =  'PhoneStrong_Scaling/{num_clients}Clients/'
+output_folder_template =  'PhoneStrong_ScalingRCTA/{num_clients}Clients/'
 G = 6
 SY = 2
 S = 2
@@ -77,7 +78,7 @@ for i in range(len(num_nodes)):
     NC = num_clients_per_selector[i]
     output_folder = output_folder_template.format(num_clients = NC*NS)
     mkdir_cmd = mkdir_format_string.format(output_folder=output_folder)
-    run_cmd = run_cuda_format_string.format(output_folder=output_folder,N=N,NR=NR,G=G,SY=SY,S=S,NA=NA,NS=NS,NC=NC,NT=NT)
+    run_cmd = run_cpu_format_string.format(output_folder=output_folder,N=N,NR=NR,G=G,SY=SY,S=S,NA=NA,NS=NS,NC=NC,NT=NT)
 
     f.write(mkdir_cmd)
     f.write(run_cmd)
@@ -87,7 +88,7 @@ f.write('\n')
 N = 2
 NR = 32
 # 1, 2, 4, 8, 16, 32, 64
-output_folder_template =  'PhoneWeak_Scaling/{num_clients}Clients_{num_tasks}Tasks/'
+output_folder_template =  'PhoneWeak_ScalingRCTA/{num_clients}Clients_{num_tasks}Tasks/'
 G = 6
 SY = 2
 S = 2
@@ -103,7 +104,58 @@ for i in range(len(num_nodes)):
     NT = num_tasks[i]
     output_folder = output_folder_template.format(num_clients = NC*NS, num_tasks = NT)
     mkdir_cmd = mkdir_format_string.format(output_folder=output_folder)
-    run_cmd = run_cuda_format_string.format(output_folder=output_folder,N=N,NR=NR,G=G,SY=SY,S=S,NA=NA,NS=NS,NC=NC,NT=NT)
+    run_cmd = run_cpu_format_string.format(output_folder=output_folder,N=N,NR=NR,G=G,SY=SY,S=S,NA=NA,NS=NS,NC=NC,NT=NT)
+
+    f.write(mkdir_cmd)
+    f.write(run_cmd)
+f.write('\n')
+
+# Phones Strong scaling naive
+N = 2
+NR = 32
+# 1, 2, 4, 8, 16, 32, 64
+output_folder_template =  'PhoneStrong_ScalingNaive/{num_clients}Clients/'
+G = 6
+SY = 2
+S = 1
+num_aggregators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
+num_selectors = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2]
+num_clients_per_selector = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 750, 1000]
+NT = 100
+
+for i in range(len(num_nodes)):
+    NA = num_aggregators[i]
+    NS = num_selectors[i]
+    NC = num_clients_per_selector[i]
+    output_folder = output_folder_template.format(num_clients = NC*NS)
+    mkdir_cmd = mkdir_format_string.format(output_folder=output_folder)
+    run_cmd = run_cpu_format_string.format(output_folder=output_folder,N=N,NR=NR,G=G,SY=SY,S=S,NA=NA,NS=NS,NC=NC,NT=NT)
+
+    f.write(mkdir_cmd)
+    f.write(run_cmd)
+f.write('\n')
+
+# Phones Weak scaling naive
+N = 2
+NR = 32
+# 1, 2, 4, 8, 16, 32, 64
+output_folder_template =  'PhoneWeak_ScalingNaive/{num_clients}Clients_{num_tasks}Tasks/'
+G = 6
+SY = 2
+S = 1
+num_aggregators = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20]
+num_selectors = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2]
+num_clients_per_selector = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 750, 1000]
+num_tasks = [10, 100, 200, 300, 400, 500, 600, 700, 800, 900, 100, 1500, 2000]
+
+for i in range(len(num_nodes)):
+    NA = num_aggregators[i]
+    NS = num_selectors[i]
+    NC = num_clients_per_selector[i]
+    NT = num_tasks[i]
+    output_folder = output_folder_template.format(num_clients = NC*NS, num_tasks = NT)
+    mkdir_cmd = mkdir_format_string.format(output_folder=output_folder)
+    run_cmd = run_cpu_format_string.format(output_folder=output_folder,N=N,NR=NR,G=G,SY=SY,S=S,NA=NA,NS=NS,NC=NC,NT=NT)
 
     f.write(mkdir_cmd)
     f.write(run_cmd)

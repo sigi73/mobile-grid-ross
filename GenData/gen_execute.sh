@@ -28,33 +28,63 @@ sbatch -o ./Sim_Weak_Scaling/32Ranks/ -p dcs -N 2 --ntasks-per-node=16 --gres=gp
 mkir -p ./Sim_Weak_Scaling/64Ranks/
 sbatch -o ./Sim_Weak_Scaling/64Ranks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=10 --num_selectors=[1, 2, 4, 8, 16, 32, 64] --num_clients_per_selector=1000 --num_tasks=100 --stats-path=./Sim_Weak_Scaling/64Ranks/ --end=600000 --mean_dur = 120000 --prop_start=.05
 
-mkir -p ./PhoneStrong_Scaling/10Clients/
-sbatch -o ./PhoneStrong_Scaling/10Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=100 --stats-path=./PhoneStrong_Scaling/10Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneStrong_Scaling/100Clients/
-sbatch -o ./PhoneStrong_Scaling/100Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=2 --num_selectors=1 --num_clients_per_selector=100 --num_tasks=100 --stats-path=./PhoneStrong_Scaling/100Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneStrong_Scaling/200Clients/
-sbatch -o ./PhoneStrong_Scaling/200Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=3 --num_selectors=1 --num_clients_per_selector=200 --num_tasks=100 --stats-path=./PhoneStrong_Scaling/200Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneStrong_Scaling/300Clients/
-sbatch -o ./PhoneStrong_Scaling/300Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=4 --num_selectors=1 --num_clients_per_selector=300 --num_tasks=100 --stats-path=./PhoneStrong_Scaling/300Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneStrong_Scaling/400Clients/
-sbatch -o ./PhoneStrong_Scaling/400Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=5 --num_selectors=1 --num_clients_per_selector=400 --num_tasks=100 --stats-path=./PhoneStrong_Scaling/400Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneStrong_Scaling/500Clients/
-sbatch -o ./PhoneStrong_Scaling/500Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=6 --num_selectors=1 --num_clients_per_selector=500 --num_tasks=100 --stats-path=./PhoneStrong_Scaling/500Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneStrong_Scaling/600Clients/
-sbatch -o ./PhoneStrong_Scaling/600Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=7 --num_selectors=1 --num_clients_per_selector=600 --num_tasks=100 --stats-path=./PhoneStrong_Scaling/600Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingRCTA/10Clients/
+sbatch -o ./PhoneStrong_ScalingRCTA/10Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=100 --stats-path=./PhoneStrong_ScalingRCTA/10Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingRCTA/100Clients/
+sbatch -o ./PhoneStrong_ScalingRCTA/100Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=2 --num_selectors=1 --num_clients_per_selector=100 --num_tasks=100 --stats-path=./PhoneStrong_ScalingRCTA/100Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingRCTA/200Clients/
+sbatch -o ./PhoneStrong_ScalingRCTA/200Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=3 --num_selectors=1 --num_clients_per_selector=200 --num_tasks=100 --stats-path=./PhoneStrong_ScalingRCTA/200Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingRCTA/300Clients/
+sbatch -o ./PhoneStrong_ScalingRCTA/300Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=4 --num_selectors=1 --num_clients_per_selector=300 --num_tasks=100 --stats-path=./PhoneStrong_ScalingRCTA/300Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingRCTA/400Clients/
+sbatch -o ./PhoneStrong_ScalingRCTA/400Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=5 --num_selectors=1 --num_clients_per_selector=400 --num_tasks=100 --stats-path=./PhoneStrong_ScalingRCTA/400Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingRCTA/500Clients/
+sbatch -o ./PhoneStrong_ScalingRCTA/500Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=6 --num_selectors=1 --num_clients_per_selector=500 --num_tasks=100 --stats-path=./PhoneStrong_ScalingRCTA/500Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingRCTA/600Clients/
+sbatch -o ./PhoneStrong_ScalingRCTA/600Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=7 --num_selectors=1 --num_clients_per_selector=600 --num_tasks=100 --stats-path=./PhoneStrong_ScalingRCTA/600Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
 
-mkir -p ./PhoneWeak_Scaling/10Clients_10Tasks/
-sbatch -o ./PhoneWeak_Scaling/10Clients_10Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=10 --stats-path=./PhoneWeak_Scaling/10Clients_10Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneWeak_Scaling/100Clients_100Tasks/
-sbatch -o ./PhoneWeak_Scaling/100Clients_100Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=2 --num_selectors=1 --num_clients_per_selector=100 --num_tasks=100 --stats-path=./PhoneWeak_Scaling/100Clients_100Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneWeak_Scaling/200Clients_200Tasks/
-sbatch -o ./PhoneWeak_Scaling/200Clients_200Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=3 --num_selectors=1 --num_clients_per_selector=200 --num_tasks=200 --stats-path=./PhoneWeak_Scaling/200Clients_200Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneWeak_Scaling/300Clients_300Tasks/
-sbatch -o ./PhoneWeak_Scaling/300Clients_300Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=4 --num_selectors=1 --num_clients_per_selector=300 --num_tasks=300 --stats-path=./PhoneWeak_Scaling/300Clients_300Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneWeak_Scaling/400Clients_400Tasks/
-sbatch -o ./PhoneWeak_Scaling/400Clients_400Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=5 --num_selectors=1 --num_clients_per_selector=400 --num_tasks=400 --stats-path=./PhoneWeak_Scaling/400Clients_400Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneWeak_Scaling/500Clients_500Tasks/
-sbatch -o ./PhoneWeak_Scaling/500Clients_500Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=6 --num_selectors=1 --num_clients_per_selector=500 --num_tasks=500 --stats-path=./PhoneWeak_Scaling/500Clients_500Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
-mkir -p ./PhoneWeak_Scaling/600Clients_600Tasks/
-sbatch -o ./PhoneWeak_Scaling/600Clients_600Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCUDA.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=7 --num_selectors=1 --num_clients_per_selector=600 --num_tasks=600 --stats-path=./PhoneWeak_Scaling/600Clients_600Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingRCTA/10Clients_10Tasks/
+sbatch -o ./PhoneWeak_ScalingRCTA/10Clients_10Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=10 --stats-path=./PhoneWeak_ScalingRCTA/10Clients_10Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingRCTA/100Clients_100Tasks/
+sbatch -o ./PhoneWeak_ScalingRCTA/100Clients_100Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=2 --num_selectors=1 --num_clients_per_selector=100 --num_tasks=100 --stats-path=./PhoneWeak_ScalingRCTA/100Clients_100Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingRCTA/200Clients_200Tasks/
+sbatch -o ./PhoneWeak_ScalingRCTA/200Clients_200Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=3 --num_selectors=1 --num_clients_per_selector=200 --num_tasks=200 --stats-path=./PhoneWeak_ScalingRCTA/200Clients_200Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingRCTA/300Clients_300Tasks/
+sbatch -o ./PhoneWeak_ScalingRCTA/300Clients_300Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=4 --num_selectors=1 --num_clients_per_selector=300 --num_tasks=300 --stats-path=./PhoneWeak_ScalingRCTA/300Clients_300Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingRCTA/400Clients_400Tasks/
+sbatch -o ./PhoneWeak_ScalingRCTA/400Clients_400Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=5 --num_selectors=1 --num_clients_per_selector=400 --num_tasks=400 --stats-path=./PhoneWeak_ScalingRCTA/400Clients_400Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingRCTA/500Clients_500Tasks/
+sbatch -o ./PhoneWeak_ScalingRCTA/500Clients_500Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=6 --num_selectors=1 --num_clients_per_selector=500 --num_tasks=500 --stats-path=./PhoneWeak_ScalingRCTA/500Clients_500Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingRCTA/600Clients_600Tasks/
+sbatch -o ./PhoneWeak_ScalingRCTA/600Clients_600Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=7 --num_selectors=1 --num_clients_per_selector=600 --num_tasks=600 --stats-path=./PhoneWeak_ScalingRCTA/600Clients_600Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+
+mkir -p ./PhoneStrong_ScalingNaive/10Clients/
+sbatch -o ./PhoneStrong_ScalingNaive/10Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=100 --stats-path=./PhoneStrong_ScalingNaive/10Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingNaive/100Clients/
+sbatch -o ./PhoneStrong_ScalingNaive/100Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=2 --num_selectors=1 --num_clients_per_selector=100 --num_tasks=100 --stats-path=./PhoneStrong_ScalingNaive/100Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingNaive/200Clients/
+sbatch -o ./PhoneStrong_ScalingNaive/200Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=3 --num_selectors=1 --num_clients_per_selector=200 --num_tasks=100 --stats-path=./PhoneStrong_ScalingNaive/200Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingNaive/300Clients/
+sbatch -o ./PhoneStrong_ScalingNaive/300Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=4 --num_selectors=1 --num_clients_per_selector=300 --num_tasks=100 --stats-path=./PhoneStrong_ScalingNaive/300Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingNaive/400Clients/
+sbatch -o ./PhoneStrong_ScalingNaive/400Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=5 --num_selectors=1 --num_clients_per_selector=400 --num_tasks=100 --stats-path=./PhoneStrong_ScalingNaive/400Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingNaive/500Clients/
+sbatch -o ./PhoneStrong_ScalingNaive/500Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=6 --num_selectors=1 --num_clients_per_selector=500 --num_tasks=100 --stats-path=./PhoneStrong_ScalingNaive/500Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneStrong_ScalingNaive/600Clients/
+sbatch -o ./PhoneStrong_ScalingNaive/600Clients/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=7 --num_selectors=1 --num_clients_per_selector=600 --num_tasks=100 --stats-path=./PhoneStrong_ScalingNaive/600Clients/ --end=600000 --mean_dur = 120000 --prop_start=.05
+
+mkir -p ./PhoneWeak_ScalingNaive/10Clients_10Tasks/
+sbatch -o ./PhoneWeak_ScalingNaive/10Clients_10Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=10 --stats-path=./PhoneWeak_ScalingNaive/10Clients_10Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingNaive/100Clients_100Tasks/
+sbatch -o ./PhoneWeak_ScalingNaive/100Clients_100Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=2 --num_selectors=1 --num_clients_per_selector=100 --num_tasks=100 --stats-path=./PhoneWeak_ScalingNaive/100Clients_100Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingNaive/200Clients_200Tasks/
+sbatch -o ./PhoneWeak_ScalingNaive/200Clients_200Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=3 --num_selectors=1 --num_clients_per_selector=200 --num_tasks=200 --stats-path=./PhoneWeak_ScalingNaive/200Clients_200Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingNaive/300Clients_300Tasks/
+sbatch -o ./PhoneWeak_ScalingNaive/300Clients_300Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=4 --num_selectors=1 --num_clients_per_selector=300 --num_tasks=300 --stats-path=./PhoneWeak_ScalingNaive/300Clients_300Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingNaive/400Clients_400Tasks/
+sbatch -o ./PhoneWeak_ScalingNaive/400Clients_400Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=5 --num_selectors=1 --num_clients_per_selector=400 --num_tasks=400 --stats-path=./PhoneWeak_ScalingNaive/400Clients_400Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingNaive/500Clients_500Tasks/
+sbatch -o ./PhoneWeak_ScalingNaive/500Clients_500Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=6 --num_selectors=1 --num_clients_per_selector=500 --num_tasks=500 --stats-path=./PhoneWeak_ScalingNaive/500Clients_500Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
+mkir -p ./PhoneWeak_ScalingNaive/600Clients_600Tasks/
+sbatch -o ./PhoneWeak_ScalingNaive/600Clients_600Tasks/ -p dcs -N 2 --ntasks-per-node=32 --gres=gpu:6 -t 30 ./slurmSpectrumCPU.sh --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=7 --num_selectors=1 --num_clients_per_selector=600 --num_tasks=600 --stats-path=./PhoneWeak_ScalingNaive/600Clients_600Tasks/ --end=600000 --mean_dur = 120000 --prop_start=.05
 
