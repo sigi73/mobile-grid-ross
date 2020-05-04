@@ -142,6 +142,7 @@ struct s_client_parameters
 	unsigned int *client_flops;
 	float *client_start_time;
 	float *client_duration;
+	float *client_churn_prob;
 	float *client_x;
 	float *client_y;
 } client_parameters;
@@ -156,6 +157,14 @@ static inline float get_client_flops(tw_lpid gid)
 static inline float get_client_start_time(tw_lpid gid)
 {
     return client_parameters.client_start_time[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
+}
+static inline float get_client_duration(tw_lpid gid)
+{
+    return client_parameters.client_duration[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
+}
+static inline float get_client_churn_prob(tw_lpid gid)
+{
+    return client_parameters.client_churn_prob[gid - NUM_FIXED_ACTORS - num_actors.num_aggregators - num_actors.num_selectors];
 }
 static inline float get_client_x(tw_lpid gid)
 {
@@ -219,8 +228,25 @@ struct worker
 {
 	tw_lpid client_id;
 	unsigned int flops;
-	//unsigned int dropout;
+	double duration;
+	double churn_prob;
 	int assigned;   // 0 -> unassigned, 1 -> assigned
+};
+
+typedef struct worker_node worker_node;
+struct worker_node
+{
+	worker* worker;
+	worker_node* next;
+};
+
+typedef struct coordinator_worker coordinator_worker;
+struct coordinator_worker 
+{
+	worker* worker;
+	double comp_time;
+	//unsigned int churn_prob;
+	double churn_prob;
 };
 
 /*
@@ -239,7 +265,8 @@ struct coordinator_state
 	unsigned int tasks_received;  // Number of tasks that have received so far
 	unsigned int tasks_started;  // Number of tasks that the coordinator has started scheduling 
 	task_node* task_stage;      // Head of linked list of tasks ready to be distributed in the next round
-	worker** workers;	
+	//worker** workers;	
+	worker_node* workers;
 	int num_workers;
 };
 
@@ -248,12 +275,24 @@ void coordinator_pre_init(coordinator_state *s, tw_lp *lp);
 void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void coordinator_event_handler_rc(coordinator_state *s, tw_bf *bf, message *m, tw_lp *lp);
 void coordinator_finish(coordinator_state *s, tw_lp *lp);
+
 void schedule(coordinator_state *s, tw_lp *lp); 
 worker* schedule_naive(client_task* task, coordinator_state *s, tw_lp *lp);
+worker* schedule_rcta(client_task* task, worker** workers, int num_workers, coordinator_state *s, tw_lp *lp);
+
 client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp);
+
 void stage_task(task_node* head, client_task* task);
 client_task* pop_task(task_node* head);
 void free_task_stage(task_node* head);
+
+void add_worker(worker_node* head, worker* worker);
+void delete_worker(worker_node* head, tw_lpid client_id);
+worker* pop_worker(worker_node* head);
+void free_workers(worker_node* head);
+
+worker** convert_workers_to_array(worker_node* head, int count);
+coordinator_worker** merge_sort_workers(coordinator_worker** workers, int n);
 
 void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag);
 
