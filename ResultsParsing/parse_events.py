@@ -11,11 +11,17 @@ parser = EventTrace.from_file(data_fn)
 config_fn = sys.argv[2]
 config_file = open(config_fn)
 config = config_file.readlines()
+print(config)
 
 NUM_AGGREGATORS = int(config[0].split(':')[1])
-NUM_SELECTORS = int(config[0].split(':')[1])
-NUM_CLIENTS_PER_SELECTOR = int(config[0].split(':')[1])
-SIZE_OF_MESSAGE_TYPE = int(config[0].split(':')[1])
+NUM_SELECTORS = int(config[1].split(':')[1])
+NUM_CLIENTS_PER_SELECTOR = int(config[2].split(':')[1])
+SIZE_OF_MESSAGE_TYPE = int(config[3].split(':')[1])
+
+print(NUM_AGGREGATORS)
+print(NUM_SELECTORS)
+print(NUM_CLIENTS_PER_SELECTOR)
+print(SIZE_OF_MESSAGE_TYPE)
 
 COORDINATOR_ID = 0
 MASTER_AGGREGATOR_ID = 1
@@ -104,9 +110,11 @@ for event in parser.meta:
         clients2[client_id][task_id][3] = event.virtual_recv_time
     
     if event.destination_lp in client_ids and t == MessageType.ASSIGN_JOB:
-        task_id = struct.unpack('=I', event.buf[4:8])
-        task_id = task_id[0]
-        clients2[event.destination_lp][task_id] = [event.virtual_recv_time, -1, -1, -1]
+        if event.model_data_size == 8:
+            #print(event.buf)
+            task_id = struct.unpack('=I', event.buf[4:8])
+            task_id = task_id[0]
+            clients2[event.destination_lp][task_id] = [event.virtual_recv_time, -1, -1, -1]
 
     if event.destination_lp in client_ids:
         pass
@@ -118,8 +126,9 @@ for event in parser.meta:
         clients2[event.destination_lp][task_id][1] = event.virtual_recv_time
 
     if event.destination_lp in channel_ids and t == MessageType.SEND_RESULTS:
-        (task_id, client_id) = struct.unpack('=II', event.buf[4:12])
-        clients2[client_id][task_id][2] = event.virtual_recv_time
+        if event.model_data_size == 12:
+            (task_id, client_id) = struct.unpack('=II', event.buf[4:12])
+            clients2[client_id][task_id][2] = event.virtual_recv_time
     index = index + 1
 
 #print(clients2)    
@@ -148,4 +157,6 @@ for c in clients2.keys():
     index = index+1
 plt.show()
 
+
 print(aggregator_tasks)
+print(val)
