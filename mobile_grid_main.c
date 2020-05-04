@@ -266,7 +266,7 @@ int mobile_grid_main(int argc, char* argv[]) {
 			fprintf(f, "NumAggregators:%d\n", num_actors.num_aggregators);
 			fprintf(f, "NumSelectors:%d\n", num_actors.num_selectors);
 			fprintf(f, "NumClientsPerSelector:%d\n", num_actors.num_clients_per_selector);
-			fprintf(f, "Sizeof MessageType:%d\n", sizeof(message_type));
+			fprintf(f, "Sizeof MessageType:%lu\n", sizeof(message_type));
 			fclose(f);
 			printf("Test print only once\n");
 		}
