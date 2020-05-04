@@ -36,6 +36,7 @@ void coordinator_init(coordinator_state *s, tw_lp *lp)
 
    // Initialize task requests at random intervals
    double task_interval = (unsigned int) tw_rand_normal_sd(lp->rng, 9000, 2000, (unsigned int*) &lp->rng->count);
+   if (task_interval < g_min_delay) task_interval = g_min_delay;
    tw_event *e2 = tw_event_new(COORDINATOR_ID, task_interval, lp);
    message *msg2 = tw_event_data(e2);
    msg2->type = TASK_ARRIVED;
@@ -110,6 +111,7 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
          tw_output(lp, "Scheduling new task");
 
          double task_interval = (unsigned int) tw_rand_normal_sd(lp->rng, 9000, 2000, (unsigned int*) &lp->rng->count);
+         if (task_interval < g_min_delay) task_interval = g_min_delay;
          tw_event *e = tw_event_new(COORDINATOR_ID, task_interval, lp);
          message *msg = tw_event_data(e);
          msg->type = TASK_ARRIVED;

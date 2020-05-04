@@ -112,6 +112,7 @@ void client_event_handler(client_state *s, tw_bf *bf, message *m, tw_lp *lp)
         // Received data, run calculation and send results to aggregator
         tw_output(lp, "Client: Got data for lp %u\n", m->client_id);
         double delay = m->task.flops / s->flops * 1000;
+        if (delay < g_min_delay) delay = g_min_delay;
         tw_event *e = tw_event_new(client_to_channel(lp->gid), delay, lp);
         message *msg = tw_event_data(e);
 
