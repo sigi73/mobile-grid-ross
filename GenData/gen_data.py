@@ -13,11 +13,11 @@ num_ranks_per_node = [1, 2, 4, 4, 8, 16, 32]
 output_folder_template =  'Sim_Strong_Scaling/{num_ranks}Ranks/'
 gpus = [1, 2, 4, 6, 6, 6, 6]
 synch = [1, 2, 2, 2, 2, 2, 2]
-S = 2
-NA = 10
-NS = 25
-NC = 40
-NT = 100
+S = 1
+NA = 4
+NS = 5
+NC = 10
+NT = 10
 
 for i in range(len(num_nodes)):
     N = num_nodes[i]
@@ -33,24 +33,37 @@ for i in range(len(num_nodes)):
 f.write('\n')
 
 # SIM Weak Scaling
-num_nodes = [1, 1, 1, 2, 2, 2, 2]
-num_ranks_per_node = [1, 2, 4, 4, 8, 16, 32]
+#num_nodes = [1, 1, 1, 2, 2, 2, 2]
+#num_ranks_per_node = [1, 2, 4, 4, 8, 16, 32]
+#num_nodes = [1, 1, 1]
+#num_ranks_per_node = [1, 2, 4]
+num_nodes = [2, 2, 2, 2]
+num_ranks_per_node = [4, 8, 16, 32]
 # 1, 2, 4, 8, 16, 32, 64
 output_folder_template =  'Sim_Weak_Scaling/{num_ranks}Ranks/'
-gpus = [1, 2, 4, 6, 6, 6, 6]
-synch = [1, 2, 2, 2, 2, 2, 2]
-S = 2
-NA = 10
-num_selectors = [1,2,4,8,16,32,64]
-NC = 1000
-NT = 100
+#gpus = [1, 2, 4, 6, 6, 6, 6]
+#synch = [1, 2, 2, 2, 2, 2, 2]
+#synch = [1, 2, 2]
+synch = [2, 2, 2, 2]
+#gpus = [1, 2, 4]
+gpus = [6, 6, 6, 6]
+S = 1
+NA = 4
+#num_selectors = [1,2,4,8,16,32,64]
+NS = 5
+NC = 10
+#NT = 10
+#num_tasks = [1,2,4,8,16,32,64]
+#num_tasks = [1,2,4]
+num_tasks = [8,16,32,64]
 
 for i in range(len(num_nodes)):
     N = num_nodes[i]
     NR = num_ranks_per_node[i]
     G = gpus[i]
     SY = synch[i]
-    NS = num_selectors
+    #NS = num_selectors[i]
+    NT = num_tasks[i]
     output_folder = output_folder_template.format(num_ranks = N*NR)
     mkdir_cmd = mkdir_format_string.format(output_folder=output_folder)
     run_cmd = run_cuda_format_string.format(output_folder=output_folder,N=N,NR=NR,G=G,SY=SY,S=S,NA=NA,NS=NS,NC=NC,NT=NT)
@@ -59,6 +72,7 @@ for i in range(len(num_nodes)):
     f.write(run_cmd)
 f.write('\n')
 
+'''
 # Phones Strong scaling
 N = 2
 NR = 32
@@ -164,3 +178,5 @@ for i in range(len(num_aggregators)):
     f.write(mkdir_cmd)
     f.write(run_cmd)
 f.write('\n')
+
+'''
