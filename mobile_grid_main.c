@@ -183,7 +183,7 @@ void defaultSettings()
   	coordinator_settings.scheduling_interval = 10000;
   	coordinator_settings.num_tasks = 10;
   	coordinator_settings.task_size= 50;
-  	coordinator_settings.scheduling_algorithm = 0;          // 0 For naive, 1 for Risk-Controlled Task Assignment
+  	coordinator_settings.scheduling_algorithm = 1;          // 0 For naive, 1 for Risk-Controlled Task Assignment
 
 	client_settings.mean_flops = 20000000;
 	client_settings.stddev_flops = 5000000;

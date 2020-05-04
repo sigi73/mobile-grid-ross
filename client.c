@@ -50,6 +50,7 @@ void allocate_client_parameters()
     client_parameters.client_flops = malloc(g_num_clients * sizeof(unsigned int));
     client_parameters.client_start_time = malloc(g_num_clients * sizeof(float));
     client_parameters.client_duration = malloc(g_num_clients * sizeof(float));
+    client_parameters.client_churn_prob = malloc(g_num_clients * sizeof(float));
     client_parameters.client_x = malloc(g_num_clients * sizeof(float));
     client_parameters.client_y = malloc(g_num_clients * sizeof(float));
     for (unsigned int i = 0; i < g_num_clients; i++)
@@ -58,11 +59,12 @@ void allocate_client_parameters()
         flops = fmax(1, flops); // 0 probably shouldn't be permitted?
         client_parameters.client_flops[i] = (unsigned int)flops;
 
+        client_parameters.client_start_time[i] = rand_uniform(g_min_delay, g_tw_ts_end - client_settings.mean_duration);
+        client_parameters.client_churn_prob[i] = gauss(10, 2) / 100;                       // TODO set as actual parameters 
         client_parameters.client_duration[i] = (float)(rand_exp(client_settings.mean_duration));
         if (g_num_clients * client_settings.proportion_start_immediately > i)
         {
             client_parameters.client_start_time[i] = (float)g_min_delay;
-            printf("start immediately: %d\n", i);
         } else
         {
             client_parameters.client_start_time[i] = rand_uniform(g_min_delay, g_tw_ts_end - client_settings.mean_duration);
@@ -77,6 +79,7 @@ void free_client_parameters()
     free(client_parameters.client_flops);
     free(client_parameters.client_start_time);
     free(client_parameters.client_duration);
+    free(client_parameters.client_churn_prob);
     free(client_parameters.client_x);
     free(client_parameters.client_y);
 }
