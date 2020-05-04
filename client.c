@@ -42,6 +42,7 @@ void allocate_client_parameters()
     client_parameters.client_flops = malloc(g_num_clients * sizeof(unsigned int));
     client_parameters.client_start_time = malloc(g_num_clients * sizeof(float));
     client_parameters.client_duration = malloc(g_num_clients * sizeof(float));
+    client_parameters.client_churn_prob = malloc(g_num_clients * sizeof(float));
     client_parameters.client_x = malloc(g_num_clients * sizeof(float));
     client_parameters.client_y = malloc(g_num_clients * sizeof(float));
     for (unsigned int i = 0; i < g_num_clients; i++)
@@ -52,6 +53,8 @@ void allocate_client_parameters()
 
         client_parameters.client_start_time[i] = rand_uniform(g_min_delay, g_tw_ts_end - client_settings.mean_duration);
         client_parameters.client_duration[i] = rand_expo(client_settings.mean_duration);
+        client_parameters.client_churn_prob[i] = gauss(10, 2) / 100;                       // TODO set as actual parameters 
+        printf("yooo %f\n", client_parameters.client_churn_prob[i]);
         client_parameters.client_x[i] = rand_uniform(-MAX_GRID_SIZE, MAX_GRID_SIZE);
         client_parameters.client_y[i] = rand_uniform(-MAX_GRID_SIZE, MAX_GRID_SIZE);
     }
@@ -62,6 +65,7 @@ void free_client_parameters()
     free(client_parameters.client_flops);
     free(client_parameters.client_start_time);
     free(client_parameters.client_duration);
+    free(client_parameters.client_churn_prob);
     free(client_parameters.client_x);
     free(client_parameters.client_y);
 }

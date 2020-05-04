@@ -75,13 +75,14 @@ void coordinator_event_handler(coordinator_state *s, tw_bf *bf, message *m, tw_l
    }
    if (m->type == DEVICE_REGISTER)
    {
-      tw_output(lp, "Device available received %d, %u, %u\n", m->client_id, get_client_flops(m->client_id), get_client_duration(m->client_id));
+      tw_output(lp, "Device available received %d, %u, %u, %lf\n", m->client_id, get_client_flops(m->client_id), get_client_duration(m->client_id), get_client_churn_prob(m->client_id));
 
       // Add to list of active workers
       worker* w = malloc(sizeof(worker));
       w->client_id = m->client_id;
       w->flops = get_client_flops(m->client_id);
       //w->dropout = get_client_dropout(m->client_id);
+      w->duration = get_client_duration(m->client_id);
       w->assigned = 0;
 
       //s->workers[s->num_workers] = w; 
@@ -191,13 +192,13 @@ void schedule(coordinator_state *s, tw_lp *lp) {
    if (coordinator_settings.scheduling_algorithm == 1) {
       workers_array = convert_workers_to_array(s->workers, s->num_workers);
       for (int i = 0; i < s->num_workers; i++) {
-         printf("%d->", workers_array[i]->flops);
+         printf("%f->", workers_array[i]->duration);
       }
    }
 
    // All staged tasks must be scheduled
-   task_node* cur = s->task_stage; 
-   while (cur->next != NULL) {
+   //task_node* cur = s->task_stage; 
+   while (s->task_stage->next != NULL) {
       // Assign task based off of the chosen algorithm
       client_task* task = pop_task(s->task_stage);
       worker* assignment;
@@ -206,7 +207,8 @@ void schedule(coordinator_state *s, tw_lp *lp) {
          assignment = schedule_naive(task, s, lp);
       } else {
          // Risk-Controlled task assignment
-         assignment = NULL;
+         assignment = schedule_rcta(task, workers_array, s->num_workers, s, lp);
+         //assignment = NULL;
       }
 
       // We are out of available workers.
@@ -227,19 +229,11 @@ void schedule(coordinator_state *s, tw_lp *lp) {
       msg->task.aggregator_id = task->aggregator_id;
 
       tw_event_send(e);
-
-      cur = cur->next;
    }
 }
 
 // Just assign first potential worker
 worker* schedule_naive(client_task* task, coordinator_state *s, tw_lp *lp) {
-   /*for (int i = 0; i < s->num_workers; i++) {
-      if (s->workers[i]->assigned == 0) {
-         s->workers[i]->assigned = 1;
-         return s->workers[i];
-      }
-   }*/
    worker_node* cur = s->workers->next;
    while (cur != NULL) {
       if (cur->worker->assigned == 0) {
@@ -253,6 +247,52 @@ worker* schedule_naive(client_task* task, coordinator_state *s, tw_lp *lp) {
 
 
 // Risk-controlled task assignment
+worker* schedule_rcta(client_task* task, worker** workers, int num_workers, coordinator_state *s, tw_lp *lp) {
+   // Part 1: Assign comptime, churnprobability, to all workers
+   float lowestRisk = -1;
+   coordinator_worker* selected_h = NULL;
+   coordinator_worker** cws = malloc(sizeof(coordinator_worker*) * num_workers);
+   int unassigned = 0;
+   for (int i = 0; i < num_workers; i++) {
+      if (workers[i]->assigned == 0) {
+         coordinator_worker* cw = malloc(sizeof(coordinator_worker));
+         cw->worker = workers[i];
+         // Compute comp time
+         cw->comp_time = (double) task->flops / workers[i]->flops;
+         // Compute churn probability (set to 0 for now)
+         cw->churn_prob = get_client_churn_prob(workers[i]->client_id);
+         cws[unassigned] = cw;
+         unassigned++;
+         if (lowestRisk > cw->churn_prob || lowestRisk == -1) {
+            selected_h = cw;
+            lowestRisk = cw->churn_prob; 
+         }
+      }
+   }
+   if (unassigned == 0) {
+      return NULL;
+   }
+   // Part 2: Sort workers by risk
+   coordinator_worker** sorted = merge_sort_workers(cws, unassigned);
+
+   // Part 3: Risk based assignment
+   for (int i = 0; i < unassigned; i++) {
+      if (sorted[i]->comp_time > selected_h->comp_time) {
+         continue;
+      }
+      double added_risk = (sorted[i]->churn_prob - selected_h->churn_prob)/sorted[i]->churn_prob;
+      double gain = (selected_h->comp_time - sorted[i]->comp_time) / selected_h->comp_time;
+      
+      if (gain > added_risk) {
+         selected_h = sorted[i];
+      }
+   }
+   if (selected_h == NULL) {
+      return NULL;
+   }
+   selected_h->worker->assigned = 1;
+   return selected_h->worker;
+}
 
 // Map reduce task has a tree like structure
 client_task* generate_map_reduce_task(int task_id, int n, tw_lp *lp) {
@@ -392,3 +432,53 @@ worker** convert_workers_to_array(worker_node* head, int count) {
    }
    return res;
 } 
+
+coordinator_worker** merge_sort_workers(coordinator_worker** workers, int n) {
+   if (n == 1) {
+      coordinator_worker** res = malloc(sizeof(coordinator_worker*));
+      res[0] = workers[0];
+      return res;
+   }
+
+   // Sort both halves
+   int len1 = n/2;
+   int len2 = (n - (n/2));
+   coordinator_worker** h1 = merge_sort_workers(workers, len1);
+   coordinator_worker** h2 = merge_sort_workers(&workers[n/2], len2);
+
+   // Merge
+   coordinator_worker** res = malloc(sizeof(coordinator_worker*) * n);
+
+   int i = 0;
+   int j = 0;
+   int total = 0;
+   while (total < n) {
+      if (i < len1 && j < len2) {
+         if (h1[i]->churn_prob < h2[j]->churn_prob) {
+            res[total] = h1[i];
+            i++;
+            total++;
+         } else {
+            res[total] = h2[j];
+            j++;
+            total++;
+         }
+      } else if (i < len1 && j >= len2) {
+         for (i = i; i < len1; i++) {
+            res[total] = h1[i];
+            total++;
+         }
+      } else if (i >= len1 && j < len2) {
+         for (j = j; j < len2; j++) {
+            res[total] = h2[j];
+            total++;
+         }
+      } else {
+         total++;
+      }
+   }
+   free(h1);
+   free(h2);
+
+   return res;
+}
