@@ -301,21 +301,11 @@ void coordinator_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_f
    buffer += sizeof(message_type);
    if (m->type == DEVICE_AVAILABLE)
    {
-      (*collect_flag) = 1;
       memcpy(buffer, &m->client_id, 8);
    }
    else if (m->type == DEVICE_REGISTER)
    {
-      (*collect_flag) = 1;
       memcpy(buffer, &m->client_id, 8);
       buffer += 8;
-   }
-   else if (m->type == SCHEDULING_INTERVAL) {
-      (*collect_flag) = 1;
-      // Nothing else to log
-   } else
-   {
-      (*collect_flag) = 0;
-      // No logging
    }
 }

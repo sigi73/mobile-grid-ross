@@ -81,5 +81,5 @@ void selector_finish(selector_state *s, tw_lp *lp)
 
 void selector_event_trace(message *m, tw_lp *lp, char *buffer, int *collect_flag)
 {
-    (*collect_flag) = 0;
+   memcpy(buffer, &m->type, sizeof(message_type));
 }
