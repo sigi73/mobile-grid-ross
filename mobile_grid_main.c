@@ -167,7 +167,7 @@ const tw_optdef model_opts[] = {
 	TWOPT_UINT("mean_flops", client_settings.mean_flops, "Average number of floating point operations per second the client is capable of"),
 	TWOPT_UINT("stdev_flops", client_settings.stddev_flops, "Standard deviation of floating point operations per second the client is capable of"),
 	TWOPT_UINT("mean_dur", client_settings.mean_duration, "Mean duration client is connected"),
-	TWOPT_UINT("prop_start", client_settings.proportion_start_immediately, "Proportion of clients that are conencted at startup"),
+	TWOPT_DOUBLE("prop_start", client_settings.proportion_start_immediately, "Proportion of clients that are conencted at startup"),
 
 	TWOPT_END(),
 };

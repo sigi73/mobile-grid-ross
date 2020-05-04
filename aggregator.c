@@ -102,13 +102,15 @@ void aggregator_event_handler(aggregator_state *s, tw_bf *bf, message *m, tw_lp 
       {
          printf("ERROR: GID %u received results but not waiting for jobs, client_id %u, task_id %u\n", lp->gid, m->client_id, m->task.task_id);
          // Exit horribly? 
-         exit(1);
+         //exit(1);
+         return;
       }
       aggregator_task *job = find_aggregator_task(s->tasks, m->task.task_id);
       if (job == NULL)
       {
          printf("ERROR: GID %u received results but is not waiting for task_id %u", lp->gid, m->task.task_id);
-         exit(1);
+         return;
+         //exit(1);
       }
       job->num_remaining--;
 
