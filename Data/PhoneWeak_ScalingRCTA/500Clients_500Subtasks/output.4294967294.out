@@ -1,0 +1,1328 @@
++ '[' x64 = x ']'
++ '[' x32 = x ']'
++ srun hostname -s
++ sort -u
++ awk '{ print $0 "-ib slots=32"; }' /tmp/hosts.152515
++ mv /tmp/tmp.152515 /tmp/hosts.152515
++ module load spectrum-mpi
+++ /usr/share/lmod/lmod/libexec/lmod bash load spectrum-mpi
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) cuda/10.1
+
++ eval 'CUDA_PATH=/usr/local/cuda-10.1;' export 'CUDA_PATH;' '__LMOD_REF_COUNT_LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:1\;/opt/ibm/spectrum_mpi/profilesupport/lib:1\;/opt/ibm/spectrum_mpi/lib:1\;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/lib64:1\;/opt/mellanox/sharp/lib:1\;/opt/mellanox/hcoll/lib:1;' export '__LMOD_REF_COUNT_LD_LIBRARY_PATH;' 'LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:/opt/ibm/spectrum_mpi/profilesupport/lib:/opt/ibm/spectrum_mpi/lib:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/lib64:/opt/mellanox/sharp/lib:/opt/mellanox/hcoll/lib;' export 'LD_LIBRARY_PATH;' 'LMOD_FAMILY_MPI=spectrum-mpi;' export 'LMOD_FAMILY_MPI;' 'LMOD_FAMILY_MPI_VERSION=10.3;' export 'LMOD_FAMILY_MPI_VERSION;' '__LMOD_REF_COUNT_LOADEDMODULES=gcc/7.4.0/1:1\;cmake/3.14.6:1\;spectrum-mpi/10.3:1\;cuda/10.1:1;' export '__LMOD_REF_COUNT_LOADEDMODULES;' 'LOADEDMODULES=gcc/7.4.0/1:cmake/3.14.6:spectrum-mpi/10.3:cuda/10.1;' export 'LOADEDMODULES;' '__LMOD_REF_COUNT_MANPATH=/opt/ibm/spectrum_mpi/share/man:1\;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/share/man:1;' export '__LMOD_REF_COUNT_MANPATH;' 'MANPATH=/opt/ibm/spectrum_mpi/share/man:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/share/man;' export 'MANPATH;' '__LMOD_REF_COUNT_MODULEPATH=/gpfs/u/software/ppc64le-rhel7/modulefiles/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/.cuda/10.1:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/.gcc/7.4.0/1:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles:1;' export '__LMOD_REF_COUNT_MODULEPATH;' 'MODULEPATH=/gpfs/u/software/ppc64le-rhel7/modulefiles/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/.cuda/10.1:/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:/gpfs/u/software/ppc64le-rhel7/modulefiles/.gcc/7.4.0/1:/gpfs/u/software/ppc64le-rhel7/modulefiles;' export 'MODULEPATH;' 'MPI_ROOT=/opt/ibm/spectrum_mpi;' export 'MPI_ROOT;' 'OPAL_LIBDIR=/opt/ibm/spectrum_mpi/lib;' export 'OPAL_LIBDIR;' '__LMOD_REF_COUNT_PATH=/usr/local/cuda-10.1/bin:1\;/opt/ibm/spectrum_mpi/bin:1\;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/bin:1\;/usr/lpp/mmfs/bin:1\;/opt/cci/bin:1\;/usr/local/bin:1\;/usr/bin:1\;/usr/local/sbin:1\;/usr/sbin:1\;/opt/ibutils/bin:1\;/gpfs/u/home/PCP9/PCP9srsd/.local/bin:1\;/gpfs/u/home/PCP9/PCP9srsd/bin:1;' export '__LMOD_REF_COUNT_PATH;' 'PATH=/usr/local/cuda-10.1/bin:/opt/ibm/spectrum_mpi/bin:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/bin:/usr/lpp/mmfs/bin:/opt/cci/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/gpfs/u/home/PCP9/PCP9srsd/.local/bin:/gpfs/u/home/PCP9/PCP9srsd/bin;' export 'PATH;' '__LMOD_REF_COUNT__LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/gcc/7.4.0/1.lua:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/cmake/3.14.6.lua:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/cuda/10.1.lua:1;' export '__LMOD_REF_COUNT__LMFILES_;' '_LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/gcc/7.4.0/1.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/cmake/3.14.6.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/cuda/10.1.lua;' export '_LMFILES_;' '_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXtbImNtYWtlIl09ImNtYWtlIixbImNvbXBpbGVyIl09ImdjYyIsWyJtcGkiXT0ic3BlY3RydW0tbXBpIix9LG1UPXtjbWFrZT17WyJmbiJdPSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMvY21ha2UvMy4xNC42Lmx1YSIsWyJmdWxsTmFtZSJdPSJjbWFrZS8zLjE0LjYiLFsibG9hZE9yZGVyIl09Mixwcm9wVD17c3RhdGU9e1sic3RhYmxlIl09MSx9LH0sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iY21ha2UiLH0sY3VkYT17WyJmbiJd;' export '_ModuleTable001_;' '_ModuleTable002_=PSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMvLnNwZWN0cnVtLW1waS8xMC4zL2N1ZGEvMTAuMS5sdWEiLFsiZnVsbE5hbWUiXT0iY3VkYS8xMC4xIixbImxvYWRPcmRlciJdPTQscHJvcFQ9e3N0YXRlPXtbInN0YWJsZSJdPTEsfSx9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09ImN1ZGEiLH0sZ2NjPXtbImZuIl09Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9nY2MvNy40LjAvMS5sdWEiLFsiZnVsbE5hbWUiXT0iZ2NjLzcuNC4wLzEiLFsibG9hZE9yZGVyIl09MSxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJd;' export '_ModuleTable002_;' '_ModuleTable003_=PSJnY2MvNy40LjAvMSIsfSxbInNwZWN0cnVtLW1waSJdPXtbImZuIl09Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9zcGVjdHJ1bS1tcGkvMTAuMy5sdWEiLFsiZnVsbE5hbWUiXT0ic3BlY3RydW0tbXBpLzEwLjMiLFsibG9hZE9yZGVyIl09Myxwcm9wVD17c3RhdGU9e1sidGVzdGluZyJdPTEsfSx9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNwZWN0cnVtLW1waSIsfSx9LG1wYXRoQT17Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMy8uY3VkYS8xMC4xIiwiL2dwZnMvdS9zb2Z0d2Fy;' export '_ModuleTable003_;' '_ModuleTable004_=ZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMyIsIi9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy8uZ2NjLzcuNC4wLzEiLCIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2dwZnMvdS9zb2Z0d2FyZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzIix9;' export '_ModuleTable004_;' '_ModuleTable_Sz_=4;' export '_ModuleTable_Sz_;'
+++ CUDA_PATH=/usr/local/cuda-10.1
+++ export CUDA_PATH
+++ __LMOD_REF_COUNT_LD_LIBRARY_PATH='/usr/local/cuda-10.1/lib64:1;/opt/ibm/spectrum_mpi/profilesupport/lib:1;/opt/ibm/spectrum_mpi/lib:1;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/lib64:1;/opt/mellanox/sharp/lib:1;/opt/mellanox/hcoll/lib:1'
+++ export __LMOD_REF_COUNT_LD_LIBRARY_PATH
+++ LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:/opt/ibm/spectrum_mpi/profilesupport/lib:/opt/ibm/spectrum_mpi/lib:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/lib64:/opt/mellanox/sharp/lib:/opt/mellanox/hcoll/lib
+++ export LD_LIBRARY_PATH
+++ LMOD_FAMILY_MPI=spectrum-mpi
+++ export LMOD_FAMILY_MPI
+++ LMOD_FAMILY_MPI_VERSION=10.3
+++ export LMOD_FAMILY_MPI_VERSION
+++ __LMOD_REF_COUNT_LOADEDMODULES='gcc/7.4.0/1:1;cmake/3.14.6:1;spectrum-mpi/10.3:1;cuda/10.1:1'
+++ export __LMOD_REF_COUNT_LOADEDMODULES
+++ LOADEDMODULES=gcc/7.4.0/1:cmake/3.14.6:spectrum-mpi/10.3:cuda/10.1
+++ export LOADEDMODULES
+++ __LMOD_REF_COUNT_MANPATH='/opt/ibm/spectrum_mpi/share/man:1;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/share/man:1'
+++ export __LMOD_REF_COUNT_MANPATH
+++ MANPATH=/opt/ibm/spectrum_mpi/share/man:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/share/man
+++ export MANPATH
+++ __LMOD_REF_COUNT_MODULEPATH='/gpfs/u/software/ppc64le-rhel7/modulefiles/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/.cuda/10.1:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/.gcc/7.4.0/1:1;/gpfs/u/software/ppc64le-rhel7/modulefiles:1'
+++ export __LMOD_REF_COUNT_MODULEPATH
+++ MODULEPATH=/gpfs/u/software/ppc64le-rhel7/modulefiles/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/.cuda/10.1:/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:/gpfs/u/software/ppc64le-rhel7/modulefiles/.gcc/7.4.0/1:/gpfs/u/software/ppc64le-rhel7/modulefiles
+++ export MODULEPATH
+++ MPI_ROOT=/opt/ibm/spectrum_mpi
+++ export MPI_ROOT
+++ OPAL_LIBDIR=/opt/ibm/spectrum_mpi/lib
+++ export OPAL_LIBDIR
+++ __LMOD_REF_COUNT_PATH='/usr/local/cuda-10.1/bin:1;/opt/ibm/spectrum_mpi/bin:1;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/bin:1;/usr/lpp/mmfs/bin:1;/opt/cci/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/sbin:1;/opt/ibutils/bin:1;/gpfs/u/home/PCP9/PCP9srsd/.local/bin:1;/gpfs/u/home/PCP9/PCP9srsd/bin:1'
+++ export __LMOD_REF_COUNT_PATH
+++ PATH=/usr/local/cuda-10.1/bin:/opt/ibm/spectrum_mpi/bin:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/bin:/usr/lpp/mmfs/bin:/opt/cci/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/gpfs/u/home/PCP9/PCP9srsd/.local/bin:/gpfs/u/home/PCP9/PCP9srsd/bin
+++ export PATH
+++ __LMOD_REF_COUNT__LMFILES_='/gpfs/u/software/ppc64le-rhel7/modulefiles/gcc/7.4.0/1.lua:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/cmake/3.14.6.lua:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/cuda/10.1.lua:1'
+++ export __LMOD_REF_COUNT__LMFILES_
+++ _LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/gcc/7.4.0/1.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/cmake/3.14.6.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/cuda/10.1.lua
+++ export _LMFILES_
+++ _ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXtbImNtYWtlIl09ImNtYWtlIixbImNvbXBpbGVyIl09ImdjYyIsWyJtcGkiXT0ic3BlY3RydW0tbXBpIix9LG1UPXtjbWFrZT17WyJmbiJdPSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMvY21ha2UvMy4xNC42Lmx1YSIsWyJmdWxsTmFtZSJdPSJjbWFrZS8zLjE0LjYiLFsibG9hZE9yZGVyIl09Mixwcm9wVD17c3RhdGU9e1sic3RhYmxlIl09MSx9LH0sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iY21ha2UiLH0sY3VkYT17WyJmbiJd
+++ export _ModuleTable001_
+++ _ModuleTable002_=PSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMvLnNwZWN0cnVtLW1waS8xMC4zL2N1ZGEvMTAuMS5sdWEiLFsiZnVsbE5hbWUiXT0iY3VkYS8xMC4xIixbImxvYWRPcmRlciJdPTQscHJvcFQ9e3N0YXRlPXtbInN0YWJsZSJdPTEsfSx9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09ImN1ZGEiLH0sZ2NjPXtbImZuIl09Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9nY2MvNy40LjAvMS5sdWEiLFsiZnVsbE5hbWUiXT0iZ2NjLzcuNC4wLzEiLFsibG9hZE9yZGVyIl09MSxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJd
+++ export _ModuleTable002_
+++ _ModuleTable003_=PSJnY2MvNy40LjAvMSIsfSxbInNwZWN0cnVtLW1waSJdPXtbImZuIl09Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9zcGVjdHJ1bS1tcGkvMTAuMy5sdWEiLFsiZnVsbE5hbWUiXT0ic3BlY3RydW0tbXBpLzEwLjMiLFsibG9hZE9yZGVyIl09Myxwcm9wVD17c3RhdGU9e1sidGVzdGluZyJdPTEsfSx9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNwZWN0cnVtLW1waSIsfSx9LG1wYXRoQT17Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMy8uY3VkYS8xMC4xIiwiL2dwZnMvdS9zb2Z0d2Fy
+++ export _ModuleTable003_
+++ _ModuleTable004_=ZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMyIsIi9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy8uZ2NjLzcuNC4wLzEiLCIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2dwZnMvdS9zb2Z0d2FyZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzIix9
+++ export _ModuleTable004_
+++ _ModuleTable_Sz_=4
+++ export _ModuleTable_Sz_
+++ : -s sh
++ eval
++ mpirun --bind-to core --report-bindings -hostfile /tmp/hosts.152515 -np 64 /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=6 --num_selectors=1 --num_clients_per_selector=500 --num_tasks=10 --task_size=500 --stats-path=./PhoneWeak_ScalingRCTA/500Clients_500Subtasks/ --end=600000 --mean_dur=120000 --prop_start=.05
+[dcs113.ccni.rpi.edu:35007] MCW rank 32 bound to socket 0[core 0[hwt 0-3]]: [BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 33 bound to socket 1[core 20[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 34 bound to socket 0[core 1[hwt 0-3]]: [..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 35 bound to socket 1[core 21[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 36 bound to socket 0[core 2[hwt 0-3]]: [..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 38 bound to socket 0[core 3[hwt 0-3]]: [..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 37 bound to socket 1[core 22[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 3 bound to socket 1[core 21[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 4 bound to socket 0[core 2[hwt 0-3]]: [..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 5 bound to socket 1[core 22[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 6 bound to socket 0[core 3[hwt 0-3]]: [..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 0 bound to socket 0[core 0[hwt 0-3]]: [BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 1 bound to socket 1[core 20[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 2 bound to socket 0[core 1[hwt 0-3]]: [..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 39 bound to socket 1[core 23[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 7 bound to socket 1[core 23[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 8 bound to socket 0[core 4[hwt 0-3]]: [..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 40 bound to socket 0[core 4[hwt 0-3]]: [..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 9 bound to socket 1[core 24[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 42 bound to socket 0[core 5[hwt 0-3]]: [..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 41 bound to socket 1[core 24[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 11 bound to socket 1[core 25[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 43 bound to socket 1[core 25[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 44 bound to socket 0[core 6[hwt 0-3]]: [..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 10 bound to socket 0[core 5[hwt 0-3]]: [..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 12 bound to socket 0[core 6[hwt 0-3]]: [..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 46 bound to socket 0[core 7[hwt 0-3]]: [..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 15 bound to socket 1[core 27[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 47 bound to socket 1[core 27[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 13 bound to socket 1[core 26[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 45 bound to socket 1[core 26[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 14 bound to socket 0[core 7[hwt 0-3]]: [..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 48 bound to socket 0[core 8[hwt 0-3]]: [..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 16 bound to socket 0[core 8[hwt 0-3]]: [..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 50 bound to socket 0[core 9[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 51 bound to socket 1[core 29[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 19 bound to socket 1[core 29[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 17 bound to socket 1[core 28[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 49 bound to socket 1[core 28[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 52 bound to socket 0[core 10[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 18 bound to socket 0[core 9[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 20 bound to socket 0[core 10[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 54 bound to socket 0[core 11[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 53 bound to socket 1[core 30[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 23 bound to socket 1[core 31[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 21 bound to socket 1[core 30[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 55 bound to socket 1[core 31[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 56 bound to socket 0[core 12[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 22 bound to socket 0[core 11[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 24 bound to socket 0[core 12[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 27 bound to socket 1[core 33[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 58 bound to socket 0[core 13[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 59 bound to socket 1[core 33[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 57 bound to socket 1[core 32[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 25 bound to socket 1[core 32[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 28 bound to socket 0[core 14[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 60 bound to socket 0[core 14[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 26 bound to socket 0[core 13[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 62 bound to socket 0[core 15[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 61 bound to socket 1[core 34[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 31 bound to socket 1[core 35[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 29 bound to socket 1[core 34[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....]
+[dcs113.ccni.rpi.edu:35007] MCW rank 63 bound to socket 1[core 35[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....]
+[dcs112.ccni.rpi.edu:26810] MCW rank 30 bound to socket 0[core 15[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+/gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=6 --num_selectors=1 --num_clients_per_selector=500 --num_tasks=10 --task_size=500 --stats-path=./PhoneWeak_ScalingRCTA/500Clients_500Subtasks/ --end=600000 --mean_dur=120000 --prop_start=.05 
+
+Mon May  4 04:39:33 2020
+
+ROSS Version: HEAD-HASH-NOTFOUND
+
+tw_net_start: Found world size to be 64 
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+500
+g_num_total_lps: 1009, num_lps_per_pe: 16
+
+ROSS Core Configuration: 
+	Total PEs                                                   64
+	Total KPs                                          [Nodes (64) x KPs (16)] 1024
+	Total LPs                                                 1024
+	Simulation End Time                                  600000.00
+	LP-to-PE Mapping                                        linear
+
+
+ROSS Event Memory Allocation:
+	Model events                                              2049
+	Network events                                              16
+	Total events                                              2064
+
+Initializing client, gid: 160 (Channel 660)
+Initializing client, gid: 161 (Channel 661)
+Initializing client, gid: 162 (Channel 662)
+Initializing client, gid: 163 (Channel 663)
+Initializing client, gid: 164 (Channel 664)
+Initializing client, gid: 165 (Channel 665)
+Initializing client, gid: 166 (Channel 666)
+Initializing client, gid: 167 (Channel 667)
+Initializing client, gid: 168 (Channel 668)
+Initializing client, gid: 169 (Channel 669)
+Initializing client, gid: 170 (Channel 670)
+Initializing client, gid: 171 (Channel 671)
+Initializing client, gid: 172 (Channel 672)
+Initializing client, gid: 173 (Channel 673)
+Initializing client, gid: 174 (Channel 674)
+Initializing client, gid: 175 (Channel 675)
+Initializing client, gid: 176 (Channel 676)
+Initializing client, gid: 177 (Channel 677)
+Initializing client, gid: 178 (Channel 678)
+Initializing client, gid: 179 (Channel 679)
+Initializing client, gid: 180 (Channel 680)
+Initializing client, gid: 181 (Channel 681)
+Initializing client, gid: 182 (Channel 682)
+Initializing client, gid: 183 (Channel 683)
+Initializing client, gid: 184 (Channel 684)
+Initializing client, gid: 185 (Channel 685)
+Initializing client, gid: 186 (Channel 686)
+Initializing client, gid: 187 (Channel 687)
+Initializing client, gid: 188 (Channel 688)
+Initializing client, gid: 189 (Channel 689)
+Initializing client, gid: 190 (Channel 690)
+Initializing client, gid: 191 (Channel 691)
+Initializing client, gid: 304 (Channel 804)
+Initializing client, gid: 305 (Channel 805)
+Initializing client, gid: 306 (Channel 806)
+Initializing client, gid: 307 (Channel 807)
+Initializing client, gid: 308 (Channel 808)
+Initializing client, gid: 309 (Channel 809)
+Initializing client, gid: 310 (Channel 810)
+Initializing client, gid: 311 (Channel 811)
+Initializing client, gid: 312 (Channel 812)
+Initializing client, gid: 313 (Channel 813)
+Initializing client, gid: 314 (Channel 814)
+Initializing client, gid: 315 (Channel 815)
+Initializing client, gid: 316 (Channel 816)
+Initializing client, gid: 317 (Channel 817)
+Initializing client, gid: 318 (Channel 818)
+Initializing client, gid: 319 (Channel 819)
+Initializing client, gid: 320 (Channel 820)
+Initializing client, gid: 321 (Channel 821)
+Initializing client, gid: 322 (Channel 822)
+Initializing client, gid: 323 (Channel 823)
+Initializing client, gid: 324 (Channel 824)
+Initializing client, gid: 325 (Channel 825)
+Initializing client, gid: 326 (Channel 826)
+Initializing client, gid: 327 (Channel 827)
+Initializing client, gid: 328 (Channel 828)
+Initializing client, gid: 329 (Channel 829)
+Initializing client, gid: 330 (Channel 830)
+Initializing client, gid: 331 (Channel 831)
+Initializing client, gid: 332 (Channel 832)
+Initializing client, gid: 333 (Channel 833)
+Initializing client, gid: 334 (Channel 834)
+Initializing client, gid: 335 (Channel 835)
+Initializing client, gid: 208 (Channel 708)
+Initializing client, gid: 209 (Channel 709)
+Initializing client, gid: 210 (Channel 710)
+Initializing client, gid: 211 (Channel 711)
+Initializing client, gid: 212 (Channel 712)
+Initializing client, gid: 213 (Channel 713)
+Initializing client, gid: 214 (Channel 714)
+Initializing client, gid: 215 (Channel 715)
+Initializing client, gid: 216 (Channel 716)
+Initializing client, gid: 217 (Channel 717)
+Initializing client, gid: 218 (Channel 718)
+Initializing client, gid: 219 (Channel 719)
+Initializing client, gid: 220 (Channel 720)
+Initializing client, gid: 221 (Channel 721)
+Initializing client, gid: 222 (Channel 722)
+Initializing client, gid: 223 (Channel 723)
+Initializing client, gid: 496 (Channel 996)
+Initializing client, gid: 497 (Channel 997)
+Initializing client, gid: 498 (Channel 998)
+Initializing client, gid: 499 (Channel 999)
+Initializing client, gid: 500 (Channel 1000)
+Initializing client, gid: 501 (Channel 1001)
+Initializing client, gid: 502 (Channel 1002)
+Initializing client, gid: 503 (Channel 1003)
+Initializing client, gid: 504 (Channel 1004)
+Initializing client, gid: 505 (Channel 1005)
+Initializing client, gid: 506 (Channel 1006)
+Initializing client, gid: 507 (Channel 1007)
+Initializing client, gid: 508 (Channel 1008)
+Initializing channel, gid: 509 (Client 9)
+Initializing channel, gid: 510 (Client 10)
+Initializing channel, gid: 511 (Client 11)
+Initializing client, gid: 240 (Channel 740)
+Initializing client, gid: 241 (Channel 741)
+Initializing client, gid: 242 (Channel 742)
+Initializing client, gid: 243 (Channel 743)
+Initializing client, gid: 244 (Channel 744)
+Initializing client, gid: 245 (Channel 745)
+Initializing client, gid: 246 (Channel 746)
+Initializing client, gid: 247 (Channel 747)
+Initializing client, gid: 248 (Channel 748)
+Initializing client, gid: 249 (Channel 749)
+Initializing client, gid: 250 (Channel 750)
+Initializing client, gid: 251 (Channel 751)
+Initializing client, gid: 252 (Channel 752)
+Initializing client, gid: 253 (Channel 753)
+Initializing client, gid: 254 (Channel 754)
+Initializing client, gid: 255 (Channel 755)
+Initializing client, gid: 256 (Channel 756)
+Initializing client, gid: 257 (Channel 757)
+Initializing client, gid: 258 (Channel 758)
+Initializing client, gid: 259 (Channel 759)
+Initializing client, gid: 260 (Channel 760)
+Initializing client, gid: 261 (Channel 761)
+Initializing client, gid: 262 (Channel 762)
+Initializing client, gid: 263 (Channel 763)
+Initializing client, gid: 264 (Channel 764)
+Initializing client, gid: 265 (Channel 765)
+Initializing client, gid: 266 (Channel 766)
+Initializing client, gid: 267 (Channel 767)
+Initializing client, gid: 268 (Channel 768)
+Initializing client, gid: 269 (Channel 769)
+Initializing client, gid: 270 (Channel 770)
+Initializing client, gid: 271 (Channel 771)
+Initializing client, gid: 288 (Channel 788)
+Initializing client, gid: 289 (Channel 789)
+Initializing client, gid: 290 (Channel 790)
+Initializing client, gid: 291 (Channel 791)
+Initializing client, gid: 292 (Channel 792)
+Initializing client, gid: 293 (Channel 793)
+Initializing client, gid: 294 (Channel 794)
+Initializing client, gid: 295 (Channel 795)
+Initializing client, gid: 296 (Channel 796)
+Initializing client, gid: 297 (Channel 797)
+Initializing client, gid: 298 (Channel 798)
+Initializing client, gid: 299 (Channel 799)
+Initializing client, gid: 300 (Channel 800)
+Initializing client, gid: 301 (Channel 801)
+Initializing client, gid: 302 (Channel 802)
+Initializing client, gid: 303 (Channel 803)
+Initializing client, gid: 272 (Channel 772)
+Initializing client, gid: 273 (Channel 773)
+Initializing client, gid: 274 (Channel 774)
+Initializing client, gid: 275 (Channel 775)
+Initializing client, gid: 276 (Channel 776)
+Initializing client, gid: 277 (Channel 777)
+Initializing client, gid: 278 (Channel 778)
+Initializing client, gid: 279 (Channel 779)
+Initializing client, gid: 280 (Channel 780)
+Initializing client, gid: 281 (Channel 781)
+Initializing client, gid: 282 (Channel 782)
+Initializing client, gid: 283 (Channel 783)
+Initializing client, gid: 284 (Channel 784)
+Initializing client, gid: 285 (Channel 785)
+Initializing client, gid: 286 (Channel 786)
+Initializing client, gid: 287 (Channel 787)
+Initializing client, gid: 48 (Channel 548)
+Initializing client, gid: 49 (Channel 549)
+Initializing client, gid: 50 (Channel 550)
+Initializing client, gid: 51 (Channel 551)
+Initializing client, gid: 52 (Channel 552)
+Initializing client, gid: 53 (Channel 553)
+Initializing client, gid: 54 (Channel 554)
+Initializing client, gid: 55 (Channel 555)
+Initializing client, gid: 56 (Channel 556)
+Initializing client, gid: 57 (Channel 557)
+Initializing client, gid: 58 (Channel 558)
+Initializing client, gid: 59 (Channel 559)
+Initializing client, gid: 60 (Channel 560)
+Initializing client, gid: 61 (Channel 561)
+Initializing client, gid: 62 (Channel 562)
+Initializing client, gid: 63 (Channel 563)
+Initializing client, gid: 128 (Channel 628)
+Initializing client, gid: 129 (Channel 629)
+Initializing client, gid: 130 (Channel 630)
+Initializing client, gid: 131 (Channel 631)
+Initializing client, gid: 132 (Channel 632)
+Initializing client, gid: 133 (Channel 633)
+Initializing client, gid: 134 (Channel 634)
+Initializing client, gid: 135 (Channel 635)
+Initializing client, gid: 136 (Channel 636)
+Initializing client, gid: 137 (Channel 637)
+Initializing client, gid: 138 (Channel 638)
+Initializing client, gid: 139 (Channel 639)
+Initializing client, gid: 140 (Channel 640)
+Initializing client, gid: 141 (Channel 641)
+Initializing client, gid: 142 (Channel 642)
+Initializing client, gid: 143 (Channel 643)
+Initializing client, gid: 352 (Channel 852)
+Initializing client, gid: 353 (Channel 853)
+Initializing client, gid: 354 (Channel 854)
+Initializing client, gid: 355 (Channel 855)
+Initializing client, gid: 356 (Channel 856)
+Initializing client, gid: 357 (Channel 857)
+Initializing client, gid: 358 (Channel 858)
+Initializing client, gid: 359 (Channel 859)
+Initializing client, gid: 360 (Channel 860)
+Initializing client, gid: 361 (Channel 861)
+Initializing client, gid: 362 (Channel 862)
+Initializing client, gid: 363 (Channel 863)
+Initializing client, gid: 364 (Channel 864)
+Initializing client, gid: 365 (Channel 865)
+Initializing client, gid: 366 (Channel 866)
+Initializing client, gid: 367 (Channel 867)
+Initializing client, gid: 336 (Channel 836)
+Initializing client, gid: 337 (Channel 837)
+Initializing client, gid: 338 (Channel 838)
+Initializing client, gid: 339 (Channel 839)
+Initializing client, gid: 340 (Channel 840)
+Initializing client, gid: 341 (Channel 841)
+Initializing client, gid: 342 (Channel 842)
+Initializing client, gid: 343 (Channel 843)
+Initializing client, gid: 344 (Channel 844)
+Initializing client, gid: 345 (Channel 845)
+Initializing client, gid: 346 (Channel 846)
+Initializing client, gid: 347 (Channel 847)
+Initializing client, gid: 348 (Channel 848)
+Initializing client, gid: 349 (Channel 849)
+Initializing client, gid: 350 (Channel 850)
+Initializing client, gid: 351 (Channel 851)
+Initializing client, gid: 368 (Channel 868)
+Initializing client, gid: 369 (Channel 869)
+Initializing client, gid: 370 (Channel 870)
+Initializing client, gid: 371 (Channel 871)
+Initializing client, gid: 372 (Channel 872)
+Initializing client, gid: 373 (Channel 873)
+Initializing client, gid: 374 (Channel 874)
+Initializing client, gid: 375 (Channel 875)
+Initializing client, gid: 376 (Channel 876)
+Initializing client, gid: 377 (Channel 877)
+Initializing client, gid: 378 (Channel 878)
+Initializing client, gid: 379 (Channel 879)
+Initializing client, gid: 380 (Channel 880)
+Initializing client, gid: 381 (Channel 881)
+Initializing client, gid: 382 (Channel 882)
+Initializing client, gid: 383 (Channel 883)
+Initializing client, gid: 384 (Channel 884)
+Initializing client, gid: 385 (Channel 885)
+Initializing client, gid: 386 (Channel 886)
+Initializing client, gid: 387 (Channel 887)
+Initializing client, gid: 388 (Channel 888)
+Initializing client, gid: 389 (Channel 889)
+Initializing client, gid: 390 (Channel 890)
+Initializing client, gid: 391 (Channel 891)
+Initializing client, gid: 392 (Channel 892)
+Initializing client, gid: 393 (Channel 893)
+Initializing client, gid: 394 (Channel 894)
+Initializing client, gid: 395 (Channel 895)
+Initializing client, gid: 396 (Channel 896)
+Initializing client, gid: 397 (Channel 897)
+Initializing client, gid: 398 (Channel 898)
+Initializing client, gid: 399 (Channel 899)
+Initializing client, gid: 400 (Channel 900)
+Initializing client, gid: 401 (Channel 901)
+Initializing client, gid: 402 (Channel 902)
+Initializing client, gid: 403 (Channel 903)
+Initializing client, gid: 404 (Channel 904)
+Initializing client, gid: 405 (Channel 905)
+Initializing client, gid: 406 (Channel 906)
+Initializing client, gid: 407 (Channel 907)
+Initializing client, gid: 408 (Channel 908)
+Initializing client, gid: 409 (Channel 909)
+Initializing client, gid: 410 (Channel 910)
+Initializing client, gid: 411 (Channel 911)
+Initializing client, gid: 412 (Channel 912)
+Initializing client, gid: 413 (Channel 913)
+Initializing client, gid: 414 (Channel 914)
+Initializing client, gid: 415 (Channel 915)
+Initializing client, gid: 192 (Channel 692)
+Initializing client, gid: 193 (Channel 693)
+Initializing client, gid: 194 (Channel 694)
+Initializing client, gid: 195 (Channel 695)
+Initializing client, gid: 196 (Channel 696)
+Initializing client, gid: 197 (Channel 697)
+Initializing client, gid: 198 (Channel 698)
+Initializing client, gid: 199 (Channel 699)
+Initializing client, gid: 200 (Channel 700)
+Initializing client, gid: 201 (Channel 701)
+Initializing client, gid: 202 (Channel 702)
+Initializing client, gid: 203 (Channel 703)
+Initializing client, gid: 204 (Channel 704)
+Initializing client, gid: 205 (Channel 705)
+Initializing client, gid: 206 (Channel 706)
+Initializing client, gid: 207 (Channel 707)
+Initializing client, gid: 432 (Channel 932)
+Initializing client, gid: 433 (Channel 933)
+Initializing client, gid: 434 (Channel 934)
+Initializing client, gid: 435 (Channel 935)
+Initializing client, gid: 436 (Channel 936)
+Initializing client, gid: 437 (Channel 937)
+Initializing client, gid: 438 (Channel 938)
+Initializing client, gid: 439 (Channel 939)
+Initializing client, gid: 440 (Channel 940)
+Initializing client, gid: 441 (Channel 941)
+Initializing client, gid: 442 (Channel 942)
+Initializing client, gid: 443 (Channel 943)
+Initializing client, gid: 444 (Channel 944)
+Initializing client, gid: 445 (Channel 945)
+Initializing client, gid: 446 (Channel 946)
+Initializing client, gid: 447 (Channel 947)
+Initializing client, gid: 464 (Channel 964)
+Initializing client, gid: 465 (Channel 965)
+Initializing client, gid: 466 (Channel 966)
+Initializing client, gid: 467 (Channel 967)
+Initializing client, gid: 468 (Channel 968)
+Initializing client, gid: 469 (Channel 969)
+Initializing client, gid: 470 (Channel 970)
+Initializing client, gid: 471 (Channel 971)
+Initializing client, gid: 472 (Channel 972)
+Initializing client, gid: 473 (Channel 973)
+Initializing client, gid: 474 (Channel 974)
+Initializing client, gid: 475 (Channel 975)
+Initializing client, gid: 476 (Channel 976)
+Initializing client, gid: 477 (Channel 977)
+Initializing client, gid: 478 (Channel 978)
+Initializing client, gid: 479 (Channel 979)
+Initializing client, gid: 480 (Channel 980)
+Initializing client, gid: 481 (Channel 981)
+Initializing client, gid: 482 (Channel 982)
+Initializing client, gid: 483 (Channel 983)
+Initializing client, gid: 484 (Channel 984)
+Initializing client, gid: 485 (Channel 985)
+Initializing client, gid: 486 (Channel 986)
+Initializing client, gid: 487 (Channel 987)
+Initializing client, gid: 488 (Channel 988)
+Initializing client, gid: 489 (Channel 989)
+Initializing client, gid: 490 (Channel 990)
+Initializing client, gid: 491 (Channel 991)
+Initializing client, gid: 492 (Channel 992)
+Initializing client, gid: 493 (Channel 993)
+Initializing client, gid: 494 (Channel 994)
+Initializing client, gid: 495 (Channel 995)
+Initializing coordinator, gid: 0
+Initializing aggregator, gid: 1
+Initializing aggregator, gid: 2
+Initializing aggregator, gid: 3
+Initializing aggregator, gid: 4
+Initializing aggregator, gid: 5
+Initializing aggregator, gid: 6
+Initializing aggregator, gid: 7
+Initializing selector, gid: 8, Clients: 9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428,429,430,431,432,433,434,435,436,437,438,439,440,441,442,443,444,445,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,507,508,
+Initializing client, gid: 9 (Channel 509)
+Initializing client, gid: 10 (Channel 510)
+Initializing client, gid: 11 (Channel 511)
+Initializing client, gid: 12 (Channel 512)
+Initializing client, gid: 13 (Channel 513)
+Initializing client, gid: 14 (Channel 514)
+Initializing client, gid: 15 (Channel 515)
+Coordinator preeeinit
+Initializing client, gid: 448 (Channel 948)
+Initializing client, gid: 449 (Channel 949)
+Initializing client, gid: 450 (Channel 950)
+Initializing client, gid: 451 (Channel 951)
+Initializing client, gid: 452 (Channel 952)
+Initializing client, gid: 453 (Channel 953)
+Initializing client, gid: 454 (Channel 954)
+Initializing client, gid: 455 (Channel 955)
+Initializing client, gid: 456 (Channel 956)
+Initializing client, gid: 457 (Channel 957)
+Initializing client, gid: 458 (Channel 958)
+Initializing client, gid: 459 (Channel 959)
+Initializing client, gid: 460 (Channel 960)
+Initializing client, gid: 461 (Channel 961)
+Initializing client, gid: 462 (Channel 962)
+Initializing client, gid: 463 (Channel 963)
+Initializing client, gid: 416 (Channel 916)
+Initializing client, gid: 417 (Channel 917)
+Initializing client, gid: 418 (Channel 918)
+Initializing client, gid: 419 (Channel 919)
+Initializing client, gid: 420 (Channel 920)
+Initializing client, gid: 421 (Channel 921)
+Initializing client, gid: 422 (Channel 922)
+Initializing client, gid: 423 (Channel 923)
+Initializing client, gid: 424 (Channel 924)
+Initializing client, gid: 425 (Channel 925)
+Initializing client, gid: 426 (Channel 926)
+Initializing client, gid: 427 (Channel 927)
+Initializing client, gid: 428 (Channel 928)
+Initializing client, gid: 429 (Channel 929)
+Initializing client, gid: 430 (Channel 930)
+Initializing client, gid: 431 (Channel 931)
+Initializing client, gid: 16 (Channel 516)
+Initializing client, gid: 17 (Channel 517)
+Initializing client, gid: 18 (Channel 518)
+Initializing client, gid: 19 (Channel 519)
+Initializing client, gid: 20 (Channel 520)
+Initializing client, gid: 21 (Channel 521)
+Initializing client, gid: 22 (Channel 522)
+Initializing client, gid: 23 (Channel 523)
+Initializing client, gid: 24 (Channel 524)
+Initializing client, gid: 25 (Channel 525)
+Initializing client, gid: 26 (Channel 526)
+Initializing client, gid: 27 (Channel 527)
+Initializing client, gid: 28 (Channel 528)
+Initializing client, gid: 29 (Channel 529)
+Initializing client, gid: 30 (Channel 530)
+Initializing client, gid: 31 (Channel 531)
+Initializing client, gid: 32 (Channel 532)
+Initializing client, gid: 33 (Channel 533)
+Initializing client, gid: 34 (Channel 534)
+Initializing client, gid: 35 (Channel 535)
+Initializing client, gid: 36 (Channel 536)
+Initializing client, gid: 37 (Channel 537)
+Initializing client, gid: 38 (Channel 538)
+Initializing client, gid: 39 (Channel 539)
+Initializing client, gid: 40 (Channel 540)
+Initializing client, gid: 41 (Channel 541)
+Initializing client, gid: 42 (Channel 542)
+Initializing client, gid: 43 (Channel 543)
+Initializing client, gid: 44 (Channel 544)
+Initializing client, gid: 45 (Channel 545)
+Initializing client, gid: 46 (Channel 546)
+Initializing client, gid: 47 (Channel 547)
+Initializing client, gid: 64 (Channel 564)
+Initializing client, gid: 65 (Channel 565)
+Initializing client, gid: 66 (Channel 566)
+Initializing client, gid: 67 (Channel 567)
+Initializing client, gid: 68 (Channel 568)
+Initializing client, gid: 69 (Channel 569)
+Initializing client, gid: 70 (Channel 570)
+Initializing client, gid: 71 (Channel 571)
+Initializing client, gid: 72 (Channel 572)
+Initializing client, gid: 73 (Channel 573)
+Initializing client, gid: 74 (Channel 574)
+Initializing client, gid: 75 (Channel 575)
+Initializing client, gid: 76 (Channel 576)
+Initializing client, gid: 77 (Channel 577)
+Initializing client, gid: 78 (Channel 578)
+Initializing client, gid: 79 (Channel 579)
+Initializing client, gid: 80 (Channel 580)
+Initializing client, gid: 81 (Channel 581)
+Initializing client, gid: 82 (Channel 582)
+Initializing client, gid: 83 (Channel 583)
+Initializing client, gid: 84 (Channel 584)
+Initializing client, gid: 85 (Channel 585)
+Initializing client, gid: 86 (Channel 586)
+Initializing client, gid: 87 (Channel 587)
+Initializing client, gid: 88 (Channel 588)
+Initializing client, gid: 89 (Channel 589)
+Initializing client, gid: 90 (Channel 590)
+Initializing client, gid: 91 (Channel 591)
+Initializing client, gid: 92 (Channel 592)
+Initializing client, gid: 93 (Channel 593)
+Initializing client, gid: 94 (Channel 594)
+Initializing client, gid: 95 (Channel 595)
+Initializing client, gid: 96 (Channel 596)
+Initializing client, gid: 97 (Channel 597)
+Initializing client, gid: 98 (Channel 598)
+Initializing client, gid: 99 (Channel 599)
+Initializing client, gid: 100 (Channel 600)
+Initializing client, gid: 101 (Channel 601)
+Initializing client, gid: 102 (Channel 602)
+Initializing client, gid: 103 (Channel 603)
+Initializing client, gid: 104 (Channel 604)
+Initializing client, gid: 105 (Channel 605)
+Initializing client, gid: 106 (Channel 606)
+Initializing client, gid: 107 (Channel 607)
+Initializing client, gid: 108 (Channel 608)
+Initializing client, gid: 109 (Channel 609)
+Initializing client, gid: 110 (Channel 610)
+Initializing client, gid: 111 (Channel 611)
+Initializing client, gid: 224 (Channel 724)
+Initializing client, gid: 225 (Channel 725)
+Initializing client, gid: 226 (Channel 726)
+Initializing client, gid: 227 (Channel 727)
+Initializing client, gid: 228 (Channel 728)
+Initializing client, gid: 229 (Channel 729)
+Initializing client, gid: 230 (Channel 730)
+Initializing client, gid: 231 (Channel 731)
+Initializing client, gid: 232 (Channel 732)
+Initializing client, gid: 233 (Channel 733)
+Initializing client, gid: 234 (Channel 734)
+Initializing client, gid: 235 (Channel 735)
+Initializing client, gid: 236 (Channel 736)
+Initializing client, gid: 237 (Channel 737)
+Initializing client, gid: 238 (Channel 738)
+Initializing client, gid: 239 (Channel 739)
+Initializing client, gid: 112 (Channel 612)
+Initializing client, gid: 113 (Channel 613)
+Initializing client, gid: 114 (Channel 614)
+Initializing client, gid: 115 (Channel 615)
+Initializing client, gid: 116 (Channel 616)
+Initializing client, gid: 117 (Channel 617)
+Initializing client, gid: 118 (Channel 618)
+Initializing client, gid: 119 (Channel 619)
+Initializing client, gid: 120 (Channel 620)
+Initializing client, gid: 121 (Channel 621)
+Initializing client, gid: 122 (Channel 622)
+Initializing client, gid: 123 (Channel 623)
+Initializing client, gid: 124 (Channel 624)
+Initializing client, gid: 125 (Channel 625)
+Initializing client, gid: 126 (Channel 626)
+Initializing client, gid: 127 (Channel 627)
+Initializing client, gid: 144 (Channel 644)
+Initializing client, gid: 145 (Channel 645)
+Initializing client, gid: 146 (Channel 646)
+Initializing client, gid: 147 (Channel 647)
+Initializing client, gid: 148 (Channel 648)
+Initializing client, gid: 149 (Channel 649)
+Initializing client, gid: 150 (Channel 650)
+Initializing client, gid: 151 (Channel 651)
+Initializing client, gid: 152 (Channel 652)
+Initializing client, gid: 153 (Channel 653)
+Initializing client, gid: 154 (Channel 654)
+Initializing client, gid: 155 (Channel 655)
+Initializing client, gid: 156 (Channel 656)
+Initializing client, gid: 157 (Channel 657)
+Initializing client, gid: 158 (Channel 658)
+Initializing client, gid: 159 (Channel 659)
+*** START PARALLEL CONSERVATIVE SIMULATION ***
+
+Device available received 404, 0, 0, 0.097737
+Device available received 75, 2147483648, 0, 0.058331
+Device available received 424, 2147483648, 0, 0.078359
+Device available received 300, 2147483648, 0, 0.138197
+Device available received 112, 0, 0, 0.101339
+GVT #6: simulation 1% complete, max event queue size 502 (GVT = 7045.3511).
+AVL tree size: 0
+Device available received 302, 536870912, 0, 0.119761
+Initializing channel, gid: 944 (Client 444)
+Initializing channel, gid: 945 (Client 445)
+Initializing channel, gid: 946 (Client 446)
+Initializing channel, gid: 947 (Client 447)
+Initializing channel, gid: 948 (Client 448)
+Initializing channel, gid: 949 (Client 449)
+Initializing channel, gid: 950 (Client 450)
+Initializing channel, gid: 951 (Client 451)
+Initializing channel, gid: 952 (Client 452)
+Initializing channel, gid: 953 (Client 453)
+Initializing channel, gid: 954 (Client 454)
+Initializing channel, gid: 955 (Client 455)
+Initializing channel, gid: 956 (Client 456)
+Initializing channel, gid: 957 (Client 457)
+Initializing channel, gid: 958 (Client 458)
+Initializing channel, gid: 959 (Client 459)
+[dcs112:26836] *** Process received signal ***
+[dcs112:26836] Signal: Segmentation fault (11)
+[dcs112:26836] Signal code: Address not mapped (1)
+[dcs112:26836] Failing at address: (nil)
+[dcs112:26836] [ 0] [0x7fffa10504d8]
+[dcs112:26836] [ 1] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/liblmobile_grid.so(schedule_rcta+0x70)[0x7fffa0eed110]
+[dcs112:26836] [ 2] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/liblmobile_grid.so(schedule+0x628)[0x7fffa0eecca8]
+[dcs112:26836] [ 3] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/liblmobile_grid.so(coordinator_event_handler+0x14c)[0x7fffa0eebe8c]
+[dcs112:26836] [ 4] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid[0x10031164]
+[dcs112:26836] [ 5] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid[0x1001e6c0]
+[dcs112:26836] [ 6] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid[0x10004798]
+[dcs112:26836] [ 7] /usr/lib64/libc.so.6(+0x25200)[0x7fffa0ac5200]
+[dcs112:26836] [ 8] Device available received 103, 3221225472, 0, 0.095251
+Initializing channel, gid: 960 (Client 460)
+Initializing channel, gid: 961 (Client 461)
+Initializing channel, gid: 962 (Client 462)
+Initializing channel, gid: 963 (Client 463)
+Initializing channel, gid: 964 (Client 464)
+Initializing channel, gid: 965 (Client 465)
+Initializing channel, gid: 966 (Client 466)
+Initializing channel, gid: 967 (Client 467)
+Initializing channel, gid: 968 (Client 468)
+Initializing channel, gid: 969 (Client 469)
+Initializing channel, gid: 970 (Client 470)
+Initializing channel, gid: 971 (Client 471)
+Initializing channel, gid: 972 (Client 472)
+Initializing channel, gid: 973 (Client 473)
+Initializing channel, gid: 974 (Client 474)
+Initializing channel, gid: 975 (Client 475)
+Initializing channel, gid: 976 (Client 476)
+Initializing channel, gid: 977 (Client 477)
+Initializing channel, gid: 978 (Client 478)
+Initializing channel, gid: 979 (Client 479)
+Initializing channel, gid: 980 (Client 480)
+Initializing channel, gid: 981 (Client 481)
+Initializing channel, gid: 982 (Client 482)
+Initializing channel, gid: 983 (Client 483)
+Initializing channel, gid: 984 (Client 484)
+Initializing channel, gid: 985 (Client 485)
+Initializing channel, gid: 986 (Client 486)
+Initializing channel, gid: 987 (Client 487)
+Initializing channel, gid: 988 (Client 488)
+Initializing channel, gid: 989 (Client 489)
+Initializing channel, gid: 990 (Client 490)
+Initializing channel, gid: 991 (Client 491)
+/usr/lib64/libc.so.6(__libc_start_main+0xc4)[0x7fffa0ac53f4]
+[dcs112:26836] *** End of error message ***
+Device available received 80, 2147483648, 0, 0.098686
+Initializing channel, gid: 832 (Client 332)
+Initializing channel, gid: 833 (Client 333)
+Initializing channel, gid: 834 (Client 334)
+Initializing channel, gid: 835 (Client 335)
+Initializing channel, gid: 836 (Client 336)
+Initializing channel, gid: 837 (Client 337)
+Initializing channel, gid: 838 (Client 338)
+Initializing channel, gid: 839 (Client 339)
+Initializing channel, gid: 840 (Client 340)
+Initializing channel, gid: 841 (Client 341)
+Initializing channel, gid: 842 (Client 342)
+Initializing channel, gid: 843 (Client 343)
+Initializing channel, gid: 844 (Client 344)
+Initializing channel, gid: 845 (Client 345)
+Initializing channel, gid: 846 (Client 346)
+Initializing channel, gid: 847 (Client 347)
+Task Arriving
+Scheduling new taskGenerating map reduce task
+Initializing channel, gid: 992 (Client 492)
+Initializing channel, gid: 993 (Client 493)
+Initializing channel, gid: 994 (Client 494)
+Initializing channel, gid: 995 (Client 495)
+Initializing channel, gid: 996 (Client 496)
+Initializing channel, gid: 997 (Client 497)
+Initializing channel, gid: 998 (Client 498)
+Initializing channel, gid: 999 (Client 499)
+Initializing channel, gid: 1000 (Client 500)
+Initializing channel, gid: 1001 (Client 501)
+Initializing channel, gid: 1002 (Client 502)
+Initializing channel, gid: 1003 (Client 503)
+Initializing channel, gid: 1004 (Client 504)
+Initializing channel, gid: 1005 (Client 505)
+Initializing channel, gid: 1006 (Client 506)
+Initializing channel, gid: 1007 (Client 507)
+Initializing channel, gid: 1008 (Client 508)
+Initializing channel, gid: 528 (Client 28)
+Initializing channel, gid: 529 (Client 29)
+Initializing channel, gid: 530 (Client 30)
+Initializing channel, gid: 531 (Client 31)
+Initializing channel, gid: 532 (Client 32)
+Initializing channel, gid: 533 (Client 33)
+Initializing channel, gid: 534 (Client 34)
+Initializing channel, gid: 535 (Client 35)
+Initializing channel, gid: 536 (Client 36)
+Initializing channel, gid: 537 (Client 37)
+Initializing channel, gid: 538 (Client 38)
+Initializing channel, gid: 539 (Client 39)
+Initializing channel, gid: 540 (Client 40)
+Initializing channel, gid: 541 (Client 41)
+Initializing channel, gid: 542 (Client 42)
+Initializing channel, gid: 543 (Client 43)
+Initializing channel, gid: 544 (Client 44)
+Initializing channel, gid: 545 (Client 45)
+Initializing channel, gid: 546 (Client 46)
+Initializing channel, gid: 547 (Client 47)
+Initializing channel, gid: 548 (Client 48)
+Initializing channel, gid: 549 (Client 49)
+Initializing channel, gid: 550 (Client 50)
+Initializing channel, gid: 551 (Client 51)
+Initializing channel, gid: 552 (Client 52)
+Initializing channel, gid: 553 (Client 53)
+Initializing channel, gid: 554 (Client 54)
+Initializing channel, gid: 555 (Client 55)
+Initializing channel, gid: 556 (Client 56)
+Initializing channel, gid: 557 (Client 57)
+Initializing channel, gid: 558 (Client 58)
+Initializing channel, gid: 559 (Client 59)
+Initializing channel, gid: 688 (Client 188)
+Initializing channel, gid: 689 (Client 189)
+Initializing channel, gid: 690 (Client 190)
+Initializing channel, gid: 691 (Client 191)
+Initializing channel, gid: 692 (Client 192)
+Initializing channel, gid: 693 (Client 193)
+Initializing channel, gid: 694 (Client 194)
+Initializing channel, gid: 695 (Client 195)
+Initializing channel, gid: 696 (Client 196)
+Initializing channel, gid: 697 (Client 197)
+Initializing channel, gid: 698 (Client 198)
+Initializing channel, gid: 699 (Client 199)
+Initializing channel, gid: 700 (Client 200)
+Initializing channel, gid: 701 (Client 201)
+Initializing channel, gid: 702 (Client 202)
+Initializing channel, gid: 703 (Client 203)
+Initializing channel, gid: 560 (Client 60)
+Initializing channel, gid: 561 (Client 61)
+Initializing channel, gid: 562 (Client 62)
+Initializing channel, gid: 563 (Client 63)
+Initializing channel, gid: 564 (Client 64)
+Initializing channel, gid: 565 (Client 65)
+Initializing channel, gid: 566 (Client 66)
+Initializing channel, gid: 567 (Client 67)
+Initializing channel, gid: 568 (Client 68)
+Initializing channel, gid: 569 (Client 69)
+Initializing channel, gid: 570 (Client 70)
+Initializing channel, gid: 571 (Client 71)
+Initializing channel, gid: 572 (Client 72)
+Initializing channel, gid: 573 (Client 73)
+Initializing channel, gid: 574 (Client 74)
+Initializing channel, gid: 575 (Client 75)
+Initializing channel, gid: 576 (Client 76)
+Initializing channel, gid: 577 (Client 77)
+Initializing channel, gid: 578 (Client 78)
+Initializing channel, gid: 579 (Client 79)
+Initializing channel, gid: 580 (Client 80)
+Initializing channel, gid: 581 (Client 81)
+Initializing channel, gid: 582 (Client 82)
+Initializing channel, gid: 583 (Client 83)
+Initializing channel, gid: 584 (Client 84)
+Initializing channel, gid: 585 (Client 85)
+Initializing channel, gid: 586 (Client 86)
+Initializing channel, gid: 587 (Client 87)
+Initializing channel, gid: 588 (Client 88)
+Initializing channel, gid: 589 (Client 89)
+Initializing channel, gid: 590 (Client 90)
+Initializing channel, gid: 591 (Client 91)
+Staged subtask: 203
+Initializing channel, gid: 592 (Client 92)
+Initializing channel, gid: 593 (Client 93)
+Initializing channel, gid: 594 (Client 94)
+Initializing channel, gid: 595 (Client 95)
+Initializing channel, gid: 596 (Client 96)
+Initializing channel, gid: 597 (Client 97)
+Initializing channel, gid: 598 (Client 98)
+Initializing channel, gid: 599 (Client 99)
+Initializing channel, gid: 600 (Client 100)
+Initializing channel, gid: 601 (Client 101)
+Initializing channel, gid: 602 (Client 102)
+Initializing channel, gid: 603 (Client 103)
+Initializing channel, gid: 604 (Client 104)
+Initializing channel, gid: 605 (Client 105)
+Initializing channel, gid: 606 (Client 106)
+Initializing channel, gid: 607 (Client 107)
+Initializing channel, gid: 624 (Client 124)
+Initializing channel, gid: 625 (Client 125)
+Initializing channel, gid: 626 (Client 126)
+Initializing channel, gid: 627 (Client 127)
+Initializing channel, gid: 628 (Client 128)
+Initializing channel, gid: 629 (Client 129)
+Initializing channel, gid: 630 (Client 130)
+Initializing channel, gid: 631 (Client 131)
+Initializing channel, gid: 632 (Client 132)
+Initializing channel, gid: 633 (Client 133)
+Initializing channel, gid: 634 (Client 134)
+Initializing channel, gid: 635 (Client 135)
+Initializing channel, gid: 636 (Client 136)
+Initializing channel, gid: 637 (Client 137)
+Initializing channel, gid: 638 (Client 138)
+Initializing channel, gid: 639 (Client 139)
+Initializing channel, gid: 640 (Client 140)
+Initializing channel, gid: 641 (Client 141)
+Initializing channel, gid: 642 (Client 142)
+Initializing channel, gid: 643 (Client 143)
+Initializing channel, gid: 644 (Client 144)
+Initializing channel, gid: 645 (Client 145)
+Initializing channel, gid: 646 (Client 146)
+Initializing channel, gid: 647 (Client 147)
+Initializing channel, gid: 648 (Client 148)
+Initializing channel, gid: 649 (Client 149)
+Initializing channel, gid: 650 (Client 150)
+Initializing channel, gid: 651 (Client 151)
+Initializing channel, gid: 652 (Client 152)
+Initializing channel, gid: 653 (Client 153)
+Initializing channel, gid: 654 (Client 154)
+Initializing channel, gid: 655 (Client 155)
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks84
+Assigned to aggregator num tasks84
+Assigned to aggregator num tasks83
+Assigned to aggregator num tasks83
+Assigned to aggregator num tasks83
+Assigned to aggregator num tasks83
+Initializing channel, gid: 608 (Client 108)
+Initializing channel, gid: 609 (Client 109)
+Initializing channel, gid: 610 (Client 110)
+Initializing channel, gid: 611 (Client 111)
+Initializing channel, gid: 612 (Client 112)
+Initializing channel, gid: 613 (Client 113)
+Initializing channel, gid: 614 (Client 114)
+Initializing channel, gid: 615 (Client 115)
+Initializing channel, gid: 616 (Client 116)
+Initializing channel, gid: 617 (Client 117)
+Initializing channel, gid: 618 (Client 118)
+Initializing channel, gid: 619 (Client 119)
+Initializing channel, gid: 620 (Client 120)
+Initializing channel, gid: 621 (Client 121)
+Initializing channel, gid: 622 (Client 122)
+Initializing channel, gid: 623 (Client 123)
+Initializing channel, gid: 656 (Client 156)
+Initializing channel, gid: 657 (Client 157)
+Initializing channel, gid: 658 (Client 158)
+Initializing channel, gid: 659 (Client 159)
+Initializing channel, gid: 660 (Client 160)
+Initializing channel, gid: 661 (Client 161)
+Initializing channel, gid: 662 (Client 162)
+Initializing channel, gid: 663 (Client 163)
+Initializing channel, gid: 664 (Client 164)
+Initializing channel, gid: 665 (Client 165)
+Initializing channel, gid: 666 (Client 166)
+Initializing channel, gid: 667 (Client 167)
+Initializing channel, gid: 668 (Client 168)
+Initializing channel, gid: 669 (Client 169)
+Initializing channel, gid: 670 (Client 170)
+Initializing channel, gid: 671 (Client 171)
+Initializing channel, gid: 672 (Client 172)
+Initializing channel, gid: 673 (Client 173)
+Initializing channel, gid: 674 (Client 174)
+Initializing channel, gid: 675 (Client 175)
+Initializing channel, gid: 676 (Client 176)
+Initializing channel, gid: 677 (Client 177)
+Initializing channel, gid: 678 (Client 178)
+Initializing channel, gid: 679 (Client 179)
+Initializing channel, gid: 680 (Client 180)
+Initializing channel, gid: 681 (Client 181)
+Initializing channel, gid: 682 (Client 182)
+Initializing channel, gid: 683 (Client 183)
+Initializing channel, gid: 684 (Client 184)
+Initializing channel, gid: 685 (Client 185)
+Initializing channel, gid: 686 (Client 186)
+Initializing channel, gid: 687 (Client 187)
+Initializing channel, gid: 784 (Client 284)
+Initializing channel, gid: 785 (Client 285)
+Initializing channel, gid: 786 (Client 286)
+Initializing channel, gid: 787 (Client 287)
+Initializing channel, gid: 788 (Client 288)
+Initializing channel, gid: 789 (Client 289)
+Initializing channel, gid: 790 (Client 290)
+Initializing channel, gid: 791 (Client 291)
+Initializing channel, gid: 792 (Client 292)
+Initializing channel, gid: 793 (Client 293)
+Initializing channel, gid: 794 (Client 294)
+Initializing channel, gid: 795 (Client 295)
+Initializing channel, gid: 796 (Client 296)
+Initializing channel, gid: 797 (Client 297)
+Initializing channel, gid: 798 (Client 298)
+Initializing channel, gid: 799 (Client 299)
+Initializing channel, gid: 704 (Client 204)
+Initializing channel, gid: 705 (Client 205)
+Initializing channel, gid: 706 (Client 206)
+Initializing channel, gid: 707 (Client 207)
+Initializing channel, gid: 708 (Client 208)
+Initializing channel, gid: 709 (Client 209)
+Initializing channel, gid: 710 (Client 210)
+Initializing channel, gid: 711 (Client 211)
+Initializing channel, gid: 712 (Client 212)
+Initializing channel, gid: 713 (Client 213)
+Initializing channel, gid: 714 (Client 214)
+Initializing channel, gid: 715 (Client 215)
+Initializing channel, gid: 716 (Client 216)
+Initializing channel, gid: 717 (Client 217)
+Initializing channel, gid: 718 (Client 218)
+Initializing channel, gid: 719 (Client 219)
+Initializing channel, gid: 720 (Client 220)
+Initializing channel, gid: 721 (Client 221)
+Initializing channel, gid: 722 (Client 222)
+Initializing channel, gid: 723 (Client 223)
+Initializing channel, gid: 724 (Client 224)
+Initializing channel, gid: 725 (Client 225)
+Initializing channel, gid: 726 (Client 226)
+Initializing channel, gid: 727 (Client 227)
+Initializing channel, gid: 728 (Client 228)
+Initializing channel, gid: 729 (Client 229)
+Initializing channel, gid: 730 (Client 230)
+Initializing channel, gid: 731 (Client 231)
+Initializing channel, gid: 732 (Client 232)
+Initializing channel, gid: 733 (Client 233)
+Initializing channel, gid: 734 (Client 234)
+Initializing channel, gid: 735 (Client 235)
+Initializing channel, gid: 752 (Client 252)
+Initializing channel, gid: 753 (Client 253)
+Initializing channel, gid: 754 (Client 254)
+Initializing channel, gid: 755 (Client 255)
+Initializing channel, gid: 756 (Client 256)
+Initializing channel, gid: 757 (Client 257)
+Initializing channel, gid: 758 (Client 258)
+Initializing channel, gid: 759 (Client 259)
+Initializing channel, gid: 760 (Client 260)
+Initializing channel, gid: 761 (Client 261)
+Initializing channel, gid: 762 (Client 262)
+Initializing channel, gid: 763 (Client 263)
+Initializing channel, gid: 764 (Client 264)
+Initializing channel, gid: 765 (Client 265)
+Initializing channel, gid: 766 (Client 266)
+Initializing channel, gid: 767 (Client 267)
+Initializing channel, gid: 512 (Client 12)
+Initializing channel, gid: 513 (Client 13)
+Initializing channel, gid: 514 (Client 14)
+Initializing channel, gid: 515 (Client 15)
+Initializing channel, gid: 516 (Client 16)
+Initializing channel, gid: 517 (Client 17)
+Initializing channel, gid: 518 (Client 18)
+Initializing channel, gid: 519 (Client 19)
+Initializing channel, gid: 520 (Client 20)
+Initializing channel, gid: 521 (Client 21)
+Initializing channel, gid: 522 (Client 22)
+Initializing channel, gid: 523 (Client 23)
+Initializing channel, gid: 524 (Client 24)
+Initializing channel, gid: 525 (Client 25)
+Initializing channel, gid: 526 (Client 26)
+Initializing channel, gid: 527 (Client 27)
+Initializing channel, gid: 768 (Client 268)
+Initializing channel, gid: 769 (Client 269)
+Initializing channel, gid: 770 (Client 270)
+Initializing channel, gid: 771 (Client 271)
+Initializing channel, gid: 772 (Client 272)
+Initializing channel, gid: 773 (Client 273)
+Initializing channel, gid: 774 (Client 274)
+Initializing channel, gid: 775 (Client 275)
+Initializing channel, gid: 776 (Client 276)
+Initializing channel, gid: 777 (Client 277)
+Initializing channel, gid: 778 (Client 278)
+Initializing channel, gid: 779 (Client 279)
+Initializing channel, gid: 780 (Client 280)
+Initializing channel, gid: 781 (Client 281)
+Initializing channel, gid: 782 (Client 282)
+Initializing channel, gid: 783 (Client 283)
+Initializing channel, gid: 800 (Client 300)
+Initializing channel, gid: 801 (Client 301)
+Initializing channel, gid: 802 (Client 302)
+Initializing channel, gid: 803 (Client 303)
+Initializing channel, gid: 804 (Client 304)
+Initializing channel, gid: 805 (Client 305)
+Initializing channel, gid: 806 (Client 306)
+Initializing channel, gid: 807 (Client 307)
+Initializing channel, gid: 808 (Client 308)
+Initializing channel, gid: 809 (Client 309)
+Initializing channel, gid: 810 (Client 310)
+Initializing channel, gid: 811 (Client 311)
+Initializing channel, gid: 812 (Client 312)
+Initializing channel, gid: 813 (Client 313)
+Initializing channel, gid: 814 (Client 314)
+Initializing channel, gid: 815 (Client 315)
+Initializing channel, gid: 736 (Client 236)
+Initializing channel, gid: 737 (Client 237)
+Initializing channel, gid: 738 (Client 238)
+Initializing channel, gid: 739 (Client 239)
+Initializing channel, gid: 740 (Client 240)
+Initializing channel, gid: 741 (Client 241)
+Initializing channel, gid: 742 (Client 242)
+Initializing channel, gid: 743 (Client 243)
+Initializing channel, gid: 744 (Client 244)
+Initializing channel, gid: 745 (Client 245)
+Initializing channel, gid: 746 (Client 246)
+Initializing channel, gid: 747 (Client 247)
+Initializing channel, gid: 748 (Client 248)
+Initializing channel, gid: 749 (Client 249)
+Initializing channel, gid: 750 (Client 250)
+Initializing channel, gid: 751 (Client 251)
+Initializing channel, gid: 816 (Client 316)
+Initializing channel, gid: 817 (Client 317)
+Initializing channel, gid: 818 (Client 318)
+Initializing channel, gid: 819 (Client 319)
+Initializing channel, gid: 820 (Client 320)
+Initializing channel, gid: 821 (Client 321)
+Initializing channel, gid: 822 (Client 322)
+Initializing channel, gid: 823 (Client 323)
+Initializing channel, gid: 824 (Client 324)
+Initializing channel, gid: 825 (Client 325)
+Initializing channel, gid: 826 (Client 326)
+Initializing channel, gid: 827 (Client 327)
+Initializing channel, gid: 828 (Client 328)
+Initializing channel, gid: 829 (Client 329)
+Initializing channel, gid: 830 (Client 330)
+Initializing channel, gid: 831 (Client 331)
+Initializing channel, gid: 848 (Client 348)
+Initializing channel, gid: 849 (Client 349)
+Initializing channel, gid: 850 (Client 350)
+Initializing channel, gid: 851 (Client 351)
+Initializing channel, gid: 852 (Client 352)
+Initializing channel, gid: 853 (Client 353)
+Initializing channel, gid: 854 (Client 354)
+Initializing channel, gid: 855 (Client 355)
+Initializing channel, gid: 856 (Client 356)
+Initializing channel, gid: 857 (Client 357)
+Initializing channel, gid: 858 (Client 358)
+Initializing channel, gid: 859 (Client 359)
+Initializing channel, gid: 860 (Client 360)
+Initializing channel, gid: 861 (Client 361)
+Initializing channel, gid: 862 (Client 362)
+Initializing channel, gid: 863 (Client 363)
+Initializing channel, gid: 864 (Client 364)
+Initializing channel, gid: 865 (Client 365)
+Initializing channel, gid: 866 (Client 366)
+Initializing channel, gid: 867 (Client 367)
+Initializing channel, gid: 868 (Client 368)
+Initializing channel, gid: 869 (Client 369)
+Initializing channel, gid: 870 (Client 370)
+Initializing channel, gid: 871 (Client 371)
+Initializing channel, gid: 872 (Client 372)
+Initializing channel, gid: 873 (Client 373)
+Initializing channel, gid: 874 (Client 374)
+Initializing channel, gid: 875 (Client 375)
+Initializing channel, gid: 876 (Client 376)
+Initializing channel, gid: 877 (Client 377)
+Initializing channel, gid: 878 (Client 378)
+Initializing channel, gid: 879 (Client 379)
+Initializing channel, gid: 880 (Client 380)
+Initializing channel, gid: 881 (Client 381)
+Initializing channel, gid: 882 (Client 382)
+Initializing channel, gid: 883 (Client 383)
+Initializing channel, gid: 884 (Client 384)
+Initializing channel, gid: 885 (Client 385)
+Initializing channel, gid: 886 (Client 386)
+Initializing channel, gid: 887 (Client 387)
+Initializing channel, gid: 888 (Client 388)
+Initializing channel, gid: 889 (Client 389)
+Initializing channel, gid: 890 (Client 390)
+Initializing channel, gid: 891 (Client 391)
+Initializing channel, gid: 892 (Client 392)
+Initializing channel, gid: 893 (Client 393)
+Initializing channel, gid: 894 (Client 394)
+Initializing channel, gid: 895 (Client 395)
+Initializing channel, gid: 896 (Client 396)
+Initializing channel, gid: 897 (Client 397)
+Initializing channel, gid: 898 (Client 398)
+Initializing channel, gid: 899 (Client 399)
+Initializing channel, gid: 900 (Client 400)
+Initializing channel, gid: 901 (Client 401)
+Initializing channel, gid: 902 (Client 402)
+Initializing channel, gid: 903 (Client 403)
+Initializing channel, gid: 904 (Client 404)
+Initializing channel, gid: 905 (Client 405)
+Initializing channel, gid: 906 (Client 406)
+Initializing channel, gid: 907 (Client 407)
+Initializing channel, gid: 908 (Client 408)
+Initializing channel, gid: 909 (Client 409)
+Initializing channel, gid: 910 (Client 410)
+Initializing channel, gid: 911 (Client 411)
+Initializing channel, gid: 912 (Client 412)
+Initializing channel, gid: 913 (Client 413)
+Initializing channel, gid: 914 (Client 414)
+Initializing channel, gid: 915 (Client 415)
+Initializing channel, gid: 916 (Client 416)
+Initializing channel, gid: 917 (Client 417)
+Initializing channel, gid: 918 (Client 418)
+Initializing channel, gid: 919 (Client 419)
+Initializing channel, gid: 920 (Client 420)
+Initializing channel, gid: 921 (Client 421)
+Initializing channel, gid: 922 (Client 422)
+Initializing channel, gid: 923 (Client 423)
+Initializing channel, gid: 924 (Client 424)
+Initializing channel, gid: 925 (Client 425)
+Initializing channel, gid: 926 (Client 426)
+Initializing channel, gid: 927 (Client 427)
+Initializing channel, gid: 928 (Client 428)
+Initializing channel, gid: 929 (Client 429)
+Initializing channel, gid: 930 (Client 430)
+Initializing channel, gid: 931 (Client 431)
+Initializing channel, gid: 932 (Client 432)
+Initializing channel, gid: 933 (Client 433)
+Initializing channel, gid: 934 (Client 434)
+Initializing channel, gid: 935 (Client 435)
+Initializing channel, gid: 936 (Client 436)
+Initializing channel, gid: 937 (Client 437)
+Initializing channel, gid: 938 (Client 438)
+Initializing channel, gid: 939 (Client 439)
+Initializing channel, gid: 940 (Client 440)
+Initializing channel, gid: 941 (Client 441)
+Initializing channel, gid: 942 (Client 442)
+Initializing channel, gid: 943 (Client 443)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node dcs112 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
++ rm /tmp/hosts.152515
