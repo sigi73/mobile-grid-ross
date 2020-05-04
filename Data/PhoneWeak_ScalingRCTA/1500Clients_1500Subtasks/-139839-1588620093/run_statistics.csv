@@ -1,0 +1,4 @@
+NumAggregators:20
+NumSelectors:2
+NumClientsPerSelector:750
+Sizeof MessageType:4

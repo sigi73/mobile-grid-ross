@@ -2,126 +2,116 @@
 + '[' x32 = x ']'
 + srun hostname -s
 + sort -u
-+ awk '{ print $0 "-ib slots=32"; }' /tmp/hosts.152510
-+ mv /tmp/tmp.152510 /tmp/hosts.152510
++ awk '{ print $0 "-ib slots=32"; }' /tmp/hosts.154547
++ mv /tmp/tmp.154547 /tmp/hosts.154547
 + module load spectrum-mpi
 ++ /usr/share/lmod/lmod/libexec/lmod bash load spectrum-mpi
-
-Due to MODULEPATH changes, the following have been reloaded:
-  1) cuda/10.1
-
-+ eval 'CUDA_PATH=/usr/local/cuda-10.1;' export 'CUDA_PATH;' '__LMOD_REF_COUNT_LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:1\;/opt/ibm/spectrum_mpi/profilesupport/lib:1\;/opt/ibm/spectrum_mpi/lib:1\;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/lib64:1\;/opt/mellanox/sharp/lib:1\;/opt/mellanox/hcoll/lib:1;' export '__LMOD_REF_COUNT_LD_LIBRARY_PATH;' 'LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:/opt/ibm/spectrum_mpi/profilesupport/lib:/opt/ibm/spectrum_mpi/lib:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/lib64:/opt/mellanox/sharp/lib:/opt/mellanox/hcoll/lib;' export 'LD_LIBRARY_PATH;' 'LMOD_FAMILY_MPI=spectrum-mpi;' export 'LMOD_FAMILY_MPI;' 'LMOD_FAMILY_MPI_VERSION=10.3;' export 'LMOD_FAMILY_MPI_VERSION;' '__LMOD_REF_COUNT_LOADEDMODULES=gcc/7.4.0/1:1\;cmake/3.14.6:1\;spectrum-mpi/10.3:1\;cuda/10.1:1;' export '__LMOD_REF_COUNT_LOADEDMODULES;' 'LOADEDMODULES=gcc/7.4.0/1:cmake/3.14.6:spectrum-mpi/10.3:cuda/10.1;' export 'LOADEDMODULES;' '__LMOD_REF_COUNT_MANPATH=/opt/ibm/spectrum_mpi/share/man:1\;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/share/man:1;' export '__LMOD_REF_COUNT_MANPATH;' 'MANPATH=/opt/ibm/spectrum_mpi/share/man:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/share/man;' export 'MANPATH;' '__LMOD_REF_COUNT_MODULEPATH=/gpfs/u/software/ppc64le-rhel7/modulefiles/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/.cuda/10.1:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/.gcc/7.4.0/1:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles:1;' export '__LMOD_REF_COUNT_MODULEPATH;' 'MODULEPATH=/gpfs/u/software/ppc64le-rhel7/modulefiles/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/.cuda/10.1:/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:/gpfs/u/software/ppc64le-rhel7/modulefiles/.gcc/7.4.0/1:/gpfs/u/software/ppc64le-rhel7/modulefiles;' export 'MODULEPATH;' 'MPI_ROOT=/opt/ibm/spectrum_mpi;' export 'MPI_ROOT;' 'OPAL_LIBDIR=/opt/ibm/spectrum_mpi/lib;' export 'OPAL_LIBDIR;' '__LMOD_REF_COUNT_PATH=/usr/local/cuda-10.1/bin:1\;/opt/ibm/spectrum_mpi/bin:1\;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/bin:1\;/usr/lpp/mmfs/bin:1\;/opt/cci/bin:1\;/usr/local/bin:1\;/usr/bin:1\;/usr/local/sbin:1\;/usr/sbin:1\;/opt/ibutils/bin:1\;/gpfs/u/home/PCP9/PCP9srsd/.local/bin:1\;/gpfs/u/home/PCP9/PCP9srsd/bin:1;' export '__LMOD_REF_COUNT_PATH;' 'PATH=/usr/local/cuda-10.1/bin:/opt/ibm/spectrum_mpi/bin:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/bin:/usr/lpp/mmfs/bin:/opt/cci/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/gpfs/u/home/PCP9/PCP9srsd/.local/bin:/gpfs/u/home/PCP9/PCP9srsd/bin;' export 'PATH;' '__LMOD_REF_COUNT__LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/gcc/7.4.0/1.lua:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/cmake/3.14.6.lua:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/cuda/10.1.lua:1;' export '__LMOD_REF_COUNT__LMFILES_;' '_LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/gcc/7.4.0/1.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/cmake/3.14.6.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/cuda/10.1.lua;' export '_LMFILES_;' '_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXtbImNtYWtlIl09ImNtYWtlIixbImNvbXBpbGVyIl09ImdjYyIsWyJtcGkiXT0ic3BlY3RydW0tbXBpIix9LG1UPXtjbWFrZT17WyJmbiJdPSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMvY21ha2UvMy4xNC42Lmx1YSIsWyJmdWxsTmFtZSJdPSJjbWFrZS8zLjE0LjYiLFsibG9hZE9yZGVyIl09Mixwcm9wVD17c3RhdGU9e1sic3RhYmxlIl09MSx9LH0sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iY21ha2UiLH0sY3VkYT17WyJmbiJd;' export '_ModuleTable001_;' '_ModuleTable002_=PSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMvLnNwZWN0cnVtLW1waS8xMC4zL2N1ZGEvMTAuMS5sdWEiLFsiZnVsbE5hbWUiXT0iY3VkYS8xMC4xIixbImxvYWRPcmRlciJdPTQscHJvcFQ9e3N0YXRlPXtbInN0YWJsZSJdPTEsfSx9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09ImN1ZGEiLH0sZ2NjPXtbImZuIl09Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9nY2MvNy40LjAvMS5sdWEiLFsiZnVsbE5hbWUiXT0iZ2NjLzcuNC4wLzEiLFsibG9hZE9yZGVyIl09MSxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJd;' export '_ModuleTable002_;' '_ModuleTable003_=PSJnY2MvNy40LjAvMSIsfSxbInNwZWN0cnVtLW1waSJdPXtbImZuIl09Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9zcGVjdHJ1bS1tcGkvMTAuMy5sdWEiLFsiZnVsbE5hbWUiXT0ic3BlY3RydW0tbXBpLzEwLjMiLFsibG9hZE9yZGVyIl09Myxwcm9wVD17c3RhdGU9e1sidGVzdGluZyJdPTEsfSx9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNwZWN0cnVtLW1waSIsfSx9LG1wYXRoQT17Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMy8uY3VkYS8xMC4xIiwiL2dwZnMvdS9zb2Z0d2Fy;' export '_ModuleTable003_;' '_ModuleTable004_=ZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMyIsIi9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy8uZ2NjLzcuNC4wLzEiLCIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2dwZnMvdS9zb2Z0d2FyZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzIix9;' export '_ModuleTable004_;' '_ModuleTable_Sz_=4;' export '_ModuleTable_Sz_;'
-++ CUDA_PATH=/usr/local/cuda-10.1
-++ export CUDA_PATH
-++ __LMOD_REF_COUNT_LD_LIBRARY_PATH='/usr/local/cuda-10.1/lib64:1;/opt/ibm/spectrum_mpi/profilesupport/lib:1;/opt/ibm/spectrum_mpi/lib:1;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/lib64:1;/opt/mellanox/sharp/lib:1;/opt/mellanox/hcoll/lib:1'
++ eval '__LMOD_REF_COUNT_LD_LIBRARY_PATH=/opt/ibm/spectrum_mpi/profilesupport/lib:1\;/opt/ibm/spectrum_mpi/lib:1\;/opt/mellanox/sharp/lib:1\;/opt/mellanox/hcoll/lib:1;' export '__LMOD_REF_COUNT_LD_LIBRARY_PATH;' 'LD_LIBRARY_PATH=/opt/ibm/spectrum_mpi/profilesupport/lib:/opt/ibm/spectrum_mpi/lib:/opt/mellanox/sharp/lib:/opt/mellanox/hcoll/lib;' export 'LD_LIBRARY_PATH;' 'LMOD_FAMILY_MPI=spectrum-mpi;' export 'LMOD_FAMILY_MPI;' 'LMOD_FAMILY_MPI_VERSION=10.3;' export 'LMOD_FAMILY_MPI_VERSION;' '__LMOD_REF_COUNT_LOADEDMODULES=spectrum-mpi/10.3:1;' export '__LMOD_REF_COUNT_LOADEDMODULES;' 'LOADEDMODULES=spectrum-mpi/10.3;' export 'LOADEDMODULES;' '__LMOD_REF_COUNT_MANPATH=/opt/ibm/spectrum_mpi/share/man:1;' export '__LMOD_REF_COUNT_MANPATH;' 'MANPATH=/opt/ibm/spectrum_mpi/share/man;' export 'MANPATH;' '__LMOD_REF_COUNT_MODULEPATH=/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:1\;/gpfs/u/software/ppc64le-rhel7/modulefiles:1;' export '__LMOD_REF_COUNT_MODULEPATH;' 'MODULEPATH=/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:/gpfs/u/software/ppc64le-rhel7/modulefiles;' export 'MODULEPATH;' 'MPI_ROOT=/opt/ibm/spectrum_mpi;' export 'MPI_ROOT;' 'OPAL_LIBDIR=/opt/ibm/spectrum_mpi/lib;' export 'OPAL_LIBDIR;' '__LMOD_REF_COUNT_PATH=/opt/ibm/spectrum_mpi/bin:1\;/usr/lpp/mmfs/bin:1\;/opt/cci/bin:1\;/usr/local/bin:1\;/usr/bin:1\;/usr/local/sbin:1\;/usr/sbin:1\;/opt/ibutils/bin:1\;/gpfs/u/home/PCP9/PCP9srsd/.local/bin:1\;/gpfs/u/home/PCP9/PCP9srsd/bin:1;' export '__LMOD_REF_COUNT_PATH;' 'PATH=/opt/ibm/spectrum_mpi/bin:/usr/lpp/mmfs/bin:/opt/cci/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/gpfs/u/home/PCP9/PCP9srsd/.local/bin:/gpfs/u/home/PCP9/PCP9srsd/bin;' export 'PATH;' '__LMOD_REF_COUNT__LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:1;' export '__LMOD_REF_COUNT__LMFILES_;' '_LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua;' export '_LMFILES_;' '_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXtbIm1waSJdPSJzcGVjdHJ1bS1tcGkiLH0sbVQ9e1sic3BlY3RydW0tbXBpIl09e1siZm4iXT0iL2dwZnMvdS9zb2Z0d2FyZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzL3NwZWN0cnVtLW1waS8xMC4zLmx1YSIsWyJmdWxsTmFtZSJdPSJzcGVjdHJ1bS1tcGkvMTAuMyIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXtzdGF0ZT17WyJ0ZXN0aW5nIl09MSx9LH0sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0ic3BlY3RydW0tbXBpIix9LH0sbXBhdGhBPXsiL2dwZnMvdS9z;' export '_ModuleTable001_;' '_ModuleTable002_=b2Z0d2FyZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMyIsIi9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcyIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMiLH0=;' export '_ModuleTable002_;' '_ModuleTable_Sz_=2;' export '_ModuleTable_Sz_;'
+++ __LMOD_REF_COUNT_LD_LIBRARY_PATH='/opt/ibm/spectrum_mpi/profilesupport/lib:1;/opt/ibm/spectrum_mpi/lib:1;/opt/mellanox/sharp/lib:1;/opt/mellanox/hcoll/lib:1'
 ++ export __LMOD_REF_COUNT_LD_LIBRARY_PATH
-++ LD_LIBRARY_PATH=/usr/local/cuda-10.1/lib64:/opt/ibm/spectrum_mpi/profilesupport/lib:/opt/ibm/spectrum_mpi/lib:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/lib64:/opt/mellanox/sharp/lib:/opt/mellanox/hcoll/lib
+++ LD_LIBRARY_PATH=/opt/ibm/spectrum_mpi/profilesupport/lib:/opt/ibm/spectrum_mpi/lib:/opt/mellanox/sharp/lib:/opt/mellanox/hcoll/lib
 ++ export LD_LIBRARY_PATH
 ++ LMOD_FAMILY_MPI=spectrum-mpi
 ++ export LMOD_FAMILY_MPI
 ++ LMOD_FAMILY_MPI_VERSION=10.3
 ++ export LMOD_FAMILY_MPI_VERSION
-++ __LMOD_REF_COUNT_LOADEDMODULES='gcc/7.4.0/1:1;cmake/3.14.6:1;spectrum-mpi/10.3:1;cuda/10.1:1'
+++ __LMOD_REF_COUNT_LOADEDMODULES=spectrum-mpi/10.3:1
 ++ export __LMOD_REF_COUNT_LOADEDMODULES
-++ LOADEDMODULES=gcc/7.4.0/1:cmake/3.14.6:spectrum-mpi/10.3:cuda/10.1
+++ LOADEDMODULES=spectrum-mpi/10.3
 ++ export LOADEDMODULES
-++ __LMOD_REF_COUNT_MANPATH='/opt/ibm/spectrum_mpi/share/man:1;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/share/man:1'
+++ __LMOD_REF_COUNT_MANPATH=/opt/ibm/spectrum_mpi/share/man:1
 ++ export __LMOD_REF_COUNT_MANPATH
-++ MANPATH=/opt/ibm/spectrum_mpi/share/man:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/share/man
+++ MANPATH=/opt/ibm/spectrum_mpi/share/man
 ++ export MANPATH
-++ __LMOD_REF_COUNT_MODULEPATH='/gpfs/u/software/ppc64le-rhel7/modulefiles/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/.cuda/10.1:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/.gcc/7.4.0/1:1;/gpfs/u/software/ppc64le-rhel7/modulefiles:1'
+++ __LMOD_REF_COUNT_MODULEPATH='/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:1;/gpfs/u/software/ppc64le-rhel7/modulefiles:1'
 ++ export __LMOD_REF_COUNT_MODULEPATH
-++ MODULEPATH=/gpfs/u/software/ppc64le-rhel7/modulefiles/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/.cuda/10.1:/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:/gpfs/u/software/ppc64le-rhel7/modulefiles/.gcc/7.4.0/1:/gpfs/u/software/ppc64le-rhel7/modulefiles
+++ MODULEPATH=/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3:/gpfs/u/software/ppc64le-rhel7/modulefiles
 ++ export MODULEPATH
 ++ MPI_ROOT=/opt/ibm/spectrum_mpi
 ++ export MPI_ROOT
 ++ OPAL_LIBDIR=/opt/ibm/spectrum_mpi/lib
 ++ export OPAL_LIBDIR
-++ __LMOD_REF_COUNT_PATH='/usr/local/cuda-10.1/bin:1;/opt/ibm/spectrum_mpi/bin:1;/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/bin:1;/usr/lpp/mmfs/bin:1;/opt/cci/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/sbin:1;/opt/ibutils/bin:1;/gpfs/u/home/PCP9/PCP9srsd/.local/bin:1;/gpfs/u/home/PCP9/PCP9srsd/bin:1'
+++ __LMOD_REF_COUNT_PATH='/opt/ibm/spectrum_mpi/bin:1;/usr/lpp/mmfs/bin:1;/opt/cci/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/sbin:1;/opt/ibutils/bin:1;/gpfs/u/home/PCP9/PCP9srsd/.local/bin:1;/gpfs/u/home/PCP9/PCP9srsd/bin:1'
 ++ export __LMOD_REF_COUNT_PATH
-++ PATH=/usr/local/cuda-10.1/bin:/opt/ibm/spectrum_mpi/bin:/gpfs/u/software/ppc64le-rhel7/gcc/7.4.0/1/bin:/usr/lpp/mmfs/bin:/opt/cci/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/gpfs/u/home/PCP9/PCP9srsd/.local/bin:/gpfs/u/home/PCP9/PCP9srsd/bin
+++ PATH=/opt/ibm/spectrum_mpi/bin:/usr/lpp/mmfs/bin:/opt/cci/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/gpfs/u/home/PCP9/PCP9srsd/.local/bin:/gpfs/u/home/PCP9/PCP9srsd/bin
 ++ export PATH
-++ __LMOD_REF_COUNT__LMFILES_='/gpfs/u/software/ppc64le-rhel7/modulefiles/gcc/7.4.0/1.lua:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/cmake/3.14.6.lua:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:1;/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/cuda/10.1.lua:1'
+++ __LMOD_REF_COUNT__LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:1
 ++ export __LMOD_REF_COUNT__LMFILES_
-++ _LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/gcc/7.4.0/1.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/cmake/3.14.6.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua:/gpfs/u/software/ppc64le-rhel7/modulefiles/.spectrum-mpi/10.3/cuda/10.1.lua
+++ _LMFILES_=/gpfs/u/software/ppc64le-rhel7/modulefiles/spectrum-mpi/10.3.lua
 ++ export _LMFILES_
-++ _ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXtbImNtYWtlIl09ImNtYWtlIixbImNvbXBpbGVyIl09ImdjYyIsWyJtcGkiXT0ic3BlY3RydW0tbXBpIix9LG1UPXtjbWFrZT17WyJmbiJdPSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMvY21ha2UvMy4xNC42Lmx1YSIsWyJmdWxsTmFtZSJdPSJjbWFrZS8zLjE0LjYiLFsibG9hZE9yZGVyIl09Mixwcm9wVD17c3RhdGU9e1sic3RhYmxlIl09MSx9LH0sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iY21ha2UiLH0sY3VkYT17WyJmbiJd
+++ _ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPWZhbHNlLFsiY19zaG9ydFRpbWUiXT1mYWxzZSxkZXB0aFQ9e30sZmFtaWx5PXtbIm1waSJdPSJzcGVjdHJ1bS1tcGkiLH0sbVQ9e1sic3BlY3RydW0tbXBpIl09e1siZm4iXT0iL2dwZnMvdS9zb2Z0d2FyZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzL3NwZWN0cnVtLW1waS8xMC4zLmx1YSIsWyJmdWxsTmFtZSJdPSJzcGVjdHJ1bS1tcGkvMTAuMyIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXtzdGF0ZT17WyJ0ZXN0aW5nIl09MSx9LH0sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0ic3BlY3RydW0tbXBpIix9LH0sbXBhdGhBPXsiL2dwZnMvdS9z
 ++ export _ModuleTable001_
-++ _ModuleTable002_=PSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMvLnNwZWN0cnVtLW1waS8xMC4zL2N1ZGEvMTAuMS5sdWEiLFsiZnVsbE5hbWUiXT0iY3VkYS8xMC4xIixbImxvYWRPcmRlciJdPTQscHJvcFQ9e3N0YXRlPXtbInN0YWJsZSJdPTEsfSx9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09ImN1ZGEiLH0sZ2NjPXtbImZuIl09Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9nY2MvNy40LjAvMS5sdWEiLFsiZnVsbE5hbWUiXT0iZ2NjLzcuNC4wLzEiLFsibG9hZE9yZGVyIl09MSxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJd
+++ _ModuleTable002_=b2Z0d2FyZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMyIsIi9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcyIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMiLH0=
 ++ export _ModuleTable002_
-++ _ModuleTable003_=PSJnY2MvNy40LjAvMSIsfSxbInNwZWN0cnVtLW1waSJdPXtbImZuIl09Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9zcGVjdHJ1bS1tcGkvMTAuMy5sdWEiLFsiZnVsbE5hbWUiXT0ic3BlY3RydW0tbXBpLzEwLjMiLFsibG9hZE9yZGVyIl09Myxwcm9wVD17c3RhdGU9e1sidGVzdGluZyJdPTEsfSx9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNwZWN0cnVtLW1waSIsfSx9LG1wYXRoQT17Ii9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMy8uY3VkYS8xMC4xIiwiL2dwZnMvdS9zb2Z0d2Fy
-++ export _ModuleTable003_
-++ _ModuleTable004_=ZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzLy5zcGVjdHJ1bS1tcGkvMTAuMyIsIi9ncGZzL3Uvc29mdHdhcmUvcHBjNjRsZS1yaGVsNy9tb2R1bGVmaWxlcy8uZ2NjLzcuNC4wLzEiLCIvZ3Bmcy91L3NvZnR3YXJlL3BwYzY0bGUtcmhlbDcvbW9kdWxlZmlsZXMiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2dwZnMvdS9zb2Z0d2FyZS9wcGM2NGxlLXJoZWw3L21vZHVsZWZpbGVzIix9
-++ export _ModuleTable004_
-++ _ModuleTable_Sz_=4
+++ _ModuleTable_Sz_=2
 ++ export _ModuleTable_Sz_
 ++ : -s sh
 + eval
-+ mpirun --bind-to core --report-bindings -hostfile /tmp/hosts.152510 -np 64 /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=10 --task_size=10 --stats-path=./PhoneWeak_ScalingRCTA/10Clients_10Subtasks/ --end=600000 --mean_dur=120000 --prop_start=.05
-[dcs113.ccni.rpi.edu:34725] MCW rank 32 bound to socket 0[core 0[hwt 0-3]]: [BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 33 bound to socket 1[core 20[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 34 bound to socket 0[core 1[hwt 0-3]]: [..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 35 bound to socket 1[core 21[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 36 bound to socket 0[core 2[hwt 0-3]]: [..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 37 bound to socket 1[core 22[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 38 bound to socket 0[core 3[hwt 0-3]]: [..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 0 bound to socket 0[core 0[hwt 0-3]]: [BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 1 bound to socket 1[core 20[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 2 bound to socket 0[core 1[hwt 0-3]]: [..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 3 bound to socket 1[core 21[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 4 bound to socket 0[core 2[hwt 0-3]]: [..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 5 bound to socket 1[core 22[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 7 bound to socket 1[core 23[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 39 bound to socket 1[core 23[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 6 bound to socket 0[core 3[hwt 0-3]]: [..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 8 bound to socket 0[core 4[hwt 0-3]]: [..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 40 bound to socket 0[core 4[hwt 0-3]]: [..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 9 bound to socket 1[core 24[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 11 bound to socket 1[core 25[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 41 bound to socket 1[core 24[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 42 bound to socket 0[core 5[hwt 0-3]]: [..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 43 bound to socket 1[core 25[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 44 bound to socket 0[core 6[hwt 0-3]]: [..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 10 bound to socket 0[core 5[hwt 0-3]]: [..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 12 bound to socket 0[core 6[hwt 0-3]]: [..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 13 bound to socket 1[core 26[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 15 bound to socket 1[core 27[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 45 bound to socket 1[core 26[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 47 bound to socket 1[core 27[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 16 bound to socket 0[core 8[hwt 0-3]]: [..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 14 bound to socket 0[core 7[hwt 0-3]]: [..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 46 bound to socket 0[core 7[hwt 0-3]]: [..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 48 bound to socket 0[core 8[hwt 0-3]]: [..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 49 bound to socket 1[core 28[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 19 bound to socket 1[core 29[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 17 bound to socket 1[core 28[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 20 bound to socket 0[core 10[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 51 bound to socket 1[core 29[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 52 bound to socket 0[core 10[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 50 bound to socket 0[core 9[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 18 bound to socket 0[core 9[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 53 bound to socket 1[core 30[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 23 bound to socket 1[core 31[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 55 bound to socket 1[core 31[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 21 bound to socket 1[core 30[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 24 bound to socket 0[core 12[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 56 bound to socket 0[core 12[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 54 bound to socket 0[core 11[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 22 bound to socket 0[core 11[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 57 bound to socket 1[core 32[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 60 bound to socket 0[core 14[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 27 bound to socket 1[core 33[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 25 bound to socket 1[core 32[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 59 bound to socket 1[core 33[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 26 bound to socket 0[core 13[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 58 bound to socket 0[core 13[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 61 bound to socket 1[core 34[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 28 bound to socket 0[core 14[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 29 bound to socket 1[core 34[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 63 bound to socket 1[core 35[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....]
-[dcs113.ccni.rpi.edu:34725] MCW rank 62 bound to socket 0[core 15[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 31 bound to socket 1[core 35[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....]
-[dcs112.ccni.rpi.edu:26399] MCW rank 30 bound to socket 0[core 15[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
++ mpirun --bind-to core --report-bindings -hostfile /tmp/hosts.154547 -np 64 /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=10 --task_size=10 --stats-path=./PhoneWeak_ScalingRCTA/10Clients_10Subtasks/ --end=600000 --mean_dur=120000 --prop_start=.05
+[dcs092.ccni.rpi.edu:74743] MCW rank 0 bound to socket 0[core 0[hwt 0-3]]: [BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 1 bound to socket 1[core 20[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 2 bound to socket 0[core 1[hwt 0-3]]: [..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 3 bound to socket 1[core 21[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 7 bound to socket 1[core 23[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 5 bound to socket 1[core 22[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 32 bound to socket 0[core 0[hwt 0-3]]: [BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 33 bound to socket 1[core 20[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 34 bound to socket 0[core 1[hwt 0-3]]: [..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 35 bound to socket 1[core 21[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 6 bound to socket 0[core 3[hwt 0-3]]: [..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 4 bound to socket 0[core 2[hwt 0-3]]: [..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 9 bound to socket 1[core 24[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 11 bound to socket 1[core 25[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 39 bound to socket 1[core 23[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 37 bound to socket 1[core 22[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 10 bound to socket 0[core 5[hwt 0-3]]: [..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 38 bound to socket 0[core 3[hwt 0-3]]: [..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 36 bound to socket 0[core 2[hwt 0-3]]: [..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 8 bound to socket 0[core 4[hwt 0-3]]: [..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 43 bound to socket 1[core 25[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 15 bound to socket 1[core 27[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 41 bound to socket 1[core 24[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 42 bound to socket 0[core 5[hwt 0-3]]: [..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 13 bound to socket 1[core 26[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 14 bound to socket 0[core 7[hwt 0-3]]: [..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 40 bound to socket 0[core 4[hwt 0-3]]: [..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 12 bound to socket 0[core 6[hwt 0-3]]: [..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 47 bound to socket 1[core 27[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 45 bound to socket 1[core 26[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 19 bound to socket 1[core 29[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 18 bound to socket 0[core 9[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 17 bound to socket 1[core 28[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 46 bound to socket 0[core 7[hwt 0-3]]: [..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 16 bound to socket 0[core 8[hwt 0-3]]: [..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 44 bound to socket 0[core 6[hwt 0-3]]: [..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 51 bound to socket 1[core 29[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 23 bound to socket 1[core 31[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 49 bound to socket 1[core 28[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 50 bound to socket 0[core 9[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 21 bound to socket 1[core 30[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 48 bound to socket 0[core 8[hwt 0-3]]: [..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 53 bound to socket 1[core 30[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 20 bound to socket 0[core 10[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 22 bound to socket 0[core 11[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 55 bound to socket 1[core 31[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 27 bound to socket 1[core 33[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 54 bound to socket 0[core 11[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 25 bound to socket 1[core 32[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 52 bound to socket 0[core 10[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 26 bound to socket 0[core 13[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 57 bound to socket 1[core 32[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 59 bound to socket 1[core 33[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 31 bound to socket 1[core 35[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 24 bound to socket 0[core 12[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 58 bound to socket 0[core 13[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 29 bound to socket 1[core 34[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 30 bound to socket 0[core 15[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 56 bound to socket 0[core 12[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 61 bound to socket 1[core 34[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....]
+[dcs092.ccni.rpi.edu:74743] MCW rank 28 bound to socket 0[core 14[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 63 bound to socket 1[core 35[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 62 bound to socket 0[core 15[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
+[dcs093.ccni.rpi.edu:38298] MCW rank 60 bound to socket 0[core 14[hwt 0-3]]: [..../..../..../..../..../..../..../..../..../..../..../..../..../..../BBBB/..../..../..../..../....][..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../..../....]
 10
 g_num_total_lps: 24, num_lps_per_pe: 1
 10
@@ -174,15 +164,9 @@ g_num_total_lps: 24, num_lps_per_pe: 1
 g_num_total_lps: 24, num_lps_per_pe: 1
 10
 g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-/gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid --event-trace=1 --synch=2 --scheduling_algorithm=2 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=10 --task_size=10 --stats-path=./PhoneWeak_ScalingRCTA/10Clients_10Subtasks/ --end=600000 --mean_dur=120000 --prop_start=.05 
+/gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid --event-trace=1 --synch=2 --scheduling_algorithm=1 --num_aggregators=1 --num_selectors=1 --num_clients_per_selector=10 --num_tasks=10 --task_size=10 --stats-path=./PhoneWeak_ScalingRCTA/10Clients_10Subtasks/ --end=600000 --mean_dur=120000 --prop_start=.05 
 
-Mon May  4 04:38:57 2020
+Mon May  4 15:21:33 2020
 
 ROSS Version: HEAD-HASH-NOTFOUND
 
@@ -190,71 +174,83 @@ ROSS Version: HEAD-HASH-NOTFOUND
 g_num_total_lps: 24, num_lps_per_pe: 1
 10
 g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
+10
+g_num_total_lps: 24, num_lps_per_pe: 1
 tw_net_start: Found world size to be 64 
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
 10
 g_num_total_lps: 24, num_lps_per_pe: 1
 
 ROSS Core Configuration: 
 	Total PEs                                                   64
 	Total KPs                                          [Nodes (64) x KPs (16)] 1024
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
 	Total LPs                                                   64
 	Simulation End Time                                  600000.00
 	LP-to-PE Mapping                                        linear
@@ -265,35 +261,29 @@ ROSS Event Memory Allocation:
 	Network events                                              16
 	Total events                                              2064
 
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
-10
-g_num_total_lps: 24, num_lps_per_pe: 1
 Initializing coordinator, gid: 0
 Coordinator preeeinit
-Initializing client, gid: 4 (Channel 14)
+Initializing client, gid: 7 (Channel 17)
 Initializing aggregator, gid: 1
 Initializing aggregator, gid: 2
 Initializing selector, gid: 3, Clients: 4,5,6,7,8,9,10,11,12,13,
 Initializing client, gid: 5 (Channel 15)
 Initializing client, gid: 6 (Channel 16)
-Initializing client, gid: 7 (Channel 17)
+Initializing client, gid: 4 (Channel 14)
 Initializing client, gid: 8 (Channel 18)
 Initializing client, gid: 9 (Channel 19)
 Initializing client, gid: 10 (Channel 20)
-Initializing client, gid: 11 (Channel 21)
 Initializing client, gid: 12 (Channel 22)
 Initializing client, gid: 13 (Channel 23)
-Initializing channel, gid: 15 (Client 5)
 Initializing channel, gid: 14 (Client 4)
-Initializing channel, gid: 17 (Client 7)
+Initializing channel, gid: 15 (Client 5)
 Initializing channel, gid: 16 (Client 6)
+Initializing client, gid: 11 (Channel 21)
+Initializing channel, gid: 17 (Client 7)
 Initializing channel, gid: 18 (Client 8)
 Initializing channel, gid: 19 (Client 9)
-Initializing channel, gid: 20 (Client 10)
 Initializing channel, gid: 21 (Client 11)
+Initializing channel, gid: 20 (Client 10)
 Initializing channel, gid: 22 (Client 12)
 Initializing channel, gid: 23 (Client 13)
 *** START PARALLEL CONSERVATIVE SIMULATION ***
@@ -308,11 +298,11 @@ Notifying aggregators
 Assigned to aggregator num tasks10
 GVT #4: simulation 2% complete, max event queue size 12 (GVT = 17274.0000).
 AVL tree size: 0
-Aggregator notified of new job 0
-Aggregator notified of new job 0
 Task Arriving
 Scheduling new taskGenerating map reduce task
 Staged subtask: 8
+Aggregator notified of new job 0
+Aggregator notified of new job 0
 GVT #5: simulation 3% complete, max event queue size 12 (GVT = 20000.0000).
 AVL tree size: 0
 scheduling
@@ -320,12 +310,12 @@ Notifying aggregators
 Assigned to aggregator num tasks10
 Notifying aggregators
 Assigned to aggregator num tasks10
-Aggregator notified of new job 0
-Aggregator notified of new job 1
-Aggregator notified of new job 0
-Aggregator notified of new job 1
 GVT #7: simulation 4% complete, max event queue size 12 (GVT = 26268.5879).
 AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 0
+Aggregator notified of new job 1
 Device available received 10, 2147483648, 0, 0.094617
 Task Arriving
 Scheduling new taskGenerating map reduce task
@@ -337,25 +327,3142 @@ Notifying aggregators
 Assigned to aggregator num tasks10
 Notifying aggregators
 Assigned to aggregator num tasks10
-[dcs112:26425] *** Process received signal ***
-[dcs112:26425] Signal: Segmentation fault (11)
-[dcs112:26425] Signal code: Address not mapped (1)
-[dcs112:26425] Failing at address: (nil)
-[dcs112:26425] [ 0] [0x7fffb4fb04d8]
-[dcs112:26425] [ 1] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/liblmobile_grid.so(schedule_rcta+0x70)[0x7fffb4e4d110]
-[dcs112:26425] [ 2] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/liblmobile_grid.so(schedule+0x628)[0x7fffb4e4cca8]
-[dcs112:26425] [ 3] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/liblmobile_grid.so(coordinator_event_handler+0x14c)[0x7fffb4e4be8c]
-[dcs112:26425] [ 4] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid[0x10031164]
-[dcs112:26425] [ 5] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid[0x1001e6c0]
-[dcs112:26425] [ 6] /gpfs/u/home/PCP9/PCP9srsd/barn/Final/ROSS/build_cpu/models/mobile-grid-ross/mobile_grid[0x10004798]
-[dcs112:26425] [ 7] /usr/lib64/libc.so.6(+0x25200)[0x7fffb4a25200]
-[dcs112:26425] [ 8] /usr/lib64/libc.so.6(__libc_start_main+0xc4)[0x7fffb4a253f4]
-[dcs112:26425] *** End of error message ***
---------------------------------------------------------------------------
-Primary job  terminated normally, but 1 process returned
-a non-zero exit code. Per user-direction, the job has been aborted.
---------------------------------------------------------------------------
---------------------------------------------------------------------------
-mpirun noticed that process rank 0 with PID 0 on node dcs112 exited on signal 11 (Segmentation fault).
---------------------------------------------------------------------------
-+ rm /tmp/hosts.152510
+0.000000->Assignment task: 43268343, worker: 10, 2
+GVT #10: simulation 5% complete, max event queue size 12 (GVT = 30003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Selector 3: Got job for lp 10
+Channel 20: Got job for lp 10
+Client:Got job for lp 10
+Channel 20: Got data request for lp 10
+Client: Got data for lp 10
+Device available received 12, 3221225472, 0, 0.123764
+Channel 20: Sending results for lp 10
+Received completed task from client 10
+GVT #17: simulation 6% complete, max event queue size 12 (GVT = 37934.0102).
+AVL tree size: 0
+Device available received 10, 2147483648, 0
+Device available received 
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->Assignment task: 41499687, worker: 12, 2
+Assignment task: 40195821, worker: 10, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Selector 3: Got job for lp 12
+Selector 3: Got job for lp 10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Channel 20: Got job for lp 10
+Channel 22: Got job for lp 12
+Channel 22: Got data request for lp 12
+Client:Got job for lp 10
+Client:Got job for lp 12
+Channel 20: Got data request for lp 10
+Task Arriving
+Scheduling new taskGenerating map reduce task
+Staged subtask: 0
+Client: Got data for lp 10
+Client: Got data for lp 12
+GVT #26: simulation 7% complete, max event queue size 12 (GVT = 42395.0102).
+AVL tree size: 0
+Channel 22: Sending results for lp 12
+Channel 20: Sending results for lp 10
+Received completed task from client 10
+Device available received 10, 2147483648, 0
+Device available received 
+Device available received 12, 3221225472, 0
+Device available received 
+Received completed task from client 12
+GVT #33: simulation 8% complete, max event queue size 12 (GVT = 49843.0000).
+AVL tree size: 0
+Task Arriving
+Scheduling new taskGenerating map reduce task
+Staged subtask: 8
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->Assignment task: 45514968, worker: 12, 2
+Assignment task: 41964565, worker: 10, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Selector 3: Got job for lp 12
+Selector 3: Got job for lp 10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Channel 22: Got job for lp 12
+Channel 20: Got job for lp 10
+Client:Got job for lp 10
+Channel 20: Got data request for lp 10
+Client:Got job for lp 12
+Channel 22: Got data request for lp 12
+Client: Got data for lp 12
+Client: Got data for lp 10
+Channel 22: Sending results for lp 12
+Channel 20: Sending results for lp 10
+GVT #42: simulation 9% complete, max event queue size 12 (GVT = 55000.0102).
+AVL tree size: 0
+Received completed task from client 12
+Device available received 12, 3221225472, 0
+Device available received 
+Task Arriving
+Scheduling new taskGenerating map reduce task
+Staged subtask: 4
+Received completed task from client 10
+GVT #47: simulation 10% complete, max event queue size 12 (GVT = 60000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->Assignment task: 51822042, worker: 12, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Selector 3: Got job for lp 12
+Channel 22: Got job for lp 12
+Client:Got job for lp 12
+Channel 22: Got data request for lp 12
+Client: Got data for lp 12
+Channel 22: Sending results for lp 12
+Received completed task from client 12
+Device available received 12, 3221225472, 0
+Device available received 
+GVT #56: simulation 11% complete, max event queue size 12 (GVT = 68351.0000).
+AVL tree size: 0
+Task Arriving
+Scheduling new taskGenerating map reduce task
+Staged subtask: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->Assignment task: 55614553, worker: 12, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Selector 3: Got job for lp 12
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Channel 22: Got job for lp 12
+Client:Got job for lp 12
+Channel 22: Got data request for lp 12
+Client: Got data for lp 12
+GVT #63: simulation 12% complete, max event queue size 12 (GVT = 72929.0102).
+AVL tree size: 0
+Channel 22: Sending results for lp 12
+Received completed task from client 12
+Task Arriving
+Scheduling new taskGenerating map reduce task
+Staged subtask: 6
+GVT #66: simulation 13% complete, max event queue size 12 (GVT = 80000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+0.000000->0.000000->Task Arriving
+Scheduling new taskGenerating map reduce task
+Staged subtask: 5
+GVT #69: simulation 15% complete, max event queue size 12 (GVT = 90000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+0.000000->0.000000->GVT #70: simulation 15% complete, max event queue size 12 (GVT = 90003.0000).
+AVL tree size: 0
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Task Arriving
+Generating map reduce task
+Staged subtask: 9
+GVT #72: simulation 16% complete, max event queue size 12 (GVT = 100000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+0.000000->0.000000->GVT #74: simulation 18% complete, max event queue size 12 (GVT = 110000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+0.000000->0.000000->GVT #75: simulation 18% complete, max event queue size 12 (GVT = 110003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #76: simulation 20% complete, max event queue size 12 (GVT = 120000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->GVT #77: simulation 20% complete, max event queue size 12 (GVT = 120003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #78: simulation 21% complete, max event queue size 12 (GVT = 130000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+0.000000->0.000000->GVT #80: simulation 23% complete, max event queue size 12 (GVT = 140000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->GVT #81: simulation 23% complete, max event queue size 12 (GVT = 140003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #82: simulation 25% complete, max event queue size 12 (GVT = 150000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->GVT #83: simulation 25% complete, max event queue size 12 (GVT = 150003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #84: simulation 26% complete, max event queue size 12 (GVT = 160000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+0.000000->0.000000->GVT #86: simulation 28% complete, max event queue size 12 (GVT = 170000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->GVT #87: simulation 28% complete, max event queue size 12 (GVT = 170003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #88: simulation 30% complete, max event queue size 12 (GVT = 180000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->GVT #89: simulation 30% complete, max event queue size 12 (GVT = 180003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Device available received 7, 1073741824, 0, 0.101017
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #91: simulation 31% complete, max event queue size 12 (GVT = 190000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->Assignment task: 36390889, worker: 7, 2
+Selector 3: Got job for lp 7
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+GVT #96: simulation 32% complete, max event queue size 12 (GVT = 193445.0102).
+AVL tree size: 0
+Channel 17: Sending results for lp 7
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #100: simulation 33% complete, max event queue size 12 (GVT = 200000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->Assignment task: 35427514, worker: 7, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Selector 3: Got job for lp 7
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Channel 17: Sending results for lp 7
+Received completed task from client 7
+GVT #107: simulation 34% complete, max event queue size 12 (GVT = 204554.0102).
+AVL tree size: 0
+Device available received 7, 1073741824, 0
+Device available received 
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->Assignment task: 34999217, worker: 7, 2
+GVT #110: simulation 35% complete, max event queue size 12 (GVT = 210003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 7
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Channel 17: Sending results for lp 7
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #118: simulation 36% complete, max event queue size 12 (GVT = 220000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->Assignment task: 34142946, worker: 7, 2
+Selector 3: Got job for lp 7
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+GVT #123: simulation 37% complete, max event queue size 12 (GVT = 222118.0102).
+AVL tree size: 0
+Channel 17: Sending results for lp 7
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #127: simulation 38% complete, max event queue size 12 (GVT = 230000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->Assignment task: 33493020, worker: 7, 2
+Selector 3: Got job for lp 7
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Channel 17: Sending results for lp 7
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #136: simulation 40% complete, max event queue size 12 (GVT = 240000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->Assignment task: 32913005, worker: 7, 2
+GVT #137: simulation 40% complete, max event queue size 12 (GVT = 240003.0000).
+AVL tree size: 0
+Selector 3: Got job for lp 7
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Channel 17: Sending results for lp 7
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #145: simulation 41% complete, max event queue size 12 (GVT = 250000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->Assignment task: 32443376, worker: 7, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 7
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Channel 17: Sending results for lp 7
+GVT #151: simulation 42% complete, max event queue size 12 (GVT = 252655.0102).
+AVL tree size: 0
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #154: simulation 43% complete, max event queue size 12 (GVT = 260000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->Assignment task: 31864305, worker: 7, 2
+Selector 3: Got job for lp 7
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Channel 17: Sending results for lp 7
+Received completed task from client 7
+GVT #161: simulation 44% complete, max event queue size 12 (GVT = 265374.0102).
+AVL tree size: 0
+Device available received 7, 1073741824, 0
+Device available received 
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->Assignment task: 30655869, worker: 7, 2
+GVT #164: simulation 45% complete, max event queue size 12 (GVT = 270003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 7
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Channel 17: Sending results for lp 7
+Device available received 13, 2147483648, 0, 0.105374
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #173: simulation 46% complete, max event queue size 12 (GVT = 280000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 30319215, worker: 7, 2
+Assignment task: 29941248, worker: 13, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 7
+Selector 3: Got job for lp 13
+Channel 23: Got job for lp 13
+Channel 17: Got job for lp 7
+Client:Got job for lp 13
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Channel 23: Got data request for lp 13
+Client: Got data for lp 13
+Client: Got data for lp 7
+GVT #180: simulation 47% complete, max event queue size 12 (GVT = 282208.0102).
+AVL tree size: 0
+Channel 23: Sending results for lp 13
+Channel 17: Sending results for lp 7
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #186: simulation 48% complete, max event queue size 12 (GVT = 290000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 29697776, worker: 7, 2
+Assignment task: 29605600, worker: 13, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 7
+Selector 3: Got job for lp 13
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 23: Got job for lp 13
+Channel 17: Got job for lp 7
+Client:Got job for lp 13
+Client:Got job for lp 7
+Channel 23: Got data request for lp 13
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Client: Got data for lp 13
+Channel 17: Sending results for lp 7
+Channel 23: Sending results for lp 13
+GVT #195: simulation 49% complete, max event queue size 12 (GVT = 294832.0102).
+AVL tree size: 0
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 28222896, worker: 7, 2
+Assignment task: 27555379, worker: 13, 2
+GVT #200: simulation 50% complete, max event queue size 12 (GVT = 300003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 7
+Selector 3: Got job for lp 13
+Channel 23: Got job for lp 13
+Channel 17: Got job for lp 7
+Client:Got job for lp 7
+Client:Got job for lp 13
+Channel 23: Got data request for lp 13
+Channel 17: Got data request for lp 7
+Client: Got data for lp 13
+Channel 23: Sending results for lp 13
+Client: Got data for lp 7
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+Channel 17: Sending results for lp 7
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #212: simulation 51% complete, max event queue size 12 (GVT = 310000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 27197928, worker: 7, 2
+Assignment task: 27176312, worker: 13, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Selector 3: Got job for lp 7
+Selector 3: Got job for lp 13
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Channel 23: Got job for lp 13
+Client:Got job for lp 13
+Client:Got job for lp 7
+Channel 23: Got data request for lp 13
+Channel 17: Got data request for lp 7
+Client: Got data for lp 13
+GVT #218: simulation 52% complete, max event queue size 12 (GVT = 312003.0102).
+AVL tree size: 0
+Client: Got data for lp 7
+Channel 23: Sending results for lp 13
+Channel 17: Sending results for lp 7
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #225: simulation 53% complete, max event queue size 12 (GVT = 320000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 26364118, worker: 7, 2
+Assignment task: 26276878, worker: 13, 2
+Selector 3: Got job for lp 7
+Selector 3: Got job for lp 13
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Channel 23: Got job for lp 13
+Client:Got job for lp 13
+Client:Got job for lp 7
+Channel 23: Got data request for lp 13
+Channel 17: Got data request for lp 7
+Client: Got data for lp 13
+Client: Got data for lp 7
+Channel 23: Sending results for lp 13
+Channel 17: Sending results for lp 7
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+GVT #236: simulation 54% complete, max event queue size 12 (GVT = 325804.0102).
+AVL tree size: 0
+Device available received 7, 1073741824, 0
+Device available received 
+Received completed task from client 7
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 26015360, worker: 7, 2
+Assignment task: 25730352, worker: 13, 2
+GVT #239: simulation 55% complete, max event queue size 12 (GVT = 330003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 7
+Selector 3: Got job for lp 13
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Channel 23: Got job for lp 13
+Client:Got job for lp 7
+Client:Got job for lp 13
+Channel 23: Got data request for lp 13
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Channel 17: Sending results for lp 7
+Client: Got data for lp 13
+Channel 23: Sending results for lp 13
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #249: simulation 56% complete, max event queue size 12 (GVT = 336578.0102).
+AVL tree size: 0
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 25388131, worker: 7, 2
+Assignment task: 25133101, worker: 13, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 7
+Selector 3: Got job for lp 13
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 23: Got job for lp 13
+Channel 17: Got job for lp 7
+Client:Got job for lp 13
+Client:Got job for lp 7
+Channel 23: Got data request for lp 13
+Channel 17: Got data request for lp 7
+Client: Got data for lp 13
+GVT #256: simulation 57% complete, max event queue size 12 (GVT = 342195.0102).
+AVL tree size: 0
+Client: Got data for lp 7
+Channel 23: Sending results for lp 13
+Channel 17: Sending results for lp 7
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #264: simulation 58% complete, max event queue size 12 (GVT = 350000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 24639942, worker: 7, 2
+Assignment task: 24375392, worker: 13, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 7
+Selector 3: Got job for lp 13
+Channel 17: Got job for lp 7
+Channel 23: Got job for lp 13
+Client:Got job for lp 13
+Client:Got job for lp 7
+Channel 17: Got data request for lp 7
+Channel 23: Got data request for lp 13
+Client: Got data for lp 7
+Client: Got data for lp 13
+Channel 17: Sending results for lp 7
+Channel 23: Sending results for lp 13
+Received completed task from client 7
+Device available received 7, 1073741824, 0
+Device available received 
+GVT #275: simulation 59% complete, max event queue size 12 (GVT = 355556.0102).
+AVL tree size: 0
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 24071408, worker: 7, 2
+Assignment task: 23852322, worker: 13, 2
+GVT #278: simulation 60% complete, max event queue size 12 (GVT = 360003.0000).
+AVL tree size: 0
+Selector 3: Got job for lp 7
+Selector 3: Got job for lp 13
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 17: Got job for lp 7
+Aggregator notified of new job 9
+Channel 23: Got job for lp 13
+Client:Got job for lp 7
+Client:Got job for lp 13
+Channel 23: Got data request for lp 13
+Channel 17: Got data request for lp 7
+Client: Got data for lp 7
+Client: Got data for lp 13
+Channel 17: Sending results for lp 7
+Channel 23: Sending results for lp 13
+Received completed task from client 7
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+GVT #289: simulation 61% complete, max event queue size 12 (GVT = 370000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 22927373, worker: 13, 2
+Selector 3: Got job for lp 13
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Client:Got job for lp 13
+Channel 23: Got job for lp 13
+Channel 23: Got data request for lp 13
+Client: Got data for lp 13
+GVT #295: simulation 62% complete, max event queue size 12 (GVT = 372653.0102).
+AVL tree size: 0
+Channel 23: Sending results for lp 13
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+GVT #298: simulation 63% complete, max event queue size 12 (GVT = 380000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->Assignment task: 22554670, worker: 13, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Selector 3: Got job for lp 13
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 9
+Channel 23: Got job for lp 13
+Client:Got job for lp 13
+Channel 23: Got data request for lp 13
+Device available received 5, 1073741824, 0, 0.073358
+Client: Got data for lp 13
+Channel 23: Sending results for lp 13
+GVT #306: simulation 64% complete, max event queue size 12 (GVT = 385144.0102).
+AVL tree size: 0
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->Assignment task: 22298501, worker: 5, 2
+Assignment task: 22009020, worker: 13, 2
+GVT #309: simulation 65% complete, max event queue size 12 (GVT = 390003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 5
+Selector 3: Got job for lp 13
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 23: Got job for lp 13
+Channel 15: Got job for lp 5
+Client:Got job for lp 13
+Client:Got job for lp 5
+Channel 23: Got data request for lp 13
+Channel 15: Got data request for lp 5
+Client: Got data for lp 13
+Client: Got data for lp 5
+Channel 15: Sending results for lp 5
+Channel 23: Sending results for lp 13
+Device available received 4, 3758096384, 0, 0.112823
+Received completed task from client 5
+Device available received 5, 1073741824, 0
+Device available received 
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+GVT #322: simulation 66% complete, max event queue size 12 (GVT = 400000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->Assignment task: 21717393, worker: 5, 2
+Assignment task: 21385241, worker: 13, 2
+Assignment task: 21314143, worker: 4, 2
+Selector 3: Got job for lp 5
+Selector 3: Got job for lp 13
+Selector 3: Got job for lp 4
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 15: Got job for lp 5
+Channel 23: Got job for lp 13
+Channel 14: Got job for lp 4
+Client:Got job for lp 5
+Client:Got job for lp 4
+Channel 15: Got data request for lp 5
+Channel 23: Got data request for lp 13
+Client:Got job for lp 13
+Channel 14: Got data request for lp 4
+Client: Got data for lp 5
+Channel 15: Sending results for lp 5
+Client: Got data for lp 4
+GVT #329: simulation 67% complete, max event queue size 12 (GVT = 402456.0102).
+AVL tree size: 0
+Channel 14: Sending results for lp 4
+Client: Got data for lp 13
+Channel 23: Sending results for lp 13
+Received completed task from client 5
+Device available received 5, 1073741824, 0
+Device available received 
+Received completed task from client 4
+Device available received 4, 3758096384, 0
+Device available received 
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+GVT #339: simulation 68% complete, max event queue size 12 (GVT = 408231.8438).
+AVL tree size: 0
+Device available received 6, 3221225472, 0, 0.108929
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->Assignment task: 21081431, worker: 5, 2
+Assignment task: 20937009, worker: 13, 2
+Assignment task: 20418920, worker: 4, 2
+Assignment task: 20105247, worker: 6, 2
+Selector 3: Got job for lp 5
+Selector 3: Got job for lp 13
+Selector 3: Got job for lp 4
+Selector 3: Got job for lp 6
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 14: Got job for lp 4
+Channel 15: Got job for lp 5
+Channel 16: Got job for lp 6
+Channel 23: Got job for lp 13
+Client:Got job for lp 13
+Client:Got job for lp 4
+Channel 16: Got data request for lp 6
+Client:Got job for lp 6
+Client: Got data for lp 6
+Channel 14: Got data request for lp 4
+Client:Got job for lp 5
+Channel 23: Got data request for lp 13
+Channel 15: Got data request for lp 5
+Client: Got data for lp 4
+Channel 14: Sending results for lp 4
+Client: Got data for lp 5
+Channel 15: Sending results for lp 5
+Client: Got data for lp 13
+Channel 16: Sending results for lp 6
+Channel 23: Sending results for lp 13
+GVT #353: simulation 69% complete, max event queue size 12 (GVT = 414672.0153).
+AVL tree size: 0
+Received completed task from client 4
+Device available received 4, 3758096384, 0
+Device available received 
+Received completed task from client 5
+Device available received 5, 1073741824, 0
+Device available received 
+Received completed task from client 6
+Device available received 6, 3221225472, 0
+Device available received 
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->Assignment task: 19618162, worker: 5, 2
+Assignment task: 19148165, worker: 13, 2
+Assignment task: 18322702, worker: 4, 2
+Assignment task: 16982612, worker: 6, 2
+GVT #362: simulation 70% complete, max event queue size 12 (GVT = 420003.0000).
+AVL tree size: 0
+Selector 3: Got job for lp 5
+Selector 3: Got job for lp 13
+Selector 3: Got job for lp 4
+Selector 3: Got job for lp 6
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Channel 14: Got job for lp 4
+Channel 16: Got job for lp 6
+Channel 23: Got job for lp 13
+Channel 15: Got job for lp 5
+Client:Got job for lp 5
+Client:Got job for lp 13
+Client:Got job for lp 6
+Client:Got job for lp 4
+Channel 14: Got data request for lp 4
+Channel 16: Got data request for lp 6
+Channel 23: Got data request for lp 13
+Client: Got data for lp 4
+Channel 15: Got data request for lp 5
+Channel 14: Sending results for lp 4
+Client: Got data for lp 5
+Channel 15: Sending results for lp 5
+Client: Got data for lp 13
+Channel 23: Sending results for lp 13
+Client: Got data for lp 6
+Channel 16: Sending results for lp 6
+Received completed task from client 4
+Device available received 4, 3758096384, 0
+Device available received 
+Received completed task from client 5
+Device available received 5, 1073741824, 0
+Device available received 
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+Received completed task from client 6
+Device available received 6, 3221225472, 0
+Device available received 
+GVT #382: simulation 71% complete, max event queue size 12 (GVT = 430000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->Assignment task: 15103020, worker: 5, 2
+Assignment task: 15077148, worker: 13, 2
+Assignment task: 14745975, worker: 4, 2
+Assignment task: 12710635, worker: 6, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 5
+Selector 3: Got job for lp 13
+Selector 3: Got job for lp 4
+Selector 3: Got job for lp 6
+Channel 14: Got job for lp 4
+Channel 16: Got job for lp 6
+Channel 15: Got job for lp 5
+Channel 23: Got job for lp 13
+Client:Got job for lp 13
+Client:Got job for lp 5
+Client:Got job for lp 6
+Client:Got job for lp 4
+Channel 16: Got data request for lp 6
+Channel 15: Got data request for lp 5
+Channel 23: Got data request for lp 13
+Client: Got data for lp 5
+Channel 14: Got data request for lp 4
+Channel 15: Sending results for lp 5
+Client: Got data for lp 13
+Channel 23: Sending results for lp 13
+Received completed task from client 5
+Device available received 5, 1073741824, 0
+Device available received 
+GVT #393: simulation 72% complete, max event queue size 12 (GVT = 432319.0102).
+AVL tree size: 0
+Client: Got data for lp 6
+Channel 16: Sending results for lp 6
+Client: Got data for lp 4
+Channel 14: Sending results for lp 4
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+Received completed task from client 6
+Device available received 6, 3221225472, 0
+Device available received 
+Received completed task from client 4
+Device available received 4, 3758096384, 0
+Device available received 
+GVT #403: simulation 73% complete, max event queue size 12 (GVT = 440000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->Assignment task: 10732116, worker: 5, 2
+Assignment task: 10061601, worker: 13, 2
+Assignment task: 8202359, worker: 4, 2
+Assignment task: 3892498, worker: 6, 2
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Selector 3: Got job for lp 5
+Selector 3: Got job for lp 13
+Selector 3: Got job for lp 4
+Selector 3: Got job for lp 6
+Channel 23: Got job for lp 13
+Channel 16: Got job for lp 6
+Channel 14: Got job for lp 4
+Channel 15: Got job for lp 5
+Channel 15: Got data request for lp 5
+Client:Got job for lp 5
+Channel 23: Got data request for lp 13
+Client:Got job for lp 6
+Channel 16: Got data request for lp 6
+Client:Got job for lp 4
+Channel 14: Got data request for lp 4
+Client:Got job for lp 13
+Client: Got data for lp 13
+Channel 23: Sending results for lp 13
+Client: Got data for lp 4
+Channel 14: Sending results for lp 4
+Client: Got data for lp 6
+Channel 16: Sending results for lp 6
+Client: Got data for lp 5
+Channel 15: Sending results for lp 5
+Received completed task from client 13
+Device available received 13, 2147483648, 0
+Device available received 
+Received completed task from client 4
+Device available received 4, 3758096384, 0
+Device available received 
+GVT #420: simulation 74% complete, max event queue size 12 (GVT = 444184.0153).
+AVL tree size: 0
+Received completed task from client 6
+Device available received 6, 3221225472, 0
+Device available received 
+Received completed task from client 5
+Device available received 5, 1073741824, 0
+Device available received 
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #425: simulation 75% complete, max event queue size 12 (GVT = 450003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #426: simulation 76% complete, max event queue size 12 (GVT = 460000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #428: simulation 78% complete, max event queue size 12 (GVT = 470000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #429: simulation 78% complete, max event queue size 12 (GVT = 470003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #430: simulation 80% complete, max event queue size 12 (GVT = 480000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #431: simulation 80% complete, max event queue size 12 (GVT = 480003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #432: simulation 81% complete, max event queue size 12 (GVT = 490000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->Device available received 11, 0, 0, 0.117245
+GVT #435: simulation 83% complete, max event queue size 12 (GVT = 500000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #436: simulation 83% complete, max event queue size 12 (GVT = 500003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #437: simulation 85% complete, max event queue size 12 (GVT = 510000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #438: simulation 85% complete, max event queue size 12 (GVT = 510003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #439: simulation 86% complete, max event queue size 12 (GVT = 520000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Aggregator notified of new job 9
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #441: simulation 88% complete, max event queue size 12 (GVT = 530000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #442: simulation 88% complete, max event queue size 12 (GVT = 530003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #443: simulation 90% complete, max event queue size 12 (GVT = 540000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #444: simulation 90% complete, max event queue size 12 (GVT = 540003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #445: simulation 91% complete, max event queue size 12 (GVT = 550000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #447: simulation 93% complete, max event queue size 12 (GVT = 560000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #448: simulation 93% complete, max event queue size 12 (GVT = 560003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+GVT #449: simulation 95% complete, max event queue size 12 (GVT = 570000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #450: simulation 95% complete, max event queue size 12 (GVT = 570003.0000).
+AVL tree size: 0
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Device available received 8, 1610612736, 0, 0.083245
+GVT #452: simulation 96% complete, max event queue size 12 (GVT = 580000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 9
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #454: simulation 97% complete, max event queue size 12 (GVT = 586228.0000).
+AVL tree size: 0
+Device available received 9, 1073741824, 0, 0.101032
+GVT #455: simulation 98% complete, max event queue size 12 (GVT = 590000.0000).
+AVL tree size: 0
+scheduling
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Notifying aggregators
+Assigned to aggregator num tasks10
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 0
+Aggregator notified of new job 1
+Aggregator notified of new job 2
+Aggregator notified of new job 3
+Aggregator notified of new job 4
+Aggregator notified of new job 5
+Aggregator notified of new job 6
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+Aggregator notified of new job 7
+Aggregator notified of new job 8
+Aggregator notified of new job 9
+0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->0.000000->GVT #457: simulation 100% complete, max event queue size 12 (GVT = MAX).
+AVL tree size: 0
+*** END SIMULATION ***
+
+PE 8: There were 0 bytes of data missed because of buffer overflow
+PE 9: There were 0 bytes of data missed because of buffer overflow
+PE 11: There were 0 bytes of data missed because of buffer overflow
+PE 18: There were 0 bytes of data missed because of buffer overflow
+PE 19: There were 0 bytes of data missed because of buffer overflow
+PE 21: There were 0 bytes of data missed because of buffer overflow
+PE 24: There were 0 bytes of data missed because of buffer overflow
+PE 25: There were 0 bytes of data missed because of buffer overflow
+PE 31: There were 0 bytes of data missed because of buffer overflow
+PE 26: There were 0 bytes of data missed because of buffer overflow
+PE 28: There were 0 bytes of data missed because of buffer overflow
+PE 29: There were 0 bytes of data missed because of buffer overflow
+PE 27: There were 0 bytes of data missed because of buffer overflow
+PE 30: There were 0 bytes of data missed because of buffer overflow
+PE 48: There were 0 bytes of data missed because of buffer overflow
+PE 49: There were 0 bytes of data missed because of buffer overflow
+PE 47: There were 0 bytes of data missed because of buffer overflow
+PE 50: There were 0 bytes of data missed because of buffer overflow
+PE 51: There were 0 bytes of data missed because of buffer overflow
+PE 52: There were 0 bytes of data missed because of buffer overflow
+PE 53: There were 0 bytes of data missed because of buffer overflow
+PE 54: There were 0 bytes of data missed because of buffer overflow
+PE 56: There were 0 bytes of data missed because of buffer overflow
+PE 57: There were 0 bytes of data missed because of buffer overflow
+PE 58: There were 0 bytes of data missed because of buffer overflow
+PE 59: There were 0 bytes of data missed because of buffer overflow
+PE 60: There were 0 bytes of data missed because of buffer overflow
+PE 61: There were 0 bytes of data missed because of buffer overflow
+PE 62: There were 0 bytes of data missed because of buffer overflow
+PE 39: There were 0 bytes of data missed because of buffer overflow
+PE 55: There were 0 bytes of data missed because of buffer overflow
+PE 32: There were 0 bytes of data missed because of buffer overflow
+PE 33: There were 0 bytes of data missed because of buffer overflow
+PE 34: There were 0 bytes of data missed because of buffer overflow
+PE 35: There were 0 bytes of data missed because of buffer overflow
+PE 36: There were 0 bytes of data missed because of buffer overflow
+PE 37: There were 0 bytes of data missed because of buffer overflow
+PE 38: There were 0 bytes of data missed because of buffer overflow
+PE 63: There were 0 bytes of data missed because of buffer overflow
+PE 40: There were 0 bytes of data missed because of buffer overflow
+PE 42: There were 0 bytes of data missed because of buffer overflow
+PE 43: There were 0 bytes of data missed because of buffer overflow
+PE 41: There were 0 bytes of data missed because of buffer overflow
+PE 44: There were 0 bytes of data missed because of buffer overflow
+PE 45: There were 0 bytes of data missed because of buffer overflow
+PE 46: There were 0 bytes of data missed because of buffer overflow
+PE 14: There were 0 bytes of data missed because of buffer overflow
+PE 10: There were 0 bytes of data missed because of buffer overflow
+PE 5: There were 0 bytes of data missed because of buffer overflow
+PE 6: There were 0 bytes of data missed because of buffer overflow
+PE 2: There were 0 bytes of data missed because of buffer overflow
+PE 3: There were 0 bytes of data missed because of buffer overflow
+PE 15: There were 0 bytes of data missed because of buffer overflow
+PE 0: There were 0 bytes of data missed because of buffer overflow
+PE 13: There were 0 bytes of data missed because of buffer overflow
+PE 1: There were 0 bytes of data missed because of buffer overflow
+PE 7: There were 0 bytes of data missed because of buffer overflow
+PE 20: There were 0 bytes of data missed because of buffer overflow
+PE 12: There were 0 bytes of data missed because of buffer overflow
+PE 22: There were 0 bytes of data missed because of buffer overflow
+PE 17: There were 0 bytes of data missed because of buffer overflow
+PE 23: There were 0 bytes of data missed because of buffer overflow
+PE 4: There were 0 bytes of data missed because of buffer overflow
+PE 16: There were 0 bytes of data missed because of buffer overflow
+
+	: Running Time = 0.0397 seconds
+
+TW Library Statistics:
+	Total Events Processed                                    1677
+	Events Aborted (part of RBs)                                 0
+	Events Rolled Back                                           0
+	Event Ties Detected in PE Queues                           996
+	Minimum TS Offset Detected in Conservative Mode    0.005100000
+	Efficiency                                              100.00 %
+	Total Remote (shared mem) Events Processed                   0
+	Percent Remote Events                                     0.00 %
+	Total Remote (network) Events Processed                   1608
+	Percent Remote Events                                    95.89 %
+
+	Total Roll Backs                                             0
+	Primary Roll Backs                                           0
+	Secondary Roll Backs                                         0
+	Fossil Collect Attempts                                      0
+	Total GVT Computations                                     458
+
+	Net Events Processed                                      1677
+	Event Rate (events/sec)                                42250.3
+	Total Events Scheduled Past End Time                         1
+
+TW Memory Statistics:
+	Events Allocated                                          2065
+	Memory Allocated                                         62991
+	Memory Wasted                                               20
+
+TW Network Statistics:
+	Remote sends                                              1608
+	Remote recvs                                              1608
+
+TW Data Structure sizes in bytes (sizeof):
+	PE struct                                                  624
+	KP struct                                                  144
+	LP struct                                                  136
+	LP Model struct                                             40
+	LP RNGs                                                     80
+	Total LP                                                   256
+	Event struct                                               152
+	Event struct with Model                                    216
+
+TW Clock Cycle Statistics (MAX values in secs at 0.5120 GHz):
+	Initialization                                          2.1040
+	Priority Queue (enq/deq)                                0.0001
+	AVL Tree (insert/delete)                                0.0000
+	LZ4 (de)compression                                     0.0000
+	Buddy system                                            0.0000
+	Event Processing                                        0.0082
+	Event Cancel                                            0.0000
+	Event Abort                                             0.0000
+
+	GVT                                                     0.0334
+	Fossil Collect                                          0.0000
+	Primary Rollbacks                                       0.0000
+	Network Read                                            0.0136
+	Other Network                                           0.0015
+	Instrumentation (computation)                           0.0066
+	Instrumentation (write)                                 0.0050
+	Total Time (Note: Using Running Time above for Speedup)      0.0397
+
+TW GVT Statistics: MPI AllReduce
+	GVT Interval                                                16
+	GVT Real Time Interval (cycles)                    0
+	GVT Real Time Interval (sec)                        0.00000000
+	Batch Size                                                  16
+
+	Forced GVT                                                   0
+	Total GVT Computations                                     458
+	Total All Reduce Calls                                    1188
+	Average Reduction / GVT                                   2.59
+Test print only once
++ rm /tmp/hosts.154547
