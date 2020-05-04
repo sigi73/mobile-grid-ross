@@ -176,7 +176,7 @@ void compute_channel_capacity(
     float bandwidth = 23e6; // wifi bandwidth in hz
     float noise_power = 0.1; // noise power in V^2
 
-    int steps = 512; // steps of the simulation to run
+    int steps = 8192; // steps of the simulation to run
 
     int blocks = 256;
     int threads = 1024;
