@@ -104,17 +104,30 @@ for event in parser.meta:
             aggregator_tasks[event.destination_lp][task_id][2].append(event.virtual_recv_time)
 
     if event.destination_lp in aggregator_ids and event.source_lp in channel_ids and t == MessageType.SEND_RESULTS:
-        task_id = struct.unpack('=I', event.buf[4:8])
-        task_id = task_id[0]
-        client_id = event.source_lp - NUM_CLIENTS_PER_SELECTOR*NUM_SELECTORS
-        clients2[client_id][task_id][3] = event.virtual_recv_time
+        try:
+            task_id = struct.unpack('=I', event.buf[4:8])
+            task_id = task_id[0]
+            client_id = event.source_lp - NUM_CLIENTS_PER_SELECTOR*NUM_SELECTORS
+            if task_id in (clients2[client_id]).keys():
+                clients2[client_id][task_id][3] = event.virtual_recv_time
+            else:
+                clients2[client_id][task_id] = [-1, -1, -1, event.virtual_recv_time]
+        except:
+            pass
+            print("ERR")
+            print(task_id)
+            print(clients2)
     
     if event.destination_lp in client_ids and t == MessageType.ASSIGN_JOB:
         if event.model_data_size == 8:
             #print(event.buf)
             task_id = struct.unpack('=I', event.buf[4:8])
             task_id = task_id[0]
-            clients2[event.destination_lp][task_id] = [event.virtual_recv_time, -1, -1, -1]
+            if task_id in (clients2[event.destination_lp]).keys():
+                clients2[event.destination_lp][task_id][0] = event.virtual_recv_time
+            else:
+                clients2[event.destination_lp][task_id] = [event.virtual_recv_time, -1, -1, -1]
+            print("Getting here")
 
     if event.destination_lp in client_ids:
         pass
@@ -123,15 +136,21 @@ for event in parser.meta:
     if event.destination_lp in client_ids and t == MessageType.RETURN_DATA:
         task_id = struct.unpack('=I', event.buf[4:8])
         task_id = task_id[0]
-        clients2[event.destination_lp][task_id][1] = event.virtual_recv_time
+        if task_id in (clients2[event.destination_lp]).keys():
+            clients2[event.destination_lp][task_id][1] = event.virtual_recv_time
+        else:
+            clients2[event.destination_lp][task_id] = [-1, event.virtual_recv_time, -1, -1]
 
     if event.destination_lp in channel_ids and t == MessageType.SEND_RESULTS:
         if event.model_data_size == 12:
             (task_id, client_id) = struct.unpack('=II', event.buf[4:12])
-            clients2[client_id][task_id][2] = event.virtual_recv_time
+            if task_id in (clients2[client_id]).keys():
+                clients2[client_id][task_id][2] = event.virtual_recv_time
+            else:
+                clients2[client_id][task_id] = [-1, event.virtual_recv_time, -1, -1]
     index = index + 1
 
-#print(clients2)    
+print(clients2)    
 
 '''
 print('Number of scheduling events: ' + str(num_scheduling))
@@ -156,7 +175,3 @@ for c in clients2.keys():
         plt.plot(arr[2:4], y_axis, 'g') # Upload
     index = index+1
 plt.show()
-
-
-print(aggregator_tasks)
-print(val)
