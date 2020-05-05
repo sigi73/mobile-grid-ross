@@ -83,6 +83,8 @@ Then in the mobile-grid-ross/ResultsParsing folder do
 ``` shell
 python parse_events.py ../../ROSS/build/stats-output/ross-stats-evtrace.bin ../../ROSS/build/stats-output/run_statistics.csv
 ```
+Note: Requires the python-kaitaistruct package.
+
 ## To run on multiple nodes (on your computer, not AiMOS)
 ``` shell
 mpirun -n # ./models/mobile-grid-rss/mobile_grid --synch=2
